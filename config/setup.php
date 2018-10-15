@@ -6,7 +6,7 @@ require_once "database.php";
 
 //echo $DB_NAME;
 try {
-        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
+        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS, $options);
 } catch (PDOException $e) {
     print "Error!: " . $e->getMessage() . "<br/>";
     die();
@@ -56,5 +56,8 @@ try {
  } catch (Exception $e) {
      die("db creation failed!");
  }
+
+ //close connection?
+ $dbh = NULL;
 
 ?>
