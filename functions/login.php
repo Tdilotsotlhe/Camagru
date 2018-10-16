@@ -51,7 +51,7 @@ $user = $stmt->fetch();
       while($row = $stmt->fetch()){ 
          
          // echo $row["password"];
-           if ($row && password_verify($pass, $row['password']))
+           if ($row && password_verify($pass, $row['passw']))
           {
             //echo "valid";
               setlogin($row);

@@ -51,7 +51,7 @@ echo $_SESSION['test'];
         <br>
         <p>email</p><input type="email" name="email" id="pwrd" placeholder="Enter email" required>
         <br>
-        <button type="submit" id="logbut">Register</button>
+        <button type="submit" id="regbut">Register</button>
        
     </form>
     <hr>
