@@ -1,14 +1,14 @@
 <?php
 include "config/database.php";
-$_SESSION['test'] = "SHIT!";
-echo $_SESSION['test'];
+/* $_SESSION['test'] = "SHIT!";
+echo $_SESSION['test']; */
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Camagru</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
     <script src="js/main.js"></script>
@@ -19,8 +19,8 @@ echo $_SESSION['test'];
   <div class="header-right">
       <a href="#"><?php echo "Welcome ".$_SESSION['username']; ?> </a>
       <!-- switch class to active on click -->
-    <a class="active" href="#home">Home</a>
-    <a href="#contact">Gallery</a>
+    <a class="active" href="#home" id="home">Home</a>
+    <a href="#gallery" id="gallery">Gallery G</a>
     <a href="functions/logout.php">Logout</a>
   </div>
 </div>
@@ -57,6 +57,7 @@ echo $_SESSION['test'];
     <hr>
         <button id="butlog" onclick="regtoggle()">login</button>
 </div>
+
 
 </body>
 </html>

@@ -1,3 +1,16 @@
+
+
+window.onload = function(){
+    var x = document.getElementById("gallery");
+    x.addEventListener("click", myFunction);
+}
+
+function myFunction()
+{
+    window.location = "gallery.php";
+}
+
+
 function regtoggle()
 {
     var x = document.getElementById("regdiv");

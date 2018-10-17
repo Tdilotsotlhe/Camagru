@@ -32,14 +32,19 @@ try {
 
  //create user table
  try {
-    $dbh->query("CREATE TABLE `users` (
-        `user_id` int(255) NOT NULL,
-        `username` varchar(255) NOT NULL,
-        `password` varchar(255) NOT NULL,
-        `email` int(255) NOT NULL,
-        `active` int(255) DEFAULT '0',
-        `ugroup` int(255) NOT NULL DEFAULT '0'
-      ) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
+    $dbh->query("CREATE TABLE `camagru`.`users`(
+        `user_id` INT(255) NOT NULL AUTO_INCREMENT,
+        `username` VARCHAR(255) NOT NULL,
+        `passw` VARCHAR(255) NOT NULL,
+        `email` VARCHAR(255) NOT NULL,
+        `active` INT(255) NOT NULL DEFAULT 0,
+        `ugroup` INT(255) NOT NULL DEFAULT 0,
+        `acthash` VARCHAR(255) NOT NULL DEFAULT 0,
+        PRIMARY KEY(`user_id`),
+        INDEX(`ugroup`),
+        UNIQUE(`email`)
+    ) ENGINE = InnoDB;");
+
  } catch (Exception $e) {
      die("users failed");
  } 

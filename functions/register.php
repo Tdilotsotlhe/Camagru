@@ -36,6 +36,7 @@ die();
     $stmt->bindParam(':acthash', $acthash);
 
     $stmt->execute();
+    header("Location: ../index.php?reg=1");
    
  } catch (PDOException $e) {
 print "Error!: " . $e->getMessage() . "<br/>";

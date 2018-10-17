@@ -51,7 +51,7 @@
   
 
   @media screen and (max-width: 500px) {
-    .header a {
+    .header p {
       float: none;
       display: block;
       text-align: left;
@@ -85,4 +85,47 @@
 .btn-group button:hover {
     background-color: #3e8e41;
 }
-  
+
+
+
+
+/* Flexbox CSS */
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  height: 50%;
+}
+
+.flexing {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.flexing > div {
+  background-color: rgb(255, 255, 255);
+  color: white;
+  width: 100px;
+  margin: 10px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 30px;
+}
+
+
+.flex-container {
+  display: flex;
+  height: 100px;
+  background-color: #f1f1f1;
+}
+
+.flex-container > div {
+  background-color: whitesmoke;
+  color: white;
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 30px;
+}
