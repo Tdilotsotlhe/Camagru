@@ -1,0 +1,239 @@
+.wrapper {
+    display: flex;  
+    flex-flow: row wrap;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .wrapper > * {
+    padding: 10px;
+    flex: 1 100%;
+  }
+  
+  .header {
+    overflow: hidden;
+    /* background-color: inherit; */
+    background: inherit;
+    border-radius: 2px;
+    padding: 20px 10px;
+    top: calc(50% - 175px);
+  left: calc(50% - 125px);
+  }
+
+  .header::after{
+    content: '';
+    width: 300px;
+    height: 300px;
+    background: inherit; 
+    position: absolute;
+    left: -25px;
+    /* left position; */
+    right: 0;
+    top: -25px;  
+    /* top position ; */
+    bottom: 0;
+    box-shadow: inset 0 0 0 200px rgba(255,255,255,0.05);
+    filter: blur(10px);
+
+  }
+  
+  .header a {
+    float: left;
+    color: black;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px; 
+    line-height: 25px;
+    border-radius: 4px;
+  }
+
+  .header .mydiv {
+    float: left;
+    color: black;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px; 
+    line-height: 25px;
+    border-radius: 4px;
+  }
+
+  .header a.logo {
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .header a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+
+  .header a.active {
+    background-color: dodgerblue;
+    color: white;
+    
+  }
+  
+
+  .header-right {
+    float: right;
+  }
+
+  .footer {
+    top: calc(50% - 175px);
+    left: calc(50% - 125px);
+    background: inherit;
+    border-radius: 2px;
+    overflow: hidden; 
+  }
+  
+  .main {
+    text-align: center;
+    background: deepskyblue;
+  }
+  
+  .aside-1 {
+   /*  background: gold; */
+/*    position: relative; */
+    z-index: 0;
+    top: calc(50% - 175px);
+    left: calc(50% - 125px);
+    background: inherit;
+    border-radius: 2px;
+    overflow: hidden; 
+  }
+  
+  .aside-2 {
+    /* position: relative; */
+   /*  background: hotpink;
+    background-image: url('img/01.jpg');  */
+    z-index: 0;
+    top: calc(50% - 175px);
+    left: calc(50% - 125px);
+    background: inherit;
+    border-radius: 2px;
+    overflow: hidden; 
+  }
+  
+  @media all and (min-width: 600px) {
+    .aside { flex: 1 auto; }
+  }
+  
+  @media all and (min-width: 800px) {
+    .main    { flex: 3 0px; }
+    .aside-1 { order: 1; } 
+    .main    { order: 2; }
+    .aside-2 { order: 3; }
+    .footer  { order: 4; }
+  }
+
+  body {
+    padding: 2em; 
+	width: 100wh;
+	height: 90vh;
+    color: #fff;
+   background-image: url('img/bg/15.jpg'); 
+	/* background: linear-gradient(-45deg,orange, purple, blue,aqua);*/
+/* 	background-size: 400% 400%; 
+	-webkit-animation: Gradient 1000s ease infinite;
+	-moz-animation: Gradient 1000s ease infinite;
+	animation: Gradient 1000s ease infinite; */
+}
+
+@-webkit-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@-moz-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+h1,
+h6 {
+	font-family: 'Open Sans';
+	font-weight: 300;
+	text-align: center;
+	position: absolute;
+	top: 45%;
+	right: 0;
+	left: 0;
+}
+
+.blurred-box{
+    position: relative;
+    width: 250px;
+    height: 350px;
+    top: calc(50% - 175px);
+    left: calc(50% - 125px);
+    background: inherit;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  
+  .blurred-box:after{
+   content: '';
+   width: 300px;
+   height: 300px;
+   background: inherit; 
+   position: absolute;
+   left: -25px;
+  /*  left position */
+   right: 0;
+   top: -25px;  
+/*    top position  */
+   bottom: 0;
+   box-shadow: inset 0 0 0 200px rgba(255,255,255,0.05);
+   filter: blur(10px);
+  }
+
+  .logindiv{
+    top: calc(50% - 175px);
+    left: calc(50% - 125px);
+    background: inherit;
+    border-radius: 2px;
+    overflow: hidden; 
+  }
+
+
+  div.polaroid {
+    width: 20%;
+    background-color: white;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 5px;
+  }
+  
+  div.container {
+    text-align: center;
+    padding: 10px 20px;
+  }
+

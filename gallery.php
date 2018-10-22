@@ -1,5 +1,6 @@
 <?php
 include "config/database.php";
+include "functions/load.php";
 /* $_SESSION['test'] = "SHIT!";
 echo $_SESSION['test']; */
 ?>
@@ -27,9 +28,9 @@ echo $_SESSION['test']; */
 
 <hr>
 <div class="flex-container">
-  <div><img src="img/google.jpg" height="50px" width= "50px"></div>
-  <div><img src="img/google.jpg" height="50px" width= "50px"></div>
-  <div><img src="img/google.jpg" height="50px" width= "50px"></div>
+  <?php
+    loadGallery();
+  ?>
 </div>
 
 <div >

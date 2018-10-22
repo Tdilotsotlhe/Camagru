@@ -42,8 +42,68 @@ if ($uploadOk == 0) {
     if (move_uploaded_file($_FILES["userpic"]["tmp_name"], $target_file)) {
         echo "The file ". basename( $_FILES["userpic"]["name"]). " has been uploaded.";
         //run insert to DB function right here
+        
+        
+        insertUserpic($_FILES["userpic"]["name"], $imageFileType);
     } else {
         echo "Sorry, there was an error uploading your file.";
     }
 }
+
+function    renamepic($oldname, $ftype)
+{
+    echo $oldname;
+    echo $ftype;
+    $uid = $_SESSION['uid'];
+    $newname = $uid."$".$oldname;
+    rename("../img/".$oldname, "../img/".$newname);
+    return ($newname);
+}
+
+function    insertUserpic($filename, $ftype)
+{
+    include "../config/database.php";
+
+    $upname = renamepic($filename, $ftype);
+
+    $fname =  $filename;
+    $theid = $_SESSION['uid'];
+
+    try {
+        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+       // echo "yes";
+      } catch (PDOException $e) {
+      print "Error!: " . $e->getMessage() . "<br/>";
+      die();
+      }
+    
+      try {
+        $dbh->query("USE ".$DB_NAME);
+      } catch (Exception $e) {
+         die("db creation failed!");
+      } 
+
+      try { 
+    $fname =  $upname;
+    $theid = $_SESSION['uid'];
+    echo $fname;
+    echo $theid;
+    $sql = "INSERT INTO camagru.gallery (img_name, users_id) VALUES (:img_name, :users_id)";
+    $stmt= $dbh->prepare($sql);
+    $stmt->bindParam(':img_name', $fname);
+    $stmt->bindParam(':users_id', $theid);
+
+    $stmt->execute();
+    //header("Location: ../index.php?reg=1");
+} catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+     }  
+}
+
+
 ?>
+
+
+
