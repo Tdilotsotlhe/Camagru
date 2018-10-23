@@ -22,11 +22,13 @@ echo $_SESSION['test']; */
     include "includes/header.php";
 ?>
   <article class="main">
-<!--   <canvas id="myCanvas" width="600" height="400">
+ <!--  <canvas id="myCanvas" width="600" height="400"> -->
+  <video id="video" width="640" height="480" autoplay></video>
+<button id="snap">Snap Photo</button>
+<canvas id="canvas" width="640" height="480"></canvas>
+<!-- </canvas> -->
 
-  
 
-  </canvas> -->
   <?php loadGallery2();  ?>
   <div class>
       <form action="functions/upload.php" method="post" enctype="multipart/form-data">
