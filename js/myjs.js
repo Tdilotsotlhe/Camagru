@@ -24,10 +24,6 @@ function changeActive()
    }
 }
 
-function snapPic()
-{
-    alert("working");
-}
 var images;
  window.onload = function(){
  /*    var p = document.getElementById("testy1");
@@ -41,8 +37,10 @@ var images;
    // var x = document.getElementById("webacm");
    // x.addEventListener("click", changeActive);
     changeActive();
+   
     
 } 
+
 
 function imageFoc(tid)
 {
@@ -50,12 +48,6 @@ function imageFoc(tid)
    var attribute = images[0].getAttribute("data-myattribute");
    alert(attribute);
 }
-
-function myFunction()
-{
-   alert("FARKEN");
-}
-
 
 function regtoggle()
 {
@@ -85,26 +77,6 @@ function logout()
     window.location = "functions/logout.php";
 }
 
-// Grab elements, create settings, etc.
-var video = document.getElementById('video');
 
-// Get access to the camera!
-if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    // Not adding `{ audio: true }` since we only want video now
-    navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
-        video.src = window.URL.createObjectURL(stream);
-        video.play();
-    });
-}
-
-// Elements for taking the snapshot
-var canvas = document.getElementById('canvas');
-var context = canvas.getContext('2d');
-var video = document.getElementById('video');
-
-// Trigger photo take
-document.getElementById("snap").addEventListener("click", function() {
-	context.drawImage(video, 0, 0, 640, 480);
-});
 
 

@@ -14,6 +14,7 @@ echo $_SESSION['test']; */
     <link rel="stylesheet" type="text/css" media="screen" href="new.css" />
     
     <script src="js/myjs.js"></script>
+    <script src="js/newcamjs.js"></script>
 </head>
 
 <body>
@@ -22,22 +23,26 @@ echo $_SESSION['test']; */
     include "includes/header.php";
 ?>
   <article class="main">
- <!--  <canvas id="myCanvas" width="600" height="400"> -->
-  <video id="video" width="640" height="480" autoplay></video>
-<button id="snap">Snap Photo</button>
-<canvas id="canvas" width="640" height="480"></canvas>
-<!-- </canvas> -->
-
-
+<canvas id="myCanvas" width="300" height="300"></canvas> 
+<video id='video'></video>
+<br>
+<button id="takepic">TAKE PIC</button>
+<br>
+<form action="functions/upweb.php" method="post">
+<img id="photo" alt="The screen capture will appear in this box.">
+<br>
+<button id="webcamupload">Save image</button>
+</form>
+<br>
   <?php loadGallery2();  ?>
-  <div class>
+  <div>
       <form action="functions/upload.php" method="post" enctype="multipart/form-data">
         <p>Select image to upload</p>
         <input type="file" name="userpic" id="userpic">
         <input type="submit" value="Upload Image" name="submit">
         
       </form>
-      <button type="submit" id="webcam" onclick="wtf();">Use Webcam</button>
+      
   </div>
   </article>
   <aside class="aside aside-1"><?php  loadMenu();   ?></aside>
@@ -45,5 +50,10 @@ echo $_SESSION['test']; */
   <footer class="footer">CAMAGRU TDILOTSO</footer>
 </div>
 </body>
+<script>
+
+  
+
+  </script>
 
 </html>
