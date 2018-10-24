@@ -1,5 +1,5 @@
 <?php
-include "config/database.php";
+//include "config/database.php";
 include "functions/load.php";
 /* $_SESSION['test'] = "SHIT!";
 echo $_SESSION['test']; */

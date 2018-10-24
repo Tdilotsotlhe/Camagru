@@ -1,5 +1,9 @@
 <?php
 
+if(isset($_GET['la']))
+{
+  echo "<script>alert('');</script>";
+}
 require_once "../config/database.php";
 
 //var_dump($_POST);
@@ -13,7 +17,7 @@ require_once "../config/database.php";
  function setlogin($row)
 {
   $_SESSION['uid'] = $row['user_id'];
-$_SESSION['username'] = $row['username'];
+  $_SESSION['username'] = $row['username'];
 } 
 
 
@@ -52,7 +56,7 @@ $user = $stmt->fetch();
       while($row = $stmt->fetch()){ 
          
          // echo $row["password"];
-           if ($row && password_verify($pass, $row['passw']))
+           if (strcmp($row['username'], $login) == 0 && $row && password_verify($pass, $row['passw']))
           {
             //echo "valid";
               setlogin($row);
@@ -60,7 +64,7 @@ $user = $stmt->fetch();
           } 
           else 
           {
-            echo "\n||||\invalid";
+            echo header("Location: ../index.php?la=0");
           }
       }
     }

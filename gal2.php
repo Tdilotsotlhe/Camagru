@@ -28,10 +28,11 @@ echo $_SESSION['test']; */
 <br>
 <button id="takepic">TAKE PIC</button>
 <br>
-<form action="functions/upweb.php" method="post">
-<img id="photo" alt="The screen capture will appear in this box.">
+<form action="functions/upweb.php" method="post" enctype="multipart/form-data">
+<img name='photo' id="photo" alt="The screen capture will appear in this box.">
+<input type="hidden" name="newimage">
 <br>
-<button id="webcamupload">Save image</button>
+<input type="submit" id="webcamupload" value="submit">
 </form>
 <br>
   <?php loadGallery2();  ?>

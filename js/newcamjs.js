@@ -1,3 +1,22 @@
+
+function storePic()
+{
+var sphoto = document.getElementById("photo");
+var ajax = new XMLHttpRequest();
+ajax.open("POST",'../functions/upweb.php',false);
+ajax.send(sphoto);
+/* var data= new FormData();
+data.append(photo.name, sphoto.files[0]);
+
+var data=new FormData();
+//from inputs
+data.append(sphoto.name,sphoto.files[0]);
+data.append('name',name);
+var xmlhttp=new XMLHttpRequest()
+xmlhttp.open("POST", "../functions/upweb.php");
+xmlhttp.send(data); */
+}
+
 //wrap funciton to avoid global issues
 (function(){
 
@@ -15,6 +34,7 @@ function startup() {
     video = document.getElementById('video');
     canvas = document.getElementById('myCanvas');
     photo = document.getElementById('photo');
+    newImg = document.getElementById('newpic');
     startbutton = document.getElementById('takepic');
 
 //fetch media stream
@@ -55,6 +75,7 @@ function clearphoto() {
     context.fillRect(0, 0, canvas.width, canvas.height);
     var data = canvas.toDataURL('image/png');
     photo.setAttribute('src', data);
+    newImg.setAttribute('value', data);
 }
 
 function takepicture(){
@@ -65,9 +86,17 @@ function takepicture(){
       context.drawImage(video, 0, 0, width, height);
     
       var data = canvas.toDataURL('image/png');
+      console.log(data);
       var myImg = document.getElementById("photo").src;
-    
+      ////////////////////////try upload script
+
+
+
+
+
+      ///////////////////////
       photo.setAttribute('src', data);
+      newImg.setAttribute('value', data);
     } else {
       clearphoto();
     }

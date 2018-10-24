@@ -9,5 +9,7 @@ $options = [
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
   ];
 $dbh = NULL;
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
 ?>

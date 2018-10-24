@@ -23,7 +23,7 @@ function loadGallery2()
       } 
 
     try { 
-        $stmt = $dbh->prepare("SELECT * FROM gallery WHERE users_id=?");
+        $stmt = $dbh->prepare("SELECT * FROM gallery WHERE users_id=? ORDER BY commtime DESC");
         if($stmt->execute([$_SESSION['uid']])){
           
           while($row = $stmt->fetch()){ 
