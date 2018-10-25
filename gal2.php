@@ -29,8 +29,9 @@ echo $_SESSION['test']; */
 <button id="takepic">TAKE PIC</button>
 <br>
 <form action="functions/upweb.php" method="post" enctype="multipart/form-data">
-<img name='photo' id="photo" alt="The screen capture will appear in this box.">
-<input type="hidden" name="newimage">
+<img name="photo" id="photo" alt="The screen capture will appear in this box.">
+<input type="image" id="myimage" name="myimage">
+<input type="hidden" id="fudge" name="fudge" value="shtthefrontdoor">
 <br>
 <input type="submit" id="webcamupload" value="submit">
 </form>

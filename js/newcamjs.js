@@ -1,4 +1,5 @@
 
+
 function storePic()
 {
 var sphoto = document.getElementById("photo");
@@ -34,7 +35,9 @@ function startup() {
     video = document.getElementById('video');
     canvas = document.getElementById('myCanvas');
     photo = document.getElementById('photo');
-    newImg = document.getElementById('newpic');
+   
+    newImg = document.getElementById('myimage');
+  
     startbutton = document.getElementById('takepic');
 
 //fetch media stream
@@ -75,7 +78,8 @@ function clearphoto() {
     context.fillRect(0, 0, canvas.width, canvas.height);
     var data = canvas.toDataURL('image/png');
     photo.setAttribute('src', data);
-    newImg.setAttribute('value', data);
+    //newImg.value =  data;
+  
 }
 
 function takepicture(){
@@ -96,9 +100,12 @@ function takepicture(){
 
       ///////////////////////
       photo.setAttribute('src', data);
-      newImg.setAttribute('value', data);
+      fdge = document.getElementById("fudge");
+       newImg.setAttribute('src', data);
+       alert(newImg.src);
+       // console.log(newImg.value);
     } else {
-      clearphoto();
+     // clearphoto();
     }
 }
 window.addEventListener('load', startup, false);

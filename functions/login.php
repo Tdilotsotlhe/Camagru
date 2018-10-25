@@ -30,24 +30,11 @@ print "Error!: " . $e->getMessage() . "<br/>";
 die();
 }
 
-
- //select DB
  try {
   $dbh->query("USE ".$DB_NAME);
 } catch (Exception $e) {
    die("db creation failed!");
 } 
-
-/*
-try {
-$stmt = $pdo->prepare("SELECT * FROM users WHERE username=:id");
-$stmt->execute(['id' => $login]); 
-$user = $stmt->fetch();
-} catch (Exception $e) {
-  die("select failed!");
-} */
-
-
 
   try { 
     $stmt = $dbh->prepare("SELECT * FROM users WHERE username=?");
@@ -55,10 +42,10 @@ $user = $stmt->fetch();
       
       while($row = $stmt->fetch()){ 
          
-         // echo $row["password"];
+       
            if (strcmp($row['username'], $login) == 0 && $row && password_verify($pass, $row['passw']))
           {
-            //echo "valid";
+          
               setlogin($row);
               header("Location: ../index.php");
           } 
