@@ -37,7 +37,7 @@ die();
 
     $stmt->execute();
     sendVerify($email, $acthash);
-    //header("Location: ../index.php?reg=1");
+
    
  } catch (PDOException $e) {
 print "Error!: " . $e->getMessage() . "<br/>";
