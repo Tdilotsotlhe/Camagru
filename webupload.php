@@ -3,12 +3,27 @@
 /*     $data = explode( ',', $_POST["img64"] );
     $emo = $_POST['emoji64']; */
 
-     $data = $_POST["img64"];
-    $emo = $_POST['emoji64'];
+    $xml = file_get_contents('php://input');
+    $res = explode('&', $xml);
+    print_r($res);
+    echo "<br>";
+    
+    $myArray;
+    foreach ($res as $key => $val)
+    {
+       // echo "<br>";
+        $g = explode('=',$val);
+       // echo $g[1];
+        $myArray[] = $g[1];
+        echo "<br>"; 
+    }
+    print_r($myArray);
     //$ogimg = document.getElementById("img64").value;
     //$newimg = document.getElementById("emoji64").value;
 
-    $test = base64_decode($data[1]);
+
+        //change $data back to array
+    $test = base64_decode($myArray[1]);
 
     echo $emo;
     $user_id = $_SESSION['uid'];
@@ -17,7 +32,7 @@
 
 
     $dest= imagecreatefrompng("img/gal/".$user_id."1.png");
-    $src = imagecreatefrompng($emo);
+    $src = imagecreatefrompng($myArray[3]);
     $width = ImageSx($src);
     $height = ImageSy($src);
     $x = $width/4; $y = $height/4;

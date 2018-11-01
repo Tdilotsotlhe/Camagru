@@ -53,7 +53,7 @@ window.onload = function()
 
 	save_photo.addEventListener('click',function(e)
 	{
-		savepic()
+		savepic();
 		e.preventDefault();
 	}, false);
 
@@ -86,10 +86,10 @@ window.onload = function()
 
 	function savepic(){
 		var dataURL = canvas.toDataURL();
-		var	emoji = document.getElementById("emoji1").src;
-		const form = document.createElement('form');
+		 var	emoji = document.getElementById("emoji1").src;
+		/*const form = document.createElement('form'); */
 		//form.action = 'webupload.php';
-		form.method = 'post';
+/* 		form.method = 'post';
 		form.onsubmit = 'ajaxsavepic()';
 		const myogimage = document.createElement('input');
 		const myoverlay = document.createElement('input');
@@ -104,7 +104,26 @@ window.onload = function()
 		form.appendChild(myogimage);
 		form.appendChild(myoverlay);
 		document.body.appendChild(form);
-		form.submit();
+		form.submit(); */
+		alert("Tsek");
+		 var xmlString;
+		 var xhr;
+		if (window.XMLHttpRequest) { // Mozilla, Safari, ...
+		xhr = new XMLHttpRequest();
+		} else if (window.ActiveXObject) { // IE 8 and older
+			xhr = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+			xmlString = "<picinfo>" +
+		"  <ogimg>" + dataURL + "</ogimg>" +
+		"  <newimg>" + emoji + "</ogimg>" +
+		"</picinfo>";
+		alert(dataURL);
+		alert(emoji);
+		var url = "webupload.php";
+		xhr.open("POST", url, true);
+		xhr.setRequestHeader("Content-Type", "text/xml");
+		xhr.send(xmlString); 
+
 		}
 
 

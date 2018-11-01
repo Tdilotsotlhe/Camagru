@@ -12,7 +12,7 @@ var xhr;
 }
 
 xmlString = "<userinfo>" +
-"  <uname>" + escape(userid) + "</userid>" +
+"  <uname>" + escape(userid) + "</uname>" +
 "  <password>" + escape(pwrd) + "</password>" +
 "</userinfo>";
 
@@ -36,10 +36,10 @@ function ajaxsavepic(){
         xhr = new ActiveXObject("Microsoft.XMLHTTP");
     }
     
-    xmlString = "<userinfo>" +
-    "  <uname>" + escape(userid) + "</userid>" +
-
-    "</userinfo>";
+    xmlString = "<picinfo>" +
+    "  <ogimg>" + ogimg + "</ogimg>" +
+    "  <newimg>" + newimg + "</ogimg>" +
+    "</picinfo>";
     
     var url = "../functions/webupload.php";
     xhr.open("POST", url, true);
