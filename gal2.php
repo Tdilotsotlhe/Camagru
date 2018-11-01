@@ -16,6 +16,7 @@ echo $_SESSION['test']; */
    <!--  <script src="js/myjs.js"></script> -->
    <!--  <script src="js/newcamjs.js"></script> -->
     <script src="js/pic.js"></script>
+    <script src="js/myajax.js"></script>
     <style>
 #overlay {
     position: absolute;

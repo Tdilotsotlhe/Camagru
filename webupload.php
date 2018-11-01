@@ -1,7 +1,13 @@
 <?php
     require_once "config/database.php";
-    $data = explode( ',', $_POST["img64"] );
+/*     $data = explode( ',', $_POST["img64"] );
+    $emo = $_POST['emoji64']; */
+
+     $data = $_POST["img64"];
     $emo = $_POST['emoji64'];
+    //$ogimg = document.getElementById("img64").value;
+    //$newimg = document.getElementById("emoji64").value;
+
     $test = base64_decode($data[1]);
 
     echo $emo;

@@ -25,9 +25,9 @@ xhr.send(xmlString);
 
 function ajaxsavepic(){
     alert("Tsek");
-    var username, pass, email, xmlString; 
-    userid = document.getElementById("image").value;
-    pass = document.getElementById("pwrd1").value;
+     var xmlString; 
+    ogimg = document.getElementById("img64").value;
+    newimg = document.getElementById("emoji64").value;
     
     var xhr;
          if (window.XMLHttpRequest) { // Mozilla, Safari, ...
@@ -41,9 +41,9 @@ function ajaxsavepic(){
 
     "</userinfo>";
     
-    var url = "../functions/ajaxcam.php";
+    var url = "../functions/webupload.php";
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "text/xml");
-    xhr.send(xmlString);
+    xhr.send(xmlString); 
     
     }
