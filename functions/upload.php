@@ -1,5 +1,5 @@
 <?php
-$target_dir = "../img/";
+$target_dir = "../img/gal/";
 $target_file = $target_dir . basename($_FILES["userpic"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -56,7 +56,7 @@ function    renamepic($oldname, $ftype)
     echo $ftype;
     $uid = $_SESSION['uid'];
     $newname = $uid."$".$oldname;
-    rename("../img/".$oldname, "../img/".$newname);
+    rename("../img/gal/".$oldname, "../img/gal/".$newname);
     return ($newname);
 }
 

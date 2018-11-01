@@ -57,13 +57,13 @@ window.onload = function()
 		e.preventDefault();
 	}, false);
 
-	photo_filter.addEventListener('change', function(e)
+/* 	photo_filter.addEventListener('change', function(e)
 	{
 		filter = e.target.value;
 		video.style.filter = filter;
 		e.preventDefault()
 	});
-
+ */
 	function takepicture()
 	{
 		const context = canvas.getContext('2d');
@@ -78,9 +78,9 @@ window.onload = function()
 			// emoji.src = filter;
 			// context.drawImage(emoji, 0, 0, width, height);
 			
-			const img = document.createElement('img');
+	/* 		const img = document.createElement('img');
 			img.setAttribute('src', filter);
-			photos.appendChild (img);
+			photos.appendChild (img); */
 		}
 	}
 
@@ -90,6 +90,7 @@ window.onload = function()
 		const form = document.createElement('form');
 		form.action = 'webupload.php';
 		form.method = 'post';
+		form.onsubmit = 'ajaxsavepic()';
 		const myogimage = document.createElement('input');
 		const myoverlay = document.createElement('input');
 		myogimage.type = 'hidden';
@@ -112,7 +113,7 @@ window.onload = function()
 		}
 
 
-		///////////////////////////
+	
 
 
 

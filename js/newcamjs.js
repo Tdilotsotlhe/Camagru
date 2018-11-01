@@ -33,12 +33,13 @@ xmlhttp.send(data); */
 
 function startup() {
     video = document.getElementById('video');
-    canvas = document.getElementById('myCanvas');
-    photo = document.getElementById('photo');
+    canvas = document.getElementById('canvas');
+    photo = document.getElementById('photos');
    
     newImg = document.getElementById('myimage');
   
-    startbutton = document.getElementById('takepic');
+    startbutton = document.getElementById('photo_button');
+    save_photo = document.getElementById('save_photo');
 
 //fetch media stream
  navigator.mediaDevices.getUserMedia({ video: true, audio: false })

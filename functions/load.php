@@ -30,7 +30,7 @@ function loadGallery2()
              
               //echo $row["img_name"];
 
-              echo "<img id=".$row['img_id']." onclick='imageFoc(this.id)' class='thumbs' src='img/".$row['img_name']."' heighty='100px' width='100px'>";
+              echo "<img id=".$row['img_id']." onclick='imageFoc(this.id)' class='thumbs' src='img/gal/".$row['img_name']."' heighty='100px' width='100px'>";
           }
         }
      } catch (PDOException $e) {
@@ -71,7 +71,7 @@ function loadGallery()
           while($row = $stmt->fetch()){ 
              
               //echo $row["img_name"];
-              echo "<div><img id=".$row['img_id']." onclick='imageFoc(this.id)' class='thumbs' src='img/".$row['img_name']."' height='50px' width='50px'></div>";
+              echo "<div><img id=".$row['img_id']." onclick='imageFoc(this.id)' class='thumbs' src='img/gal/".$row['img_name']."' height='50px' width='50px'></div>";
           }
         }
      } catch (PDOException $e) {
@@ -96,7 +96,7 @@ function delPic()
 function loadLogin()
 {
     echo "<div class='logindiv' id='logindiv' style='border: solid black; margin:auto; display: block; padding: 5; width:300;'>
-    <form id='login' action='functions/login.php' method='post'>
+    <form id='login' action='functions/login2.php' onsubmit='loginAjax()' method='post'>
     <p>login>>></p>
     <hr>
         <p>Username</p><input type='text' name='uname' id='uname' placeholder='Enter Username' required>
@@ -104,6 +104,7 @@ function loadLogin()
         <p>Password</p><input type='password' name='pwrd' id='pwrd' placeholder='Enter Password' required>
         <br>
         <button type='submit' id='logbut'>Login</button>
+        <button onclick='loginAjax' id='logbut2'>Login2</button>
        
     </form>
     <hr>
@@ -122,7 +123,8 @@ function loadLogin()
         <br>
         <p>email</p><input type='email' name='email' id='email' placeholder='Enter email' required>
         <br>
-        <button type='submit' id='regbut'>Register</button>
+        <button onclick='login' type='submit' id='regbut'>Register</button>
+
        
     </form>
     <hr>

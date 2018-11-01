@@ -1,8 +1,11 @@
 <?php
-//include "config/database.php";
+ 
 include "functions/load.php";
-/* $_SESSION['test'] = "SHIT!";
-echo $_SESSION['test']; */
+
+if(isset($_GET['welcome']))
+{
+    echo "<script>alert('login successful')</script>";
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,6 +16,7 @@ echo $_SESSION['test']; */
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="new.css" />
     <script src="js/myjs.js"></script>
+<!--     <script src="js/myajax.js"></script> -->
 </head>
 <body background="img/bg/15.jpg" onload="changeActive();">
 <div class="wrapper">
@@ -23,7 +27,11 @@ echo $_SESSION['test']; */
     <?php
         if(isset($_SESSION['uid']))
         {
-            echo "WELCOME BACK MADA EFFER";
+            //echo "WELCOME BACK MADA EFFER";
+            include "functions/afuncs.php";
+           // pgaltest();
+            // loadGallery2();
+            echo "<script>privategal();</script>";
         }
         else{
             loadLogin();
