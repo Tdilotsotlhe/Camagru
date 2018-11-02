@@ -24,7 +24,7 @@ xhr.send(xmlString);
 }
 
 function ajaxsavepic(){
-    alert("Tsek");
+
      var xmlString; 
     ogimg = document.getElementById("img64").value;
     newimg = document.getElementById("emoji64").value;

@@ -55,8 +55,8 @@ echo $_SESSION['test']; */
 
   <div height="375px" width="500px" style="position: relative;">  
 <div id="overlay" class="overlay" onclick="off()">
-<img class="text" height='100px' width='100px' id="emoji1" name="emoji1" src="img/emojis/poo.png">
-<img class="text" height='100px' width='100px' id="emoji2" name="emoji1" src="img/emojis/poo.png">
+<img class="text" height='100px' width='100px' id="emoji1" name="emoji1" src="img/emojis/poo.png" onclick="emotoggle(this);">
+<img class="text" height='100px' width='100px' id="emoji2" name="emoji1" src="" onclick="emotoggle(this);" style="display: none;">
 </div>
 <!-- <div> -->
 <video id='video'>Stream not available...</video>
@@ -74,8 +74,20 @@ save
 
 </div>
 
-<img id="e1" src="img/emojis/penguin.png" height='40px' width='40px'>
+<div id="emos1" class="btn-group">
+<p>emo1</p>
+<img id="e1" src="img/emojis/penguin.png" height='40px' width='40px' >
 <img id="e2" src="img/emojis/poo.png" height='40px' width='40px'>
+<img id="e3" src="img/emojis/1.png" height='40px' width='40px'>
+<img id="e4" src="img/emojis/2.png" height='40px' width='40px' >
+</div>
+<p>emo2</p>
+<div id="emos2" class="btn-group">
+<img id="e6" src="img/emojis/penguin.png" height='40px' width='40px'onclick ="emohide2()">
+<img id="e7" src="img/emojis/poo.png" height='40px' width='40px'onclick ="emohide2()">
+<img id="e9" src="img/emojis/1.png" height='40px' width='40px'onclick ="emohide2()">
+<img id="e10" src="img/emojis/2.png" height='40px' width='40px'onclick ="emohide2()">
+</div>
 <br>
 
 <canvas id="canvas"></canvas>
@@ -85,42 +97,128 @@ save
 <div id="photos"></div>
 </div> 
 <script>
+  var ediv1 = document.getElementById("emos1");
+  var ediv2 = document.getElementById("emos2");
 function on() {
 
 document.getElementById("overlay").style.display = "block";
+
 }
 function off() {
-document.getElementById("overlay").style.display = "none";
+//document.getElementById("overlay").style.display = "none";
+
 }
 emo1 = document.getElementById("e1");
 emo2 = document.getElementById("e2");
-emo1.addEventListener("click", function(){switchsrc(emo1);}, false);
-emo2.addEventListener("click", function(){switchsrc(emo2);}, false);
+emo3 = document.getElementById("e3");
+emo4 = document.getElementById("e4");
+emo6 = document.getElementById("e6");
+emo7 = document.getElementById("e7");
+emo9 = document.getElementById("e9");
+emo10 = document.getElementById("e10");
+emo1.addEventListener("click", function(){switchsrc(emo1); emohide();}, false);
+emo2.addEventListener("click", function(){switchsrc(emo2); emohide();}, false);
+emo3.addEventListener("click", function(){switchsrc(emo3); emohide();}, false);
+emo4.addEventListener("click", function(){switchsrc(emo4); emohide();}, false);
+emo6.addEventListener("click", function(){switchsrc(emo6);}, false);
+emo7.addEventListener("click", function(){switchsrc(emo7);}, false);
+emo9.addEventListener("click", function(){switchsrc(emo9);}, false);
+emo10.addEventListener("click", function(){switchsrc(emo10);}, false);
+//////emo toggling
+function emotoggle(emo)
+{
+    alert("canvas toggle");
+    if (emo.style.display != "none")
+    {
+        emoshow();
+        emo.style.display = "none";
+    }
+    else{
+        emohide();
+        //ediv1.style.display = "block"; 
+        emo.style.display = "block";
+    }
+}
+function emohide()
+{
+    alert("emohide1");
+    ediv1.style.display = "none";
+}
+function emoshow()
+{
+    alert("emohide1");
+    ediv1.style.display = "block";
+}
+function emotoggle2(emo)
+{
+    alert("canvas toggle");
+    if (emo.style.display != "none")
+    {
+        emoshow2();
+        emo.style.display = "none";
+    }
+    else{
+        emohide2();
+        //ediv1.style.display = "block"; 
+        emo.style.display = "block";
+    }
+}
+function emohide2()
+{
+    alert("emohide1");
+    ediv2.style.display = "none";
+}
+function emoshow2()
+{
+    alert("emohide1");
+    ediv2.style.display = "block";
+}
+
+//////////end emo toggling UI
+////start emo switching
 function switchsrc(emonew)
 {
-//document.getElementById("emoji1").style.display = "block";
+
 document.getElementById("overlay").style.display = "block";
 var emoswitch = document.getElementById("emoji1");
-var emoswitch2 = document.getElementById("emoji2");
+//var emoswitch2 = document.getElementById("emoji2");
 
-var ovl = document.getElementById("emoji1");
-var ovl2 = document.getElementById("emoji2");
+ 
+
+    //check if image is child of 1st emo div, or 2nd emodiv
+    //checkdiv by getting value
+    var firstdiv = document.getElementById("emos1");
+    var Secdiv = document.getElementById("emos2");
+    if (emonew.parentNode == firstdiv) {
+        
+    }
+
 switch (emonew.id)
 {
 case "e1" :
     emoswitch.setAttribute('src', emonew.src);
-    emoswitch2.setAttribute('src', emonew.src);
+   // emoswitch2.setAttribute('src', emonew.src);
     ovl.style.paddingTop = "90px";
     ovl.style.paddingLeft = "20px";
-    ovl2.style.paddingTop = "10px";
-    ovl2.style.paddingLeft = "30px";
+    
     break;
 case "e2" :
-emoswitch.setAttribute('src', emonew.src);
+    emoswitch.setAttribute('src', emonew.src);
     ovl.style.paddingTop = "30px";
     ovl.style.paddingLeft = "500px";
-    ovl2.style.paddingTop = "50px";
-    ovl2.style.paddingLeft = "120px";
+    
+    break;
+case "e3" :
+    emoswitch.setAttribute('src', emonew.src);
+    ovl.style.paddingTop = "30px";
+    ovl.style.paddingLeft = "500px";
+    
+    break;
+case "e4" :
+    emoswitch.setAttribute('src', emonew.src);
+    ovl.style.paddingTop = "30px";
+    ovl.style.paddingLeft = "500px";
+    
     break;
 }
 
