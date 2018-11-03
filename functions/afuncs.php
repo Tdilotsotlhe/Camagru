@@ -35,7 +35,7 @@ $xml = file_get_contents('php://input');
         } 
 
         try { 
-            $stmt = $dbh->prepare("SELECT * FROM gallery WHERE users_id=? ORDER BY commtime DESC");
+            $stmt = $dbh->prepare("SELECT * FROM gallery WHERE users_id=? ORDER BY uptime DESC");
             if($stmt->execute([$_SESSION['uid']])){
             
             while($row = $stmt->fetch()){ 

@@ -23,20 +23,19 @@ if(isset($_GET['welcome']))
 <?php
     include "includes/header.php";
 ?>
-  <article class="main">
+  <article id="maincontent" class="main">
     <?php
         if(isset($_SESSION['uid']))
         {
             //echo "WELCOME BACK MADA EFFER";
-            include "functions/afuncs.php";
+           // include "functions/afuncs.php";
            // pgaltest();
             // loadGallery2();
-            echo "<script>privategal();</script>";
-        }
-        else{
+            echo "<script>homegal();</script>";
+        }else
+        {
             loadLogin();
         }
-
     ?>
   
   
@@ -47,8 +46,8 @@ if(isset($_GET['welcome']))
   <button onclick="ajtest1;" id="ajbut">AJTEST</button>
   </form>
   </aside>
-  <aside class="aside aside-2"> </aside>
-  <footer class="footer"><div id="foot">nothing</div>CAMAGRU TDILOTSO</footer>
+  <aside class="aside aside-2"><div id="mygal"><div> </aside>
+  <footer class="footer">CAMAGRU TDILOTSO</footer>
 </div>
 
 

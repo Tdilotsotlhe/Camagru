@@ -23,7 +23,7 @@ function loadGallery2()
       } 
 
     try { 
-        $stmt = $dbh->prepare("SELECT * FROM gallery WHERE users_id=? ORDER BY commtime DESC");
+        $stmt = $dbh->prepare("SELECT * FROM gallery WHERE users_id=? ORDER BY uptime DESC");
         if($stmt->execute([$_SESSION['uid']])){
           
           while($row = $stmt->fetch()){ 
@@ -95,18 +95,19 @@ function delPic()
 
 function loadLogin()
 {
+    echo "<div id='logcont'>";
     echo "<div class='logindiv' id='logindiv' style='border: solid black; margin:auto; display: block; padding: 5; width:300;'>
-    <form id='login' action='functions/login2.php' onsubmit='loginAjax()' method='post'>
+    
     <p>login>>></p>
     <hr>
         <p>Username</p><input type='text' name='uname' id='uname' placeholder='Enter Username' required>
         <br>
         <p>Password</p><input type='password' name='pwrd' id='pwrd' placeholder='Enter Password' required>
         <br>
-      
-        <button onclick='loginAjax' id='logbut2'>Login2</button>
+        <div id='login_error'></div>
+        <button onclick='ajax_post()' id='logbut2'>Login2</button>
        
-    </form>
+    
     <hr>
         <button id='butreg' onclick='regtoggle()'>Register</button>
 </div>
@@ -130,6 +131,7 @@ function loadLogin()
     <hr>
         <button id='butlog' onclick='regtoggle()'>login</button>
 </div>";
+echo "</div>";
 }
 
 function loadMenu()

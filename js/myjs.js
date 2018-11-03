@@ -20,42 +20,56 @@ function privategal()
 
 window.onload= function(){
 var logbut = document.getElementById("logbut2");
-logbut.addEventListener("click", loginAjax);
+//logbut.addEventListener("click", loginAjax);
+
 }
 
+
+
+//////////////////////////
+/////
+/* function loginAjax(){
+    var xhr = new XMLHttpRequest();
+   var url = "functions/login2.php";
+   var userid = document.getElementById("uname1").value;
+    pass = document.getElementById("pwrd1").value;
+
+
+
+}//end */
+
+//////
 function loginAjax(){
 
-    alert('tsek');
+    alert('sdfsdf');
     var xmlString;
-    userid = document.getElementById("uname1").value;
-    pass = document.getElementById("pwrd1").value;
-    
-    var xhr;
-         if (window.XMLHttpRequest) { // Mozilla, Safari, ...
-        xhr = new XMLHttpRequest();
-    } else if (window.ActiveXObject) { // IE 8 and older
-        xhr = new ActiveXObject("Microsoft.XMLHTTP");
-    }
+    userid = document.getElementById("uname").value;
+    pass = document.getElementById("pwrd").value;
+    alert(userid, pass);
+    var xhr = new XMLHttpRequest();
+   
     
 /*     xmlString = "<userinfo>" +
     "  <uname>" + escape(userid) + "</userid>" +
     "  <password>" + escape(pwrd) + "</password>" +
     "</userinfo>"; */
-    xmlString = "<userinfo>" +
-    "  <uname>" + escape(userid) + "</userid>" +
-    "  <password>" + escape(pwrd) + "</password>" +
-    "</userinfo>";
+    xmlString = "uname=" + escape(userid) + "&" +
+    "password=" + escape(pwrd);
+    var url = "functions/login2.php";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
     xhr.onreadystatechange = function(){
     if (xhr.readyState == 4 && xhr.status == 200)
     {
        // alert("READY!");
-        //alert(xhr.responseText);
-        document.getElementById("loggeduser").innerHTML = "home";
+        alert(xhr.responseText);
+        document.getElementById("foot").innerHTML = "home";
     }
 };
-    var url = "functions/login2.php";
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-Type", "text/xml");
+    
+
+    
     xhr.send(xmlString);
     
     
@@ -106,11 +120,31 @@ var images;
 
 function imageFoc(tid)
 {
-   alert(tid);
-   var attribute = images[0].getAttribute("data-myattribute");
-   alert(attribute);
+   alert(tid.id);
+   imgFetch(tid.id);
 }
 
+////////////imgfetch
+
+function imgFetch(imgsid)
+{
+     
+     var hr = new XMLHttpRequest();
+     var url = "functions/ajaxfunction.php";
+     var vars = "imgid=" + imgsid;
+     hr.open("POST", url, true);
+     hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+     hr.onreadystatechange = function() {
+         if(hr.readyState == 4 && hr.status == 200) {
+             var return_data = hr.responseText;
+            document.getElementById("comment").innerHTML += return_data;
+         }
+     }
+     hr.send(vars); 
+     document.getElementById("comment").innerHTML = "Comments";
+}
+
+/////////////
 function regtoggle()
 {
     
@@ -139,8 +173,76 @@ function logout()
     window.location = "functions/logout.php";
 }
 
+/////newcomment
+function newCom(commenter, picid) {
+    alert(commenter + "  " + picid);
+}
 
 
+////////////
+
+
+function ajax_post(){
+    // Create our XMLHttpRequest object
+    var hr = new XMLHttpRequest();
+    // Create some variables we need to send to our PHP file
+    var url = "functions/login2.php";
+    var fn = document.getElementById("uname").value;
+    var ln = document.getElementById("pwrd").value;
+    var vars = "uname="+fn+"&pwrd="+ln;
+    hr.open("POST", url, true);
+    // Set content type header information for sending url encoded variables in the request
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // Access the onreadystatechange event for the XMLHttpRequest object
+    hr.onreadystatechange = function() {
+	    if(hr.readyState == 4 && hr.status == 200) {
+		    var return_data = hr.responseText;
+           // alert(return_data);
+            checkResponse(hr.responseText);
+          //  document.getElementById("login_error").innerHTML = return_data;
+	    }
+    }
+    // Send the data to PHP now... and wait for response to update the status div
+    hr.send(vars); // Actually execute the request
+    document.getElementById("login_error").innerHTML = "logging in...";
+}
+
+function checkResponse(response) {
+    if (response == "Login failed")
+    {
+        document.getElementById("login_error").innerHTML = "login failed";
+    }
+    else{
+        document.getElementById("namebrand").innerHTML = response;
+        document.getElementById("logcont").style.visibility = "hidden";
+        document.getElementById("logindiv").style.visibility = "hidden";
+        document.getElementById("regdiv").style.visibility = "hidden";
+        homegal();
+    }
+}
+
+
+////////////home gallery
+
+function homegal()
+{
+     
+     var hr = new XMLHttpRequest();
+     var url = "functions/ajaxfunction.php";
+     var vars = "homegal=loadit";
+     hr.open("POST", url, true);
+     hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+     hr.onreadystatechange = function() {
+         if(hr.readyState == 4 && hr.status == 200) {
+             var return_data = hr.responseText;
+            document.getElementById("mygal").innerHTML = return_data;
+         }
+     }
+     hr.send(vars); 
+   //  document.getElementById("maincontent").innerHTML = "loading private gallery...";
+}
+
+/////////////
 
 
 

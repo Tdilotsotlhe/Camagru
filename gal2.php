@@ -17,6 +17,8 @@ echo $_SESSION['test']; */
    <!--  <script src="js/newcamjs.js"></script> -->
     <script src="js/pic.js"></script>
     <script src="js/myajax.js"></script>
+    <script src="js/thumbs.js"></script>
+    <script src="js/myjs.js"></script>
     <style>
 #overlay {
     position: absolute;
@@ -241,14 +243,13 @@ case "e4" :
       
   </div>
   </article>
-  <aside class="aside aside-1"><div><?php  loadMenu();   ?></div></aside>
-  <aside class="aside aside-2">Thumbnails <?php loadGallery();  ?></aside>
+  <aside class="aside aside-1" id="thumbnails"></aside>
+  <aside id="comment"  class="aside aside-2"><p>Comments<p></aside>
   <footer class="footer">CAMAGRU TDILOTSO</footer>
 </div>
 </body>
 <script>
 
-  
 
   </script>
 

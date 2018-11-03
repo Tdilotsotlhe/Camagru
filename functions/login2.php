@@ -2,22 +2,11 @@
 
 require_once "../config/database.php";
 
-$xml = file_get_contents('php://input');
-$unser = file_get_contents('php://input');
-$res = explode('&', $xml);
-//print_r($res);
-echo "<br>";
+/* echo $_POST['uname'];
+echo $_POST['pwrd']; */
 
-$myArray;
-foreach ($res as $key => $val)
-{
-   // echo "<br>";
-    $g = explode('=',$val);
-   // echo $g[1];
-    $myArray[] = $g[1];
-    echo "<br>"; 
-}
-//print_r($myArray);
+$user = $_POST['uname'];
+$pwrd = $_POST['pwrd']; 
 
 function setlogin($row)
 {
@@ -41,34 +30,26 @@ try {
   
     try { 
       $stmt = $dbh->prepare("SELECT * FROM users WHERE username=?");
-      if($stmt->execute([$myArray[0]])){
+      if($stmt->execute([$user])){
         
         while($row = $stmt->fetch()){ 
         //  var_dump(simplexml_load_string($unser));
          
-             if (strcmp($row['username'], $myArray[0]) == 0 && $row && password_verify($myArray[1], $row['passw']))
+             if (strcmp($row['username'], $user) == 0 && $row && password_verify($pwrd, $row['passw']))
             {
             
                 setlogin($row);
-                exit();
-                
-               // echo "AJAXIFY THIS SHIIIIII!";
-               // header("Location: ../index.php?welcome=1");
-               // var_dump($unser);
-               // echo $unser;
-                
+                echo "Welcome ".$row['username']; 
               } 
             else 
             {
-              echo "NOT";
-              exit();
-              //echo header("Location: ../index.php?la=0");
+              echo "Login failed"; 
             }
         }
       }
    } catch (PDOException $e) {
   print "Error!: " . $e->getMessage() . "<br/>";
   die();
-  }  
+  }
 
 ?>
