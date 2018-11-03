@@ -18,9 +18,15 @@ function privategal()
     xhr.send(xmlString);
 }
 
+window.onload= function(){
+var logbut = document.getElementById("logbut2");
+logbut.addEventListener("click", loginAjax);
+}
+
 function loginAjax(){
 
-    var username, pass, email, xmlString; 
+    alert('tsek');
+    var xmlString;
     userid = document.getElementById("uname1").value;
     pass = document.getElementById("pwrd1").value;
     
@@ -31,11 +37,22 @@ function loginAjax(){
         xhr = new ActiveXObject("Microsoft.XMLHTTP");
     }
     
+/*     xmlString = "<userinfo>" +
+    "  <uname>" + escape(userid) + "</userid>" +
+    "  <password>" + escape(pwrd) + "</password>" +
+    "</userinfo>"; */
     xmlString = "<userinfo>" +
     "  <uname>" + escape(userid) + "</userid>" +
     "  <password>" + escape(pwrd) + "</password>" +
     "</userinfo>";
-    
+    xhr.onreadystatechange = function(){
+    if (xhr.readyState == 4 && xhr.status == 200)
+    {
+       // alert("READY!");
+        //alert(xhr.responseText);
+        document.getElementById("loggeduser").innerHTML = "home";
+    }
+};
     var url = "functions/login2.php";
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "text/xml");
@@ -121,6 +138,8 @@ function logout()
     alert("Please come again fore de next time when the pots must do to  make and get done");
     window.location = "functions/logout.php";
 }
+
+
 
 
 

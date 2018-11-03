@@ -3,8 +3,9 @@
 require_once "../config/database.php";
 
 $xml = file_get_contents('php://input');
+$unser = file_get_contents('php://input');
 $res = explode('&', $xml);
-print_r($res);
+//print_r($res);
 echo "<br>";
 
 $myArray;
@@ -16,7 +17,7 @@ foreach ($res as $key => $val)
     $myArray[] = $g[1];
     echo "<br>"; 
 }
-print_r($myArray);
+//print_r($myArray);
 
 function setlogin($row)
 {
@@ -43,17 +44,25 @@ try {
       if($stmt->execute([$myArray[0]])){
         
         while($row = $stmt->fetch()){ 
-           
+        //  var_dump(simplexml_load_string($unser));
          
              if (strcmp($row['username'], $myArray[0]) == 0 && $row && password_verify($myArray[1], $row['passw']))
             {
             
                 setlogin($row);
-                header("Location: ../index.php?welcome=1");
-            } 
+                exit();
+                
+               // echo "AJAXIFY THIS SHIIIIII!";
+               // header("Location: ../index.php?welcome=1");
+               // var_dump($unser);
+               // echo $unser;
+                
+              } 
             else 
             {
-              echo header("Location: ../index.php?la=0");
+              echo "NOT";
+              exit();
+              //echo header("Location: ../index.php?la=0");
             }
         }
       }

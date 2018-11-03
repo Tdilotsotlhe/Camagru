@@ -17,7 +17,7 @@ echo "
   <a href='#default' class='logo'>Camagru</a>
   <div class='header-right'>
       <a href='#'>";
-echo "Welcome ";
+echo "Welcome <p id='loggeduser'>test</p>";
 echo showuser();
 echo " </a>
       <!-- switch class to active on click -->

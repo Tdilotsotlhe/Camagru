@@ -103,7 +103,7 @@ function loadLogin()
         <br>
         <p>Password</p><input type='password' name='pwrd' id='pwrd' placeholder='Enter Password' required>
         <br>
-        <button type='submit' id='logbut'>Login</button>
+      
         <button onclick='loginAjax' id='logbut2'>Login2</button>
        
     </form>
@@ -123,7 +123,7 @@ function loadLogin()
         <br>
         <p>email</p><input type='email' name='email' id='email' placeholder='Enter email' required>
         <br>
-        <button onclick='login' type='submit' id='regbut'>Register</button>
+        <button type='submit' id='regbut'>Register</button>
 
        
     </form>
