@@ -25,3 +25,29 @@ function ajaxthumbs() {
  hr.send(vars); // Actually execute the request
  document.getElementById("thumbnails").innerHTML = "loading thumbs...";
 }
+
+
+
+window.addEventListener('load', alert("asdasd"), false);
+
+function imgFetch()
+{
+     alert("sdsdsdsd");
+     var hr = new XMLHttpRequest();
+     var url = "functions/ajaxfunction.php";
+     var vars = "allpics=loadup";
+     hr.open("POST", url, true);
+     hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+     hr.onreadystatechange = function() {
+         if(hr.readyState == 4 && hr.status == 200) {
+             //var return_data = hr.responseText;
+            //document.getElementById("comment").innerHTML += return_data;
+            var foo = JSON.parse(hr.responseText);
+            console.log(foo);
+         }
+     }
+     hr.send(vars); 
+     document.getElementById("comment").innerHTML = "Comments";
+}
+
+/////////////

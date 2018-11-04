@@ -12,7 +12,10 @@ if (isset($_POST['imgid']))
 {
     comment();
 }
-
+if (isset($_POST['allpics']))
+{
+    allPics();
+}
 
 function loadGal()
 {
@@ -138,7 +141,7 @@ function comment()
         
 
               echo "<div id='commdiv'>
-              <img id=".$row[0]['img_id']." class='thumbs' src='img/gal/".$row[0]['img_name']."' heighty='100px' width='100px'>
+              <img id=".$row[0]['img_id']." class='thumbs' src='img/gal/".$row[0]['img_name']."' height='100px' width='100px'>
               <br >
               <input type='text' id='comtxt'>
               <br >
@@ -207,6 +210,46 @@ function comment()
 
 }
  */
+
+function allPics()
+{
+    include "../config/database.php";
+    
+
+    try {
+        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       // echo "yes";
+      } catch (PDOException $e) {
+      print "Error!: " . $e->getMessage() . "<br/>";
+      die();
+      }
+      
+     
+       //select DB
+       try {
+        $dbh->query("USE ".$DB_NAME);
+      } catch (Exception $e) {
+         die("db selection failed!");
+      } 
+
+    try { 
+        $stmt = $dbh->prepare("SELECT * FROM gallery");
+        if($stmt->execute([$_SESSION['uid']])){
+          
+          $row = $stmt->fetchAll();
+          //echo json encode
+
+          echo json_encode($row);
+        }
+     } catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+     }  
+    //echo "<div><img src='||||' height='50px' width='50px'></div>";
+
+}
+
 
 
 ?>

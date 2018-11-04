@@ -124,27 +124,7 @@ function imageFoc(tid)
    imgFetch(tid.id);
 }
 
-////////////imgfetch
 
-function imgFetch(imgsid)
-{
-     
-     var hr = new XMLHttpRequest();
-     var url = "functions/ajaxfunction.php";
-     var vars = "imgid=" + imgsid;
-     hr.open("POST", url, true);
-     hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-     hr.onreadystatechange = function() {
-         if(hr.readyState == 4 && hr.status == 200) {
-             var return_data = hr.responseText;
-            document.getElementById("comment").innerHTML += return_data;
-         }
-     }
-     hr.send(vars); 
-     document.getElementById("comment").innerHTML = "Comments";
-}
-
-/////////////
 function regtoggle()
 {
     
@@ -176,6 +156,7 @@ function logout()
 /////newcomment
 function newCom(commenter, picid) {
     alert(commenter + "  " + picid);
+
 }
 
 
@@ -244,5 +225,58 @@ function homegal()
 
 /////////////
 
+////////////imgfetch
 
+function imgFetch()
+{
+     
+     var hr = new XMLHttpRequest();
+     var url = "functions/ajaxfunction.php";
+     var vars = "allpics=loadup";
+     hr.open("POST", url, true);
+     hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+     hr.onreadystatechange = function() {
+         if(hr.readyState == 4 && hr.status == 200) {
+             //var return_data = hr.responseText;
+            //document.getElementById("comment").innerHTML += return_data;
+            var foo = JSON.parse(hr.responseText);
+            console.log(foo.length);
+            var count = foo.length;
+            var x = 0;
+            while(x < count)
+            {
+                console.log(foo[x][1]);
+                x++;
+            }
+            
+         }
+     }
+     hr.send(vars); 
+    
+}
+////////pagination attempt
+window.onload = function (){
+var listElm = document.getElementById('infinite-list');
+
+// Add 20 items.
+var nextItem = 1;
+var loadMore = function() {
+  for (var i = 0; i < 20; i++) {
+    var item = document.createElement('li');
+    item.innerText = 'Item ' + nextItem++;
+    listElm.appendChild(item);
+  }
+}
+
+// Detect when scrolled to bottom.
+listElm.addEventListener('scroll', function() {
+  if (listElm.scrollTop + listElm.clientHeight >= listElm.scrollHeight) {
+    loadMore();
+  }
+});
+
+// Initially load some items.
+loadMore();
+}
+/////////////
 
