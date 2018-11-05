@@ -24,6 +24,7 @@ if(isset($_GET['welcome']))
     include "includes/header.php";
 ?>
   <article id="maincontent" class="main">
+
     <?php
         if(isset($_SESSION['uid']))
         {
@@ -32,6 +33,7 @@ if(isset($_GET['welcome']))
            // pgaltest();
             // loadGallery2();
             echo "<script>homegal();</script>";
+            /* echo "<script>mypaginator();</script>"; */
         }else
         {
             loadLogin();

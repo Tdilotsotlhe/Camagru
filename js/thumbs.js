@@ -28,7 +28,7 @@ function ajaxthumbs() {
 
 
 
-window.addEventListener('load', alert("asdasd"), false);
+
 
 function imgFetch()
 {
@@ -50,4 +50,32 @@ function imgFetch()
      document.getElementById("comment").innerHTML = "Comments";
 }
 
-/////////////
+/////////////window.addEventListener('load', alert("asdasd"), false);
+
+function ajaxupload() {
+    var hr = new XMLHttpRequest();
+     var url = "functions/upload.php";
+     var vars = "userpic="+document.getElementById("userpic").value;
+     hr.open("POST", url, true);
+     hr.setRequestHeader("Content-type", "multipart/form-data");
+     hr.onreadystatechange = function() {
+         if(hr.readyState == 4 && hr.status == 200) {
+             var return_data = hr.responseText;
+            alert(return_data);
+         }
+     }
+     hr.send(vars); 
+}
+
+
+var nextBtn = document.getElementById("next");
+var prevBtn = document.getElementById("prev");
+window.onload = function () {
+    nextBtn.addEventListener("click", test1, false);
+prevBtn.addEventListener("click", test1, false);    
+}
+
+
+function test1(){
+    alert("OK");
+}

@@ -18,7 +18,10 @@ function privategal()
     xhr.send(xmlString);
 }
 
+
 window.onload= function(){
+
+
 var logbut = document.getElementById("logbut2");
 //logbut.addEventListener("click", loginAjax);
 
@@ -102,6 +105,7 @@ function changeActive()
 
 var images;
  window.onload = function(){
+     
  /*    var p = document.getElementById("testy1");
     p.addEventListener("click", myFunction);
 
@@ -254,29 +258,150 @@ function imgFetch()
      hr.send(vars); 
     
 }
-////////pagination attempt
-window.onload = function (){
-var listElm = document.getElementById('infinite-list');
+////////new custom pagination attempt
+/* function test1(){
+    alert(myPage);
+    myPage++;
+    alert(myPage);
+} */
+var myPage = 0;
+var myOffset = -4;
+//var numPics = 0;
+var numPics = countPics();
+//var numPage = Math.ceil(numPics/4);
 
-// Add 20 items.
-var nextItem = 1;
-var loadMore = function() {
-  for (var i = 0; i < 20; i++) {
-    var item = document.createElement('li');
-    item.innerText = 'Item ' + nextItem++;
-    listElm.appendChild(item);
-  }
+///if offset > numpics disable next;
+if(myOffset > numPics)
+{
+    document.getElementById("nextstep").style.visibility = "hidden";
+}
+//if offset < 0 disable previous
+
+function nextpage(){
+   // alert(numPics);
+    if (myPage >= Math.ceil(numPics/4)){
+        mypage = 1;
+    }else{
+        myPage++;
+    }
+   //findway to manage offset
+   myOffset = +myOffset + 4;
+   if (+myOffset > numPics)
+    {
+        myOffset = 0;
+        document.getElementById("pagecounter").innerHTML = 1 + "/" + Math.ceil(numPics/4);
+    }else{
+        document.getElementById("pagecounter").innerHTML = myPage + "/" + Math.ceil(numPics/4);
+    }
+    fetchPicSet(myPage, myOffset);
+    
 }
 
-// Detect when scrolled to bottom.
-listElm.addEventListener('scroll', function() {
-  if (listElm.scrollTop + listElm.clientHeight >= listElm.scrollHeight) {
-    loadMore();
-  }
-});
-
-// Initially load some items.
-loadMore();
+function prevpage(){
+   // alert(numPics);
+   if (myPage < 0){
+    mypage = 1;
+    }else{
+        myPage--;
+    }
+    //alert(myPage);
+    myOffset = +myOffset - 4;
+    if (myOffset < 0)
+    {
+        myOffset = 0;
+        document.getElementById("pagecounter").innerHTML = "1" + "/" + Math.ceil(numPics/4);
+    }else{
+        document.getElementById("pagecounter").innerHTML = myPage + "/" + Math.ceil(numPics/4);
+    }
+        fetchPicSet(myPage, myOffset);
+    
+    
 }
 /////////////
 
+function    fetchPicSet(page, offs){
+   // alert(page);
+   // alert(offs);
+
+    var hr = new XMLHttpRequest();
+     var url = "functions/ajaxfunction.php";
+     var vars = "page="+page+"&offset="+offs;
+     hr.open("POST", url, true);
+     hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+     hr.onreadystatechange = function() {
+         if(hr.readyState == 4 && hr.status == 200) {
+            var foo = JSON.parse(hr.responseText);
+          //  console.log(foo);
+            var count = foo.length;
+            var x = 0;
+            //if results are less than 4 disable button
+            //subtract count from offset maybe?
+            //clear image srcs or delete imgs
+           
+                document.getElementById("pic0").src = "#";
+                document.getElementById("pic1").src = "#";
+                document.getElementById("pic2").src = "#";
+                document.getElementById("pic3").src = "#";
+                
+            while(x < count)
+            {
+                //modify srcs or append images
+                document.getElementById("pic"+x).src = "img/gal/" + foo[x][1];
+                document.getElementById("pic"+x).setAttribute("data-id", foo[x][0]);
+                console.log(foo[x][1]);
+                /////////append
+
+                x++;
+            }
+            
+         }
+     }
+     hr.send(vars); 
+
+
+}
+
+
+
+
+function countPics(){
+
+    var hr = new XMLHttpRequest();
+     var url = "functions/ajaxfunction.php";
+     var vars = "countpics=yup";
+     hr.open("POST", url, true);
+     hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+     hr.onreadystatechange = function() {
+         if(hr.readyState == 4 && hr.status == 200) {
+            var foo = hr.responseText;
+            console.log(foo);
+            numPics = foo;
+         }
+     }
+     hr.send(vars); 
+}
+
+
+function imageComment(tid)
+{
+    var el = document.getElementById(tid.id);
+    imgid = el.getAttribute('data-id');
+   alert(imgid);
+   //loadcomment
+   var addCom = document.getElementById("comment");
+
+   var hr = new XMLHttpRequest();
+     var url = "functions/ajaxfunction.php";
+     var vars = "imgid="+imgid;
+     hr.open("POST", url, true);
+     hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+     hr.onreadystatechange = function() {
+         if(hr.readyState == 4 && hr.status == 200) {
+            var foo = hr.responseText;
+            console.log(foo);
+            addCom.innerHTML = foo;
+         }
+     }
+     hr.send(vars); 
+
+}

@@ -234,12 +234,13 @@ case "e4" :
 
  
   <div>
-      <form action="functions/upload.php" method="post" enctype="multipart/form-data">
+       <form onsubmit="ajaxupload();" action="functions/upload.php" method="post" enctype="multipart/form-data"> 
         <p>Select image to upload</p>
         <input type="file" name="userpic" id="userpic">
-        <input type="submit" value="Upload Image" name="submit">
+       <input type="submit" value="Upload Image" name="submit">
+       <button id="fileUpload" type="submit">Upload!!!</button>
         
-      </form>
+     </form> 
       
   </div>
   </article>

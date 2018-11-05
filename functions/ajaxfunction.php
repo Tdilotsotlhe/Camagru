@@ -16,6 +16,14 @@ if (isset($_POST['allpics']))
 {
     allPics();
 }
+if (isset($_POST['page']))
+{
+    newPager();
+}
+if (isset($_POST['countpics']))
+{
+    picCount();
+}
 
 function loadGal()
 {
@@ -137,7 +145,7 @@ function comment()
           
           $row = $stmt->fetchAll();
              
-          $retstring = $row[1]["comment"];
+          $retstring = $row["comment"];
         
 
               echo "<div id='commdiv'>
@@ -250,6 +258,86 @@ function allPics()
 
 }
 
+
+function newPager()
+{
+    include "../config/database.php";
+    
+    $pagenumber = $_POST['page'];
+    $off = $_POST['offset'];
+    try {
+        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       // echo "yes";
+      } catch (PDOException $e) {
+      print "Error!: " . $e->getMessage() . "<br/>";
+      die();
+      }
+      
+     
+       //select DB
+       try {
+        $dbh->query("USE ".$DB_NAME);
+      } catch (Exception $e) {
+         die("db selection failed!");
+      } 
+
+    try { 
+        $stmt = $dbh->prepare("SELECT * FROM gallery ORDER BY uptime LIMIT 4 OFFSET $off");
+        if($stmt->execute()){
+          
+          $row = $stmt->fetchAll();
+          //echo json encode
+
+          echo json_encode($row);
+        }
+     } catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+     }  
+    //echo "<div><img src='||||' height='50px' width='50px'></div>";
+
+}
+
+
+
+function picCount()
+{
+    include "../config/database.php";
+    
+    
+    try {
+        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       // echo "yes";
+      } catch (PDOException $e) {
+      print "Error!: " . $e->getMessage() . "<br/>";
+      die();
+      }
+      
+     
+       //select DB
+       try {
+        $dbh->query("USE ".$DB_NAME);
+      } catch (Exception $e) {
+         die("db selection failed!");
+      } 
+
+    try { 
+        $stmt = $dbh->prepare("SELECT COUNT(img_id) AS county FROM gallery");
+        if($stmt->execute()){
+          
+          $row = $stmt->fetch();
+
+          echo intval($row['county']);
+        }
+     } catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+     }  
+  
+
+}
 
 
 ?>
