@@ -161,6 +161,23 @@ function logout()
 function newCom(commenter, picid) {
     alert(commenter + "  " + picid);
     //insert comment, NB****modify comment table
+    var comtext = document.getElementById("comtxt");
+    alert(comtext.value);
+
+     var hr = new XMLHttpRequest();
+     var url = "functions/ajaxfunction.php";
+     var vars = "insertCom="+comtext.value+"&"+"picid="+picid;
+     hr.open("POST", url, true);
+     hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+     hr.onreadystatechange = function() {
+         if(hr.readyState == 4 && hr.status == 200) {
+             var return_data = hr.responseText;
+           //refresh comments
+           document.getElementById("latest").innerHTML = comtext.value;
+         }
+     }
+     hr.send(vars); 
+     
 
 }
 

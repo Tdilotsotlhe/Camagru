@@ -24,6 +24,10 @@ if (isset($_POST['countpics']))
 {
     picCount();
 }
+if (isset($_POST['insertCom']))
+{
+    addComment();
+}
 
 function loadGal()
 {
@@ -164,10 +168,11 @@ function comment()
                   else
                   {
                     echo "<p>".$value["comment"]."</p>";
+                    
                   }
             }
             echo  " <button onclick='newCom(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Comment</button> </div>";
-          
+            echo "<p id='latest'></p>";
         }
      } catch (PDOException $e) {
     print "Error!: " . $e->getMessage() . "<br/>";
@@ -339,5 +344,46 @@ function picCount()
 
 }
 
+function addComment(){
+    include "../config/database.php";
+    
+    $comment = $_POST['insertCom'];
+    $picid = $_POST['picid'];
+    //echo $picid;
+   // echo $comment;
+   // exit();
+    
+    try {
+        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       // echo "yes";
+      } catch (PDOException $e) {
+      print "Error!: " . $e->getMessage() . "<br/>";
+      die();
+      }
+      
+     
+       //select DB
+       try {
+        $dbh->query("USE ".$DB_NAME);
+      } catch (Exception $e) {
+         die("db selection failed!");
+      } 
+
+    try { 
+        $stmt = $dbh->prepare("INSERT INTO comments (friend_id, comment, comimg_id) VALUES (:fid, :comm, :comid)");
+        $stmt->bindParam(':fid', $_SESSION['uid']);
+        $stmt->bindParam(':comm', $comment);
+        $stmt->bindParam(':comid', $picid);
+        if($stmt->execute()){
+
+          echo "Comment added Successfully!";
+        }
+     } catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+     } 
+
+}
 
 ?>
