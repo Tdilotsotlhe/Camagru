@@ -176,7 +176,7 @@ function comment()
             }
             echo "<p id='latest'></p>";
             echo  "<button onclick='newCom(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Comment</button></div>";
-            echo  "<button onclick='newCom(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Like</button></div>";
+            echo  "<button onclick='like(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Like</button></div>";
         }
      } catch (PDOException $e) {
     print "Error!: " . $e->getMessage() . "<br/>";

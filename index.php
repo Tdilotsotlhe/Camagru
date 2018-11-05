@@ -23,33 +23,32 @@ if(isset($_GET['welcome']))
 <?php
     include "includes/header.php";
 ?>
-  <article id="maincontent" class="main">
-
+  <article class="main">
     <?php
         if(isset($_SESSION['uid']))
         {
             //echo "WELCOME BACK MADA EFFER";
-           // include "functions/afuncs.php";
+            include "functions/afuncs.php";
            // pgaltest();
             // loadGallery2();
-            echo "<script>homegal();</script>";
-            /* echo "<script>mypaginator();</script>"; */
-        }else
-        {
+            echo "<script>privategal();</script>";
+        }
+        else{
             loadLogin();
         }
+
     ?>
   
   
   </article>
   <aside class="aside aside-1"><?php if(isset($_SESSION['uid'])){ loadMenu();}    ?>
   <form action="functions/ajtest.php" method="post">
-  <input type="text" id="ajtest">
+  <input type="text" id="ajtext">
   <button onclick="ajtest1;" id="ajbut">AJTEST</button>
   </form>
   </aside>
-  <aside class="aside aside-2"><div id="mygal"><div> </aside>
-  <footer class="footer">CAMAGRU TDILOTSO</footer>
+  <aside class="aside aside-2"> </aside>
+  <footer class="footer"><div id="foot">nothing</div>CAMAGRU TDILOTSO</footer>
 </div>
 
 

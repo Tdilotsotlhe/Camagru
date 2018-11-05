@@ -1,6 +1,9 @@
 <?php
     require_once "config/database.php";
     $xml = file_get_contents('php://input');
+
+
+    
     $res = explode('%', $xml);
     $data = explode( ',', $res[0]);
     $test = base64_decode($data[1]);
@@ -39,8 +42,6 @@
           $stmt= $dbh->prepare($sql);
           $stmt->bindParam(':username', $user);
           $stmt->bindParam(':passw', $pass);
-          $stmt->bindParam(':email', $email);
-          $stmt->bindParam(':acthash', $acthash);
       
           $stmt->execute();
           sendVerify($email, $acthash);
