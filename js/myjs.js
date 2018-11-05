@@ -173,6 +173,7 @@ function newCom(commenter, picid) {
          if(hr.readyState == 4 && hr.status == 200) {
              var return_data = hr.responseText;
            //refresh comments
+           alert(hr.responseText);
            document.getElementById("latest").innerHTML = comtext.value;
          }
      }
