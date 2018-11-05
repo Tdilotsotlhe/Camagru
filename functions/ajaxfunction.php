@@ -149,7 +149,7 @@ function comment()
         
 
               echo "<div id='commdiv'>
-              <img id=".$row[0]['img_id']." class='thumbs' src='img/gal/".$row[0]['img_name']."' height='100px' width='100px'>
+              <img id=".$row[0]['img_id']." class='thumbs' src='img/gal/".$row[0]['img_name']."' height='100px' width='100px' data-commid=".$_SESSION['uid'].">
               <br >
               <input type='text' id='comtxt'>
               <br >

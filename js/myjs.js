@@ -160,6 +160,7 @@ function logout()
 /////newcomment
 function newCom(commenter, picid) {
     alert(commenter + "  " + picid);
+    //insert comment, NB****modify comment table
 
 }
 
