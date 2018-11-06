@@ -157,9 +157,7 @@ function comment()
 
               echo "<div id='commdiv'>
               <img id=".$row[0]['img_id']." class='thumbs' src='img/gal/".$row[0]['img_name']."' height='100px' width='100px' data-commid=".$_SESSION['uid'].">
-              <br >
-              <input type='text' id='comtxt'>
-              <br >
+          
              
              "; 
                            
@@ -175,6 +173,9 @@ function comment()
                   }
             }
             echo "<p id='latest'></p>";
+            echo "<br >
+            <input type='text' id='comtxt'>
+            <br >";
             echo  "<button onclick='newCom(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Comment</button></div>";
             echo  "<button onclick='like(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Like</button></div>";
         }

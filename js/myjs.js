@@ -376,13 +376,16 @@ function    fetchPicSet(page, offs){
                 //append img
                 var newimg = document.createElement("IMG");
                 newimg.setAttribute("id", "img"+foo[x][0]);
-                newimg.setAttribute("data-id", foo[x][0]);
+                newimg.setAttribute("data-id", foo[w][0]);
+             
                 
                 newimg.style.height = "100px";
                 newimg.style.width = "100px";
-                newimg.src = "img/gal/"+foo[x][1];
+                newimg.src = "img/gal/"+foo[w][1];
                 picdiv.appendChild(newimg);
-                newimg.onclick(imageComment(newimg));
+                newimg.setAttribute("onclick", "imageComment(this)");
+
+               // newimg.onclick(imageComment(newimg));
                // addEventListener("click", imageComment(newimg), false);
                // alert(foo[x][1]);
                 //mod sources
