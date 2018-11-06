@@ -378,7 +378,6 @@ function    fetchPicSet(page, offs){
                 newimg.setAttribute("id", "img"+foo[x][0]);
                 newimg.setAttribute("data-id", foo[w][0]);
              
-                
                 newimg.style.height = "100px";
                 newimg.style.width = "100px";
                 newimg.src = "img/gal/"+foo[w][1];
