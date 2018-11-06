@@ -251,7 +251,7 @@ function allPics()
       } 
 
     try { 
-        $stmt = $dbh->prepare("SELECT * FROM gallery");
+        $stmt = $dbh->prepare("SELECT * FROM gallery ORDER BY uptime DESC");
         if($stmt->execute([$_SESSION['uid']])){
           
           $row = $stmt->fetchAll();

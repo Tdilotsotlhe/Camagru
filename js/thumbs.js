@@ -53,9 +53,14 @@ function imgFetch()
 /////////////window.addEventListener('load', alert("asdasd"), false);
 
 function ajaxupload() {
+    alert("ajupload running");
     var hr = new XMLHttpRequest();
      var url = "functions/upload.php";
-     var vars = "userpic="+document.getElementById("userpic").value;
+    // var vars = "userpic="+document.getElementById("userpic").value;
+     var formData = new FormData();
+    formData.append("userpic", document.getElementById("userpic").value);
+    console.log(document.getElementById("userpic").value); 
+//
      hr.open("POST", url, true);
      hr.setRequestHeader("Content-type", "multipart/form-data");
      hr.onreadystatechange = function() {
@@ -64,8 +69,10 @@ function ajaxupload() {
             alert(return_data);
          }
      }
-     hr.send(vars); 
-}
+     hr.send(formData); 
+
+   
+    }
 
 
 var nextBtn = document.getElementById("next");

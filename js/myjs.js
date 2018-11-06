@@ -283,8 +283,8 @@ function imgFetch()
     myPage++;
     alert(myPage);
 } */
-var myPage = 0;
-var myOffset = -4;
+var myPage = 1;
+var myOffset = 0;
 //var numPics = 0;
 var numPics = countPics();
 //var numPage = Math.ceil(numPics/4);
@@ -308,7 +308,7 @@ function nextpage(){
    if (+myOffset > numPics)
     {
         myOffset = 0;
-        document.getElementById("pagecounter").innerHTML = 1 + "/" + Math.ceil(numPics/4);
+        document.getElementById("pagecounter").innerHTML = mypage + "/" + Math.ceil(numPics/4);
     }else{
         document.getElementById("pagecounter").innerHTML = myPage + "/" + Math.ceil(numPics/4);
     }
@@ -337,6 +337,9 @@ function prevpage(){
     
 }
 /////////////
+window.onload = function(){
+    fetchPicSet(0,0);
+}
 
 function    fetchPicSet(page, offs){
    // alert(page);
@@ -355,22 +358,42 @@ function    fetchPicSet(page, offs){
             var x = 0;
             //if results are less than 4 disable button
             //subtract count from offset maybe?
+
             //clear image srcs or delete imgs
+            var picdiv = document.getElementById("pagegal");
            
-                document.getElementById("pic0").src = "#";
+            picdiv.innerHTML="";
+            
+               /*  document.getElementById("pic0").src = "#";
                 document.getElementById("pic1").src = "#";
                 document.getElementById("pic2").src = "#";
-                document.getElementById("pic3").src = "#";
+                document.getElementById("pic3").src = "#"; */
                 
-            while(x < count)
-            {
+           /*  while(x < count)
+            { *///////
+                for(var w = 0;w< count;w++){
                 //modify srcs or append images
-                document.getElementById("pic"+x).src = "img/gal/" + foo[x][1];
-                document.getElementById("pic"+x).setAttribute("data-id", foo[x][0]);
-                console.log(foo[x][1]);
+                //append img
+                var newimg = document.createElement("IMG");
+                newimg.setAttribute("id", "img"+foo[x][0]);
+                newimg.setAttribute("data-id", foo[x][0]);
+                
+                newimg.style.height = "100px";
+                newimg.style.width = "100px";
+                newimg.src = "img/gal/"+foo[x][1];
+                picdiv.appendChild(newimg);
+                newimg.onclick(imageComment(newimg));
+               // addEventListener("click", imageComment(newimg), false);
+               // alert(foo[x][1]);
+                //mod sources
+                //document.getElementById("pic"+x).src = "img/gal/" + foo[x][1];
+                //document.getElementById("pic"+x).setAttribute("data-id", foo[x][0]);
+               // console.log(foo[x][1]);
                 /////////append
 
-                x++;
+                //x++;
+            /*     } */
+                ///////
             }
             
          }
@@ -405,7 +428,7 @@ function imageComment(tid)
 {
     var el = document.getElementById(tid.id);
     imgid = el.getAttribute('data-id');
-   alert(imgid);
+  // alert(imgid);
    //loadcomment
    var addCom = document.getElementById("comment");
 

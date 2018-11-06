@@ -1,7 +1,8 @@
 <?php
     require_once "config/database.php";
-    $xml = file_get_contents('php://input');
-
+    //$xml = file_get_contents('php://input');
+ /*    var_dump($_POST);
+    exit(); */
 
     
     $res = explode('%', $xml);

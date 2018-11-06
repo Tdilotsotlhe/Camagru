@@ -1,14 +1,12 @@
 <?php
-
+var_dump($_POST);
+var_dump($_FILES);
 $target_dir = "../img/gal/";
-
-
-$target_file = $target_dir . basename($_FILES['userpic']['name']);
+$target_file = $target_dir . basename($_FILES["userpic"]["name"]);
 $uploadOk = 1;
-
+var_dump($_FILES);
 //var_dump($_POST);
-
-//var_dump($_POST);
+exit();
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 // Check if image file is a actual image or fake image
 if(isset($_POST["submit"])) {
