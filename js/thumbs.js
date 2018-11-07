@@ -56,10 +56,10 @@ function ajaxupload() {
     alert("ajupload running");
     var hr = new XMLHttpRequest();
      var url = "functions/upload.php";
-    // var vars = "userpic="+document.getElementById("userpic").value;
-     var formData = new FormData();
+     var vars = "userpic="+document.getElementById("userpic").value;
+/*      var formData = new FormData();
     formData.append("userpic", document.getElementById("userpic").value);
-    console.log(document.getElementById("userpic").value); 
+    console.log(document.getElementById("userpic").value); */ 
 //
      hr.open("POST", url, true);
      hr.setRequestHeader("Content-type", "multipart/form-data");

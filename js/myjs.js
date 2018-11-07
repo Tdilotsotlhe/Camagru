@@ -375,14 +375,15 @@ function    fetchPicSet(page, offs){
                 //modify srcs or append images
                 //append img
                 var newimg = document.createElement("IMG");
-                newimg.setAttribute("id", "img"+foo[x][0]);
+                newimg.setAttribute("id", "img"+w);
                 newimg.setAttribute("data-id", foo[w][0]);
              
                 newimg.style.height = "100px";
                 newimg.style.width = "100px";
                 newimg.src = "img/gal/"+foo[w][1];
-                picdiv.appendChild(newimg);
                 newimg.setAttribute("onclick", "imageComment(this)");
+                picdiv.appendChild(newimg);
+                
 
                // newimg.onclick(imageComment(newimg));
                // addEventListener("click", imageComment(newimg), false);

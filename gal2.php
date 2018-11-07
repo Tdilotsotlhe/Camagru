@@ -235,7 +235,8 @@ case "e4" :
  
   <div>
 <!--   onsubmit="ajaxupload();"
- -->       <form  action="functions/upload.php" method="post" enctype="multipart/form-data"> 
+action="functions/upload.php"
+ -->       <form action="functions/upload.php" method="post" enctype="multipart/form-data"> 
         <p>Select imagesdfsd to upload</p>
         <input type="file" name="userpic" id="userpic">
        <!-- <input type="submit" onclick="ajaxupload();" value="Upload Ajax Image" name="submit"> -->
