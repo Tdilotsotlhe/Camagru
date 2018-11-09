@@ -11,38 +11,15 @@ echo $_SESSION['test']; */
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="new.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/main2.css" />
     
    <!--  <script src="js/myjs.js"></script> -->
    <!--  <script src="js/newcamjs.js"></script> -->
     <script src="js/pic.js"></script>
     <script src="js/myajax.js"></script>
-    <script src="js/thumbs.js"></script>
-    <script src="js/myjs.js"></script>
+
     <style>
-#overlay {
-    position: absolute;
-    display: none;
-    width: 500px;
-    height: 375px;
-    top: 50;
-    left: 50;
-    right: 70; 
-    bottom: 30;
-    z-index: 2;
-   
-    
-    cursor: pointer;
-}
-#text{
-    position: absolute; 
-    top: 50%;
-    left: 50%;
-    font-size: 20px;
-    color: white;
-    /* transform: translate(-50%,-50%); */
-    /* -ms-transform: translate(-50%,-50%); */
-}
+
 </style>
 </head>
 
@@ -53,30 +30,56 @@ echo $_SESSION['test']; */
 ?>
   <article class="main">
   <div class="top_container">
+			<div id="overlay" class="overlay">
+				<img class="text" height='100px' width='100px' id="emoji1" name="emoji1" onclick="off()">
+				<img onclick="off2()" class="text" height='100px' width='100px' id="emoji2" name="emoji2"  >
+			</div>
+			<div class="video">
+				<video id='video'>Stream not available...</video>
+			</div>
+			<div class="emo_list">
+			<img id="e1" src="img/emojis/1.png" height='50px' width='50px' style="margin: 19px">
+			<img id="e2" src="img/emojis/2.png" height='50px' width='50px' style="margin: 19px">
+			<img id="e3" src="img/emojis/3.png" height='50px' width='50px' style="margin: 19px">
+			<img id="e4" src="img/emojis/4.png" height='50px' width='50px' style="margin: 19px">
+			<br>
+		</div>
+			<button id="photo_button" class="button">Take Photo</button>
+			<button id="Uploadbtn" class="button">Upload</button>
+			<label id="testme" for="file" class="lbbutton">Css only file upload button</label>
+			<input id="file" class="file-upload__input" type="file" name="file-upload">
+			<!-- <div class="file-upload">
+			</div> -->
+			<canvas id="canvas2"></canvas>
+			<button id="save_photo" class="button">save</button>
+			<canvas id="canvas"></canvas>
+		</div>
+		
+<!--   <div class="top_container">
 
 
   <div height="375px" width="500px" style="position: relative;">  
 <div id="overlay" class="overlay" onclick="off()">
 <img class="text" height='100px' width='100px' id="emoji1" name="emoji1" src="img/emojis/poo.png" onclick="emotoggle(this);">
 <img class="text" height='100px' width='100px' id="emoji2" name="emoji1" src="" onclick="emotoggle(this);" style="display: none;">
-</div>
+</div> -->
 <!-- <div> -->
-<video id='video'>Stream not available...</video>
+<!-- <video id='video'>Stream not available...</video> -->
 <!-- </div> -->
 <!-- <button onclick="on()">On</button> -->
 
-</div>
+<!-- </div>
 <button id="photo_button" class="btn btn_darkk">
 Take Photo
 </button>
 <button id="save_photo" class="btn btn_darkk">
 save
-</button>
+</button> -->
 
 
-</div>
+<!-- </div> -->
 
-<div id="emos1" class="btn-group">
+<!-- <div id="emos1" class="btn-group">
 <p>emo1</p>
 <img id="e1" src="img/emojis/penguin.png" height='40px' width='40px' >
 <img id="e2" src="img/emojis/poo.png" height='40px' width='40px'>
@@ -89,7 +92,7 @@ save
 <img id="e7" src="img/emojis/poo.png" height='40px' width='40px'onclick ="emohide2()">
 <img id="e9" src="img/emojis/1.png" height='40px' width='40px'onclick ="emohide2()">
 <img id="e10" src="img/emojis/2.png" height='40px' width='40px'onclick ="emohide2()">
-</div>
+</div> -->
 <br>
 
 <canvas id="canvas"></canvas>
@@ -99,132 +102,96 @@ save
 <div id="photos"></div>
 </div> 
 <script>
-  var ediv1 = document.getElementById("emos1");
-  var ediv2 = document.getElementById("emos2");
-function on() {
+ function off() {
+		document.getElementById("emoji1").style.visibility = "hidden";
+		document.getElementById("emoji1").removeAttribute('src');
 
-document.getElementById("overlay").style.display = "block";
+	}
+	function off2() {
+		document.getElementById("emoji2").style.visibility = "hidden";
+		document.getElementById("emoji2").removeAttribute('src');
 
-}
-function off() {
-//document.getElementById("overlay").style.display = "none";
+	}
 
-}
-emo1 = document.getElementById("e1");
-emo2 = document.getElementById("e2");
-emo3 = document.getElementById("e3");
-emo4 = document.getElementById("e4");
-emo6 = document.getElementById("e6");
-emo7 = document.getElementById("e7");
-emo9 = document.getElementById("e9");
-emo10 = document.getElementById("e10");
-emo1.addEventListener("click", function(){switchsrc(emo1); emohide();}, false);
-emo2.addEventListener("click", function(){switchsrc(emo2); emohide();}, false);
-emo3.addEventListener("click", function(){switchsrc(emo3); emohide();}, false);
-emo4.addEventListener("click", function(){switchsrc(emo4); emohide();}, false);
-emo6.addEventListener("click", function(){switchsrc(emo6);}, false);
-emo7.addEventListener("click", function(){switchsrc(emo7);}, false);
-emo9.addEventListener("click", function(){switchsrc(emo9);}, false);
-emo10.addEventListener("click", function(){switchsrc(emo10);}, false);
-//////emo toggling
-function emotoggle(emo)
-{
-    alert("canvas toggle");
-    if (emo.style.display != "none")
-    {
-        emoshow();
-        emo.style.display = "none";
-    }
-    else{
-        emohide();
-        //ediv1.style.display = "block"; 
-        emo.style.display = "block";
-    }
-}
-function emohide()
-{
-    alert("emohide1");
-    ediv1.style.display = "none";
-}
-function emoshow()
-{
-    alert("emohide1");
-    ediv1.style.display = "block";
-}
-function emotoggle2(emo)
-{
-    alert("canvas toggle");
-    if (emo.style.display != "none")
-    {
-        emoshow2();
-        emo.style.display = "none";
-    }
-    else{
-        emohide2();
-        //ediv1.style.display = "block"; 
-        emo.style.display = "block";
-    }
-}
-function emohide2()
-{
-    alert("emohide1");
-    ediv2.style.display = "none";
-}
-function emoshow2()
-{
-    alert("emohide1");
-    ediv2.style.display = "block";
-}
+	emo1 = document.getElementById("e1");
+	emo2 = document.getElementById("e2");
+	emo3 = document.getElementById("e3");
+	emo4 = document.getElementById("e4");
 
-//////////end emo toggling UI
-////start emo switching
-function switchsrc(emonew)
-{
+	
+	emo1.addEventListener("click", function(){switchsrc(emo1);}, false);
+	emo2.addEventListener("click", function(){switchsrc(emo2);}, false);
+	emo3.addEventListener("click", function(){switchsrc(emo3);}, false);
+	emo4.addEventListener("click", function(){switchsrc(emo4);}, false);
 
-document.getElementById("overlay").style.display = "block";
-var emoswitch = document.getElementById("emoji1");
-//var emoswitch2 = document.getElementById("emoji2");
 
- 
-
-    //check if image is child of 1st emo div, or 2nd emodiv
-    //checkdiv by getting value
-    var firstdiv = document.getElementById("emos1");
-    var Secdiv = document.getElementById("emos2");
-    if (emonew.parentNode == firstdiv) {
-        
-    }
-
-switch (emonew.id)
-{
-case "e1" :
-    emoswitch.setAttribute('src', emonew.src);
-   // emoswitch2.setAttribute('src', emonew.src);
-    ovl.style.paddingTop = "90px";
-    ovl.style.paddingLeft = "20px";
-    
-    break;
-case "e2" :
-    emoswitch.setAttribute('src', emonew.src);
-    ovl.style.paddingTop = "30px";
-    ovl.style.paddingLeft = "500px";
-    
-    break;
-case "e3" :
-    emoswitch.setAttribute('src', emonew.src);
-    ovl.style.paddingTop = "30px";
-    ovl.style.paddingLeft = "500px";
-    
-    break;
-case "e4" :
-    emoswitch.setAttribute('src', emonew.src);
-    ovl.style.paddingTop = "30px";
-    ovl.style.paddingLeft = "500px";
-    
-    break;
-}
-
-} 
+	function switchsrc(emonew)
+	{
+		document.getElementById("emoji1").style.visibility = "visible";
+		if (document.getElementById("emoji1").hasAttribute("src"))
+		{
+			document.getElementById("emoji2").style.visibility = "visible";
+			var emoswitch = document.getElementById("emoji2");
+		}
+		else
+		{
+			var emoswitch = document.getElementById("emoji1");
+		}
+		var ovl = document.getElementById("overlay");
+		switch (emonew.id)
+		{
+			case "e1" :
+				emoswitch.setAttribute('src', emonew.src);
+				emoswitch.style.top = "10px";
+				emoswitch.style.left = "10px";
+				break;
+			case "e2" :
+				emoswitch.setAttribute('src', emonew.src);
+				emoswitch.style.top = "10px";
+				emoswitch.style.left = "200px";
+				break;
+			case "e3" :
+				emoswitch.setAttribute('src', emonew.src);
+				emoswitch.style.top = "10px";
+				emoswitch.style.left = "400px";
+				break;
+			case "e4" :
+				emoswitch.setAttribute('src', emonew.src);
+				emoswitch.style.top = "100px";
+				emoswitch.style.left = "10px";
+				break;
+			case "e5" :
+				emoswitch.setAttribute('src', emonew.src);
+				emoswitch.style.top = "100px";
+				emoswitch.style.left = "200px";
+				break;
+			case "e6" :
+				emoswitch.setAttribute('src', emonew.src);
+				emoswitch.style.top = "100px";
+				emoswitch.style.left = "400px";
+				break;
+			case "e7" :
+				emoswitch.setAttribute('src', emonew.src);
+				emoswitch.style.top = "250px";
+				emoswitch.style.left = "10px";
+				break;
+			case "e8" :
+				emoswitch.setAttribute('src', emonew.src);
+				emoswitch.style.top = "250px";
+				emoswitch.style.left = "200px";
+				break;
+			case "e9" :
+				emoswitch.setAttribute('src', emonew.src);
+				emoswitch.style.top = "250px";
+				emoswitch.style.left = "400px";
+				break;
+			case "e10" :
+				emoswitch.setAttribute('src', emonew.src);
+				emoswitch.style.top = "100px";
+				emoswitch.style.left = "200px";
+				break;
+		}
+	} 
 </script>
 <br>
 <form action="functions/upweb.php" method="post" enctype="multipart/form-data">
@@ -236,13 +203,14 @@ case "e4" :
   <div>
 <!--   onsubmit="ajaxupload();"
 action="functions/upload.php"
- -->       <form action="functions/upload.php" method="post" enctype="multipart/form-data"> 
+action="functions/upload.php"
+ -->      <!--  <form method="post" enctype="multipart/form-data">  -->
         <p>Select imagesdfsd to upload</p>
         <input type="file" name="userpic" id="userpic">
-       <!-- <input type="submit" onclick="ajaxupload();" value="Upload Ajax Image" name="submit"> -->
-       <button id="fileUpload" type="submit">Upload!!!</button>
+       <input type="submit" onclick="ajaxupload();" value="Upload Ajax Image" name="submit">
+     <!--   <button id="fileUpload" type="submit">Upload!!!</button> -->
         
-     </form> 
+    <!--  </form>  -->
       
   </div>
   </article>

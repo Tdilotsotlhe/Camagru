@@ -31,6 +31,59 @@ if (isset($_POST['insertCom']))
     addComment();
 }
 
+if (isset($_POST['theid']))
+{
+    likeimage();
+}
+
+function likeimage()
+{
+    $userid1 = $_POST['theid'];
+    $pictureid = $_POST['picid'];
+    //$sql = "INSERT INTO likes (theimg_id,likers_id,likestatus) VALUES (:img,:lid,:lst) ON DUPLICATE KEY UPDATE likestatus=IF(likestatus=1, 0, 1)";
+
+    include "../config/database.php";
+    
+
+    try {
+        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       // echo "yes";
+      } catch (PDOException $e) {
+      print "Error!: " . $e->getMessage() . "<br/>";
+      die();
+      }
+      
+     
+       //select DB
+       try {
+        $dbh->query("USE ".$DB_NAME);
+      } catch (Exception $e) {
+         die("db selection failed!");
+      } 
+
+    try { 
+        $l = 1;
+        $stmt = $dbh->prepare("INSERT INTO likes (theimg_id,likers_id,likestatus) VALUES (:img,:lid, :lst) ON DUPLICATE KEY UPDATE likestatus=IF(likestatus=1, 0, 1)");
+        $stmt->bindParam(':img', $pictureid);
+        $stmt->bindParam(':lid', $_SESSION['uid']);
+        $stmt->bindParam(':lst', $l);
+        // $stmt->bindParam(':lst', $_SESSION['uid']);
+        if($stmt->execute()){
+            echo "WE INSERTED";
+          }
+          else{
+              echo "FAIELD";
+          }
+        
+     } catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+     }  
+    //echo "<div><img src='||||' height='50px' width='50px'></div>";
+
+}
+
 function loadGal()
 {
     include "../config/database.php";
@@ -177,7 +230,7 @@ function comment()
             <input type='text' id='comtxt'>
             <br >";
             echo  "<button onclick='newCom(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Comment</button></div>";
-            echo  "<button onclick='like(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Like</button></div>";
+            echo  "<button onclick='likepic(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Like</button></div>";
         }
      } catch (PDOException $e) {
     print "Error!: " . $e->getMessage() . "<br/>";
@@ -186,6 +239,7 @@ function comment()
     //echo "<div><img src='||||' height='50px' width='50px'></div>";
 
 }
+
 
 
 

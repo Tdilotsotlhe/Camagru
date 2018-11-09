@@ -11,14 +11,14 @@ echo $_SESSION['test']; */
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="new.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/main2.css" />
     
    <!--  <script src="js/myjs.js"></script> -->
    <!--  <script src="js/newcamjs.js"></script> -->
     <script src="js/pic.js"></script>
     <script src="js/myajax.js"></script>
     <script src="js/thumbs.js"></script>
-    <script src="js/myjs.js"></script>
+    <script src="js/myjs2.js"></script>
     <style>
 #overlay {
     position: absolute;

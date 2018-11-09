@@ -1,5 +1,9 @@
 <?php
 
+echo "AWE";
+//var_dump($_POST['userpic']);
+var_dump($_POST);
+exit();
 $target_dir = "../img/gal/";
 
 
