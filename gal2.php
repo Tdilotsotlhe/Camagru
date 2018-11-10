@@ -3,6 +3,10 @@ include "config/database.php";
 include "functions/load.php";
 /* $_SESSION['test'] = "SHIT!";
 echo $_SESSION['test']; */
+if(!isset($_SESSION['uid']))
+{
+	header("Location: index.php?nli=1");
+}
 ?>
 <!DOCTYPE html>
 <html>

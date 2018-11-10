@@ -70,10 +70,10 @@ function likeimage()
         $stmt->bindParam(':lst', $l);
         // $stmt->bindParam(':lst', $_SESSION['uid']);
         if($stmt->execute()){
-            echo "WE INSERTED";
+            echo "IN";
           }
           else{
-              echo "FAIELD";
+              echo "OUT";
           }
         
      } catch (PDOException $e) {
@@ -107,7 +107,7 @@ function loadGal()
       } 
 
     try { 
-        $stmt = $dbh->prepare("SELECT * FROM gallery WHERE users_id=? ORDER BY uptime DESC");
+        $stmt = $dbh->prepare("SELECT * FROM gallery ORDER BY uptime DESC");
         if($stmt->execute([$_SESSION['uid']])){
           
           while($row = $stmt->fetch()){ 
@@ -230,7 +230,13 @@ function comment()
             <input type='text' id='comtxt'>
             <br >";
             echo  "<button onclick='newCom(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Comment</button></div>";
-            echo  "<button onclick='likepic(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Like</button></div>";
+            if(checkLike($row[0]['img_id']) == 0)
+            {
+                echo  "<button id='likebtn' onclick='likepic(".$_SESSION['uid'].",".$row[0]['img_id'].")'>LIKE</button></div>";
+            }else{
+                echo  "<button id='likebtn' onclick='likepic(".$_SESSION['uid'].",".$row[0]['img_id'].")' >UNLIKE</button></div>";
+            }
+            
         }
      } catch (PDOException $e) {
     print "Error!: " . $e->getMessage() . "<br/>";
@@ -241,7 +247,54 @@ function comment()
 }
 
 
+function checkLike($picid)
+{
+    $user = $_SESSION['uid'];
 
+    include "../config/database.php";
+    
+
+    try {
+        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       // echo "yes";
+      } catch (PDOException $e) {
+      print "Error!: " . $e->getMessage() . "<br/>";
+      die();
+      }
+      
+     
+       //select DB
+       try {
+        $dbh->query("USE ".$DB_NAME);
+      } catch (Exception $e) {
+         die("db selection failed!");
+      } 
+
+    try { 
+        $stmt = $dbh->prepare("SELECT * FROM likes WHERE likers_id=:lid AND theimg_id=:picid");
+        $stmt->bindParam(':lid', $_SESSION['uid']);
+        $stmt->bindParam(':picid', $picid);
+        if($stmt->execute()){
+          
+          while($row = $stmt->fetch()){ 
+              if ($row['likestatus'] == 0)
+              {
+                  return (0);
+                  
+              }else{
+                  return (1);
+                 // echo "<script>imgComment(".$row['theimg_id'].");</script>";
+              }
+              //echo "<div><img id=".$row['img_id']." onclick='imageFoc(this)' class='thumbs' src='img/gal/".$row['img_name']."' heighty='100px' width='100px'></div>";
+          }
+        }
+     } catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+     }
+
+}
 
 
 /* function loadthumbs()

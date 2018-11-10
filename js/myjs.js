@@ -1,7 +1,7 @@
 
 function likepic(theuid, imgid)
 {
-   alert(theuid+" "+imgid);
+  // alert(theuid+" "+imgid);
    //$sql = "INSERT INTO likes (theimg_id,likers_id,likestatus) VALUES (:img,:lid,:lst) ON DUPLICATE KEY UPDATE likestatus=IF(likestatus=1, 0, 1)";
      var hr = new XMLHttpRequest();
      var url = "functions/ajaxfunction.php";
@@ -12,14 +12,24 @@ function likepic(theuid, imgid)
          if(hr.readyState == 4 && hr.status == 200) {
              //alert("DAMN!");
              var return_data = hr.responseText;
-             alert(return_data);
+             var ih =  document.getElementById('likebtn');
+             if(ih.innerText == "LIKE")
+             {
+                 document.getElementById('likebtn').innerHTML="UNLIKE";
+                }else{
+                    document.getElementById('likebtn').innerHTML="LIKE";
+                }
+             
+             
             //document.getElementById("comment").innerHTML += return_data;
             //var foo = JSON.parse(hr.responseText);
             //console.log(foo);
          }
      }
      hr.send(vars); 
-    // document.getElementById("comment").innerHTML = "Comments";
+
+ 
+    
 }
 
 function privategal()
@@ -226,6 +236,7 @@ function ajax_post(){
 		    var return_data = hr.responseText;
            // alert(return_data);
             checkResponse(hr.responseText);
+            
           //  document.getElementById("login_error").innerHTML = return_data;
 	    }
     }
@@ -245,6 +256,7 @@ function checkResponse(response) {
         document.getElementById("logindiv").style.visibility = "hidden";
         document.getElementById("regdiv").style.visibility = "hidden";
         homegal();
+       
     }
 }
 
@@ -466,7 +478,7 @@ function imageComment(tid)
      hr.onreadystatechange = function() {
          if(hr.readyState == 4 && hr.status == 200) {
             var foo = hr.responseText;
-            console.log(foo);
+            //console.log(foo);
             addCom.innerHTML = foo;
          }
      }

@@ -24,6 +24,7 @@ if(isset($_GET['welcome']))
     include "includes/header.php";
 ?>
   <article class="main">
+  <div id="mygal"></div>
     <?php
         if(isset($_SESSION['uid']))
         {
@@ -48,9 +49,13 @@ if(isset($_GET['welcome']))
   </form>
   </aside>
   <aside class="aside aside-2"> </aside>
-  <footer class="footer"><div id="foot">nothing</div>CAMAGRU TDILOTSO</footer>
+  <footer class="footer"><div id="foot"></div>CAMAGRU TDILOTSO</footer>
 </div>
 
 
 </body>
+
+<?php
+// include "includes/mymodals.php"
+?>
 </html>
