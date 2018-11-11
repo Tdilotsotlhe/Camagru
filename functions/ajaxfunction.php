@@ -14,6 +14,10 @@ if (isset($_POST['imgid']))
 {
     comment();
 }
+if (isset($_POST['delpicid']))
+{
+    delpic();
+}
 if (isset($_POST['allpics']))
 {
     allPics();
@@ -158,7 +162,7 @@ function loadthumbs()
              
               //echo $row["img_name"];
 
-              echo "<div><img id=".$row['img_id']." onclick='imageFoc(this)' class='thumbs' src='img/gal/".$row['img_name']."' heighty='100px' width='100px'></div>";
+              echo "<div><img data-id=".$row['img_id']." id=".$row['img_id']." onclick='privImageFoc(this)' class='thumbs' src='img/gal/".$row['img_name']."' heighty='100px' width='100px'></div>";
           }
         }
      } catch (PDOException $e) {
@@ -229,13 +233,9 @@ function comment()
             echo "<br >
             <input type='text' id='comtxt'>
             <br >";
-            echo  "<button onclick='newCom(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Comment</button></div>";
-            if(checkLike($row[0]['img_id']) == 0)
-            {
-                echo  "<button id='likebtn' onclick='likepic(".$_SESSION['uid'].",".$row[0]['img_id'].")'>LIKE</button></div>";
-            }else{
-                echo  "<button id='likebtn' onclick='likepic(".$_SESSION['uid'].",".$row[0]['img_id'].")' >UNLIKE</button></div>";
-            }
+           
+            echo  "<button id='delbtn' onclick='delpic(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Delete</button></div>";
+            
             
         }
      } catch (PDOException $e) {
@@ -498,4 +498,36 @@ function addComment(){
 
 }
 
+function delpic()
+{
+    include "../config/database.php";
+    $picid = $_POST['delpicid'];
+    
+    try {
+        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       // echo "yes";
+      } catch (PDOException $e) {
+      print "Error!: " . $e->getMessage() . "<br/>";
+      die();
+      }
+       //select DB
+       try {
+        $dbh->query("USE ".$DB_NAME);
+      } catch (Exception $e) {
+         die("db selection failed!");
+      } 
+
+    try { 
+        $stmt = $dbh->prepare("DELETE FROM gallery WHERE img_id = :imgid");
+        $stmt->bindParam(':imgid',$picid);
+        if($stmt->execute()){
+
+          echo "Image deleted successfully!";
+        }
+     } catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+     }
+}
 ?>

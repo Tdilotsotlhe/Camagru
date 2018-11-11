@@ -21,7 +21,7 @@ if(!isset($_SESSION['uid']))
    <!--  <script src="js/newcamjs.js"></script> -->
     <script src="js/pic.js"></script>
     <script src="js/myajax.js"></script>
-
+    <script src="js/thumbs2.js"></script>
     <style>
 
 </style>

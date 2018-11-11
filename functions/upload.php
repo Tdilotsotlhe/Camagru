@@ -3,7 +3,8 @@
 echo "AWE";
 //var_dump($_POST['userpic']);
 var_dump($_POST);
-exit();
+var_dump($_FILES);
+//exit();
 $target_dir = "../img/gal/";
 
 

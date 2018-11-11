@@ -32,7 +32,7 @@ function ajaxthumbs() {
 
 function imgFetch()
 {
-     alert("sdsdsdsd");
+     //alert("sdsdsdsd");
      var hr = new XMLHttpRequest();
      var url = "functions/ajaxfunction.php";
      var vars = "allpics=loadup";
@@ -75,14 +75,47 @@ function imgFetch()
 //     }
 
 
-var nextBtn = document.getElementById("next");
-var prevBtn = document.getElementById("prev");
-window.onload = function () {
-    nextBtn.addEventListener("click", test1, false);
-prevBtn.addEventListener("click", test1, false);    
+function privImageFoc(tid)
+{
+    var el = document.getElementById(tid.id);
+    imgid = el.getAttribute('data-id');
+   //alert(imgid);
+   //alert(el);
+   //loadcomment
+   var addCom = document.getElementById("comment");
+
+   var hr = new XMLHttpRequest();
+     var url = "functions/ajaxfunction.php";
+     var vars = "imgid="+imgid;
+     hr.open("POST", url, true);
+     hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+     hr.onreadystatechange = function() {
+         if(hr.readyState == 4 && hr.status == 200) {
+            var foo = hr.responseText;
+            //console.log(foo);
+            addCom.innerHTML = foo;
+         }
+     }
+     hr.send(vars); 
 }
 
 
-function test1(){
-    alert("OK");
+function delpic(theuser, thepic){
+     alert("OK");
+   //loadcomment
+   var hr = new XMLHttpRequest();
+     var url = "functions/ajaxfunction.php";
+     var vars = "delpicid="+thepic;
+     hr.open("POST", url, true);
+     hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+     hr.onreadystatechange = function() {
+         if(hr.readyState == 4 && hr.status == 200) {
+            var foo = hr.responseText;
+            //console.log(foo);
+            alert(foo);
+            ajaxthumbs();
+            document.getElementById("comment").innerHTML="";
+         }
+     }
+     hr.send(vars);
 }
