@@ -5,7 +5,7 @@ window.onload = function()
 		height = 0,
 		streaming = false;
 
-	const video = document.getElementById('video');
+	video = document.getElementById('video');
 	const canvas = document.getElementById('canvas');
 	const canvas2 = document.getElementById('canvas2');
 	const photo_button = document.getElementById('photo_button');
@@ -128,30 +128,18 @@ window.onload = function()
 		alert("Qwerty");
 	})
 
-	/* uploadbtn.addEventListener('click', function()
-	{
-		var upload_image = document.getElementById("file");
-		
-		alert (upload_image.value);
-		const context2 = canvas2.getContext('2d');
-		if (width && height) {
-			canvas2.width = width;
-			canvas2.height = height;
-			context2.drawImage(upload_image.value, 0, 0, width, height);
-			/* if (document.getElementById("emoji1").hasAttribute("src")) {
-				var emoji1 = document.getElementById("emoji1");
-				var left = parseInt(emoji1.style.left);
-				var top = parseInt(emoji1.style.top);
-				context2.drawImage(emoji1,left,top,100,100);
-			}
-			if (document.getElementById("emoji2").hasAttribute("src")) {
-				var emoji2 = document.getElementById("emoji2");
-				var left2 = parseInt(emoji2.style.left);
-				var top2 = parseInt(emoji2.style.top);
-				context2.drawImage(emoji2,left2,top2,100,100);
-			} */
-/* 		}
-	}, false);  */
+/* 	function setedit(imgid) {
+		alert(imgid);
+		//var hv = document.getElementById("video");
+		//hv.style.display = "none";
+		//alert(hv.style.display);
+		var movesrc = document.getElementById(imgid).src;
+		alert(movesrc)
+		document.getElementById("editpic").src = movesrc;
+		alert(imgid);
+	   // video = document.getElementById("editpic");
+	
+	} */
 }
 
 	

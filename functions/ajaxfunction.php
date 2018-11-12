@@ -83,7 +83,7 @@ function likeimage()
      } catch (PDOException $e) {
     print "Error!: " . $e->getMessage() . "<br/>";
     die();
-     }  
+     }
     //echo "<div><img src='||||' height='50px' width='50px'></div>";
 
 }
@@ -236,7 +236,7 @@ function comment()
             <br >";
             echo  "<button id='editbtn' onclick='setedit(".$row[0]['img_id'].")'>Edit</button></div>";
             echo  "<button id='delbtn' onclick='delpic(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Delete</button></div>";
-            
+            echo  "<button id='delbtn' onclick='newCom(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Comment</button></div>";
             
         }
      } catch (PDOException $e) {

@@ -73,10 +73,11 @@ li:hover {
 </head>
 
 <body>
-<div class="wrapper">
+
 <?php
     include "includes/header.php";
 ?>
+<div class="wrapper">
   <article  class="main">
     <div id="pagegal" style = "overflow: auto;">
 <!-- <img id='pic0' name="pik0" onclick="imageComment(this);" class='thumbs' src="img/emojis/poo.png" height="200px" width="200px">

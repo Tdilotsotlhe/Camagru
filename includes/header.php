@@ -13,6 +13,7 @@ function showuser()
 
 
 echo "
+<div class='w3-row'>
 <div class='header'>
   <a href='#default' class='logo'>Camagru</a>
   <div class='header-right'>

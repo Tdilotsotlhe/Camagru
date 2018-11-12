@@ -40,8 +40,6 @@ if(!isset($_SESSION['uid']))
 			</div>
 			<div class="video">
 				<img id="editpic" class="video" width="500px">
-			
-			<div class="video">
 				<video id='video'>Stream not available...</video>
 			</div>
 			<div class="emo_list">
@@ -62,44 +60,7 @@ if(!isset($_SESSION['uid']))
 			<canvas id="canvas"></canvas>
 		</div>
 		
-<!--   <div class="top_container">
 
-
-  <div height="375px" width="500px" style="position: relative;">  
-<div id="overlay" class="overlay" onclick="off()">
-<img class="text" height='100px' width='100px' id="emoji1" name="emoji1" src="img/emojis/poo.png" onclick="emotoggle(this);">
-<img class="text" height='100px' width='100px' id="emoji2" name="emoji1" src="" onclick="emotoggle(this);" style="display: none;">
-</div> -->
-<!-- <div> -->
-<!-- <video id='video'>Stream not available...</video> -->
-<!-- </div> -->
-<!-- <button onclick="on()">On</button> -->
-
-<!-- </div>
-<button id="photo_button" class="btn btn_darkk">
-Take Photo
-</button>
-<button id="save_photo" class="btn btn_darkk">
-save
-</button> -->
-
-
-<!-- </div> -->
-
-<!-- <div id="emos1" class="btn-group">
-<p>emo1</p>
-<img id="e1" src="img/emojis/penguin.png" height='40px' width='40px' >
-<img id="e2" src="img/emojis/poo.png" height='40px' width='40px'>
-<img id="e3" src="img/emojis/1.png" height='40px' width='40px'>
-<img id="e4" src="img/emojis/2.png" height='40px' width='40px' >
-</div>
-<p>emo2</p>
-<div id="emos2" class="btn-group">
-<img id="e6" src="img/emojis/penguin.png" height='40px' width='40px'onclick ="emohide2()">
-<img id="e7" src="img/emojis/poo.png" height='40px' width='40px'onclick ="emohide2()">
-<img id="e9" src="img/emojis/1.png" height='40px' width='40px'onclick ="emohide2()">
-<img id="e10" src="img/emojis/2.png" height='40px' width='40px'onclick ="emohide2()">
-</div> -->
 <br>
 
 <canvas id="canvas"></canvas>
@@ -199,6 +160,19 @@ save
 				break;
 		}
 	} 
+
+	function setedit(imgid) {
+		//alert(imgid);
+		var hv = document.getElementById("video");
+		hv.style.display = "none";
+		//alert(hv.style.display);
+		var movesrc = document.getElementById(imgid).src;
+		//alert(movesrc);
+		document.getElementById("editpic").src = movesrc;
+		//alert(imgid);
+	    video = document.getElementById("editpic");
+
+}
 </script>
 <br>
 <form action="functions/upweb.php" method="post" enctype="multipart/form-data">

@@ -2,17 +2,17 @@
 
 echo "AWE";
 //var_dump($_POST['userpic']);
-var_dump($_POST);
-var_dump($_FILES);
+/* var_dump($_POST);
+var_dump($_FILES); */
 //exit();
 $target_dir = "../img/gal/";
 
 
 $target_file = $target_dir . basename($_FILES['userpic']['name']);
 $uploadOk = 1;
-
+/* 
 var_dump($_POST);
-var_dump($_FILES);
+var_dump($_FILES); */
 //var_dump($_POST);
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 // Check if image file is a actual image or fake image

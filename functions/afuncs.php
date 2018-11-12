@@ -42,7 +42,7 @@ $xml = file_get_contents('php://input');
                 
                 //echo $row["img_name"];
 
-                echo "<img id=".$row['img_id']." onclick='imageFoc(this.id)' class='thumbs' src='img/gal/".$row['img_name']."' heighty='100px' width='100px'>";
+                echo "<img id=".$row['img_id']." onclick='imageFoc(this.id)' class='w3-round' src='img/gal/".$row['img_name']."' heighty='100px' width='100px'>";
             }
             }
         } catch (PDOException $e) {
