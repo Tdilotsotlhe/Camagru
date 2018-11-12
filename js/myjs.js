@@ -242,7 +242,7 @@ function ajax_post(){
     }
     // Send the data to PHP now... and wait for response to update the status div
     hr.send(vars); // Actually execute the request
-    document.getElementById("login_error").innerHTML = "logging in...";
+    document.getElementById("login_error").innerHTML = "logging in...<br><img class='w3-spin' src='img/loa.png'>";
 }
 
 function checkResponse(response) {
@@ -251,10 +251,11 @@ function checkResponse(response) {
         document.getElementById("login_error").innerHTML = "login failed";
     }
     else{
-        document.getElementById("namebrand").innerHTML = response;
+        location.replace("index.php");
+/*         document.getElementById("namebrand").innerHTML = response;
         document.getElementById("logcont").style.visibility = "hidden";
         document.getElementById("logindiv").style.visibility = "hidden";
-        document.getElementById("regdiv").style.visibility = "hidden";
+        document.getElementById("regdiv").style.visibility = "hidden"; */
         homegal();
        
     }
@@ -343,9 +344,9 @@ function nextpage(){
    if (+myOffset > numPics)
     {
         myOffset = 0;
-        document.getElementById("pagecounter").innerHTML = mypage + "/" + Math.ceil(numPics/4);
+     //   document.getElementById("pagecounter").innerHTML = mypage + "/" + Math.ceil(numPics/4);
     }else{
-        document.getElementById("pagecounter").innerHTML = myPage + "/" + Math.ceil(numPics/4);
+       // document.getElementById("pagecounter").innerHTML = myPage + "/" + (Math.ceil(numPics/4) - 1);
     }
     fetchPicSet(myPage, myOffset);
     
@@ -353,7 +354,7 @@ function nextpage(){
 
 function prevpage(){
    // alert(numPics);
-   if (myPage < 0){
+   if (myPage <= 0){
     mypage = 1;
     }else{
         myPage--;
@@ -377,8 +378,7 @@ window.onload = function(){
 }
 
 function    fetchPicSet(page, offs){
-   // alert(page);
-   // alert(offs);
+
 
     var hr = new XMLHttpRequest();
      var url = "functions/ajaxfunction.php";
@@ -391,24 +391,13 @@ function    fetchPicSet(page, offs){
           //  console.log(foo);
             var count = foo.length;
             var x = 0;
-            //if results are less than 4 disable button
-            //subtract count from offset maybe?
 
-            //clear image srcs or delete imgs
             var picdiv = document.getElementById("pagegal");
            
             picdiv.innerHTML="";
             
-               /*  document.getElementById("pic0").src = "#";
-                document.getElementById("pic1").src = "#";
-                document.getElementById("pic2").src = "#";
-                document.getElementById("pic3").src = "#"; */
-                
-           /*  while(x < count)
-            { *///////
                 for(var w = 0;w< count;w++){
-                //modify srcs or append images
-                //append img
+
                 var newimg = document.createElement("IMG");
                 newimg.setAttribute("id", "img"+w);
                 newimg.setAttribute("data-id", foo[w][0]);
@@ -417,28 +406,14 @@ function    fetchPicSet(page, offs){
                 newimg.style.width = "100px";
                 newimg.src = "img/gal/"+foo[w][1];
                 newimg.setAttribute("onclick", "imageComment(this)");
+                newimg.className = "w3-animate-opacity";
                 picdiv.appendChild(newimg);
                 
-
-               // newimg.onclick(imageComment(newimg));
-               // addEventListener("click", imageComment(newimg), false);
-               // alert(foo[x][1]);
-                //mod sources
-                //document.getElementById("pic"+x).src = "img/gal/" + foo[x][1];
-                //document.getElementById("pic"+x).setAttribute("data-id", foo[x][0]);
-               // console.log(foo[x][1]);
-                /////////append
-
-                //x++;
-            /*     } */
-                ///////
             }
             
          }
      }
      hr.send(vars); 
-
-
 }
 
 
@@ -483,5 +458,9 @@ function imageComment(tid)
      }
      hr.send(vars); 
 
+}
+
+function loginmodal(){
+    document.getElementById('id01').style.display='block'
 }
 

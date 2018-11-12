@@ -14,7 +14,7 @@ echo $_SESSION['test']; */
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Gallery</title>
+    <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="new.css" />
     
@@ -80,7 +80,10 @@ li:hover {
 <div class="wrapper">
   <article  class="main">
     <div id="pagegal" style = "overflow: auto;">
-
+<!-- <img id='pic0' name="pik0" onclick="imageComment(this);" class='thumbs' src="img/emojis/poo.png" height="200px" width="200px">
+<img id='pic1' name="pik1" onclick="imageComment(this);" class='thumbs' src="img/emojis/poo.png" height="200px" width="200px">
+<img id='pic2' name="pik2" onclick="imageComment(this);" class='thumbs' src="img/emojis/poo.png" height="200px" width="200px">
+<img id='pic3' name="pik3" onclick="imageComment(this);" class='thumbs' src="img/emojis/poo.png" height="200px" width="200px"> -->
 </div>
 <br>
 

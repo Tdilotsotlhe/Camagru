@@ -13,20 +13,27 @@ function showuser()
 
 
 echo "
-<div class='w3-row'>
-<div class='header'>
-  <a href='#default' class='logo'>Camagru</a>
-  <div class='header-right'>
-      <a id='namebrand' href='#'>";
-echo "Welcome ";
+
+
+
+  <div class='w3-bar w3-theme-d5 (w3-theme-dark) w3-animate-top'>
+  Camagru
+     ";
+echo "       Welcome ";
 echo showuser();
-echo " </a>
-      <!-- switch class to active on click -->
-    <a class='' href='index.php' id='home'>Home</a>
-    <a href='gal2.php' id='gallery'>Profile</a>
-    <a href='gal3.php' id='gallery'>Gallery</a>
-    <a id='logoutlink' href='functions/logout.php'>Logout</a>
+
+
+     if(isset($_SESSION['uid']))
+     {
+      echo "<a class='w3-button w3-right' id='logoutlink' href='functions/logout.php'>Logout</a>";
+     }else{
+  echo "<button onclick='loginmodal()' class='w3-button w3-right' id='loginbutton'>Login</button>";
+       }
+       echo "   <a class='w3-button w3-right' href='gal3.php' >Gallery</a>
+      <a class='w3-button w3-right' href='profile.php' >Profile</a>
+    <a class='w3-button w3-right' href='index.php' >Home</a>
+   
   </div>
-</div>";
+";
 
 ?>

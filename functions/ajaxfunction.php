@@ -111,7 +111,7 @@ function loadGal()
       } 
 
     try { 
-        $stmt = $dbh->prepare("SELECT * FROM gallery ORDER BY uptime DESC");
+        $stmt = $dbh->prepare("SELECT * FROM gallery WHERE users_id=? ORDER BY uptime DESC");
         if($stmt->execute([$_SESSION['uid']])){
           
           while($row = $stmt->fetch()){ 
@@ -213,7 +213,7 @@ function comment()
           //exit();
         
 
-              echo "<div id='commdiv'>
+              echo "<div id='commdiv' class='w3-animate-opacity w3-card w3-center w3-theme-l3'>
               <img id=".$row[0]['img_id']." class='thumbs' src='img/gal/".$row[0]['img_name']."' height='100px' width='100px' data-commid=".$_SESSION['uid'].">
           
              
@@ -226,18 +226,21 @@ function comment()
                   }
                   else
                   {
-                    echo "<p>".$value["comment"]."</p>";
+                    echo "<p class='w3-animate-right  w3-theme-l4 w3-hover-opacity'>".$value["comment"]."</p>";
                     
                   }
             }
             echo "<p id='latest'></p>";
-            echo "<br >
-            <input type='text' id='comtxt'>
-            <br >";
-            echo  "<button id='editbtn' onclick='setedit(".$row[0]['img_id'].")'>Edit</button></div>";
-            echo  "<button id='delbtn' onclick='delpic(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Delete</button></div>";
-            echo  "<button id='delbtn' onclick='newCom(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Comment</button></div>";
-            
+           
+            if(isset($_SESSION['uid'])){
+                echo "<p>
+                <input class='w3-input'  type='text' id='comtxt'>
+                </p>
+                <br >";
+            echo  "<button class='w3-button w3-ripple w3-dark-gray' id='editbtn' onclick='setedit(".$row[0]['img_id'].")'>Edit</button>";
+            echo  "<button class='w3-button w3-ripple w3-light-gray' id='delbtn' onclick='delpic(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Delete</button>";
+            echo  "<button class='w3-button w3-ripple w3-dark-gray' id='delbtn' onclick='newCom(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Comment</button></div>";
+            }
         }
      } catch (PDOException $e) {
     print "Error!: " . $e->getMessage() . "<br/>";
@@ -298,44 +301,6 @@ function checkLike($picid)
 }
 
 
-/* function loadthumbs()
-{
-    include "../config/database.php";
-    
-
-    try {
-        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-       // echo "yes";
-      } catch (PDOException $e) {
-      print "Error!: " . $e->getMessage() . "<br/>";
-      die();
-      }
-      
-     
-       //select DB
-       try {
-        $dbh->query("USE ".$DB_NAME);
-      } catch (Exception $e) {
-         die("db selection failed!");
-      } 
-
-    try { 
-        $stmt = $dbh->prepare("SELECT * FROM gallery WHERE imag_id=?");
-        if($stmt->execute([$_SESSION['uid']])){
-          
-          while($row = $stmt->fetch()){ 
-              echo "<div><img id=".$row['img_id']." onclick='imageFoc(this)' class='thumbs' src='img/gal/".$row['img_name']."' heighty='100px' width='100px'></div>";
-          }
-        }
-     } catch (PDOException $e) {
-    print "Error!: " . $e->getMessage() . "<br/>";
-    die();
-     }  
-    //echo "<div><img src='||||' height='50px' width='50px'></div>";
-
-}
- */
 
 function allPics()
 {
@@ -401,7 +366,7 @@ function newPager()
       } 
 
     try { 
-        $stmt = $dbh->prepare("SELECT * FROM gallery ORDER BY uptime LIMIT 4 OFFSET $off");
+        $stmt = $dbh->prepare("SELECT * FROM gallery WHERE users_id = ".$_SESSION['uid']." ORDER BY uptime LIMIT 4 OFFSET $off");
         if($stmt->execute()){
           
           $row = $stmt->fetchAll();

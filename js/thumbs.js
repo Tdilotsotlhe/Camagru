@@ -75,12 +75,12 @@ function imgFetch()
 //     }
 
 
-var nextBtn = document.getElementById("next");
+/* var nextBtn = document.getElementById("next");
 var prevBtn = document.getElementById("prev");
 window.onload = function () {
     nextBtn.addEventListener("click", test1, false);
 prevBtn.addEventListener("click", test1, false);    
-}
+} */
 
 
 function test1(){
