@@ -173,6 +173,7 @@ function loadthumbs()
 
 }
 
+//modify back to comment
 function comment()
 {
     include "../config/database.php";
@@ -233,7 +234,7 @@ function comment()
             echo "<br >
             <input type='text' id='comtxt'>
             <br >";
-           
+            echo  "<button id='editbtn' onclick='setedit(".$row[0]['img_id'].")'>Edit</button></div>";
             echo  "<button id='delbtn' onclick='delpic(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Delete</button></div>";
             
             

@@ -11,6 +11,55 @@ if(!isset($_SESSION['uid']))
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+        * {
+    box-sizing: border-box;
+}
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+}
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+html {
+    font-family: "Lucida Sans", sans-serif;
+}
+.header {
+    background-color: #9933cc;
+    color: #ffffff;
+    padding: 15px;
+}
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.menu li {
+    padding: 8px;
+    margin-bottom: 7px;
+    background-color: #33b5e5;
+    color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.menu li:hover {
+    background-color: #0099cc;
+}
+        </style>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
@@ -32,7 +81,10 @@ if(!isset($_SESSION['uid']))
 <?php
     include "includes/header.php";
 ?>
-  <article class="main">
+
+
+<div class="col-2" id="thumbnails">IMAGES</div>
+  <div class="col-7">
   <div class="top_container">
 			<div id="overlay" class="overlay">
 				<img class="text" height='100px' width='100px' id="emoji1" name="emoji1" onclick="off()">
@@ -61,45 +113,6 @@ if(!isset($_SESSION['uid']))
 			<button id="save_photo" class="button">save</button>
 			<canvas id="canvas"></canvas>
 		</div>
-		
-<!--   <div class="top_container">
-
-
-  <div height="375px" width="500px" style="position: relative;">  
-<div id="overlay" class="overlay" onclick="off()">
-<img class="text" height='100px' width='100px' id="emoji1" name="emoji1" src="img/emojis/poo.png" onclick="emotoggle(this);">
-<img class="text" height='100px' width='100px' id="emoji2" name="emoji1" src="" onclick="emotoggle(this);" style="display: none;">
-</div> -->
-<!-- <div> -->
-<!-- <video id='video'>Stream not available...</video> -->
-<!-- </div> -->
-<!-- <button onclick="on()">On</button> -->
-
-<!-- </div>
-<button id="photo_button" class="btn btn_darkk">
-Take Photo
-</button>
-<button id="save_photo" class="btn btn_darkk">
-save
-</button> -->
-
-
-<!-- </div> -->
-
-<!-- <div id="emos1" class="btn-group">
-<p>emo1</p>
-<img id="e1" src="img/emojis/penguin.png" height='40px' width='40px' >
-<img id="e2" src="img/emojis/poo.png" height='40px' width='40px'>
-<img id="e3" src="img/emojis/1.png" height='40px' width='40px'>
-<img id="e4" src="img/emojis/2.png" height='40px' width='40px' >
-</div>
-<p>emo2</p>
-<div id="emos2" class="btn-group">
-<img id="e6" src="img/emojis/penguin.png" height='40px' width='40px'onclick ="emohide2()">
-<img id="e7" src="img/emojis/poo.png" height='40px' width='40px'onclick ="emohide2()">
-<img id="e9" src="img/emojis/1.png" height='40px' width='40px'onclick ="emohide2()">
-<img id="e10" src="img/emojis/2.png" height='40px' width='40px'onclick ="emohide2()">
-</div> -->
 <br>
 
 <canvas id="canvas"></canvas>
@@ -108,6 +121,7 @@ save
 <div class="bottom_container">
 <div id="photos"></div>
 </div> 
+
 <script>
  function off() {
 		document.getElementById("emoji1").style.visibility = "hidden";
@@ -220,9 +234,10 @@ action="functions/upload.php"
     <!--  </form>  -->
       
   </div>
-  </article>
-  <aside class="aside aside-1" id="thumbnails"></aside>
-  <aside id="comment"  class="aside aside-2"><p>Comments<p></aside>
+</div>
+<div id="comment"  class="col-2"><p>Comments<p></div>
+  <!-- <aside class="aside aside-1" id="thumbnails"></aside> -->
+  <!-- <aside id="comment"  class="aside aside-2"><p>Comments<p></aside> -->
   <footer class="footer">CAMAGRU TDILOTSO</footer>
 </div>
 </body>

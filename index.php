@@ -55,7 +55,4 @@ if(isset($_GET['welcome']))
 
 </body>
 
-<?php
-// include "includes/mymodals.php"
-?>
 </html>

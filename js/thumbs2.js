@@ -119,3 +119,10 @@ function delpic(theuser, thepic){
      }
      hr.send(vars);
 }
+
+function setedit(imgid) {
+    alert(imgid);
+    var movesrc = document.getElementById(imgid).src;
+    document.getElementById("editpic").src = movesrc;
+
+}

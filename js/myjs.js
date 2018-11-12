@@ -478,7 +478,6 @@ function imageComment(tid)
      hr.onreadystatechange = function() {
          if(hr.readyState == 4 && hr.status == 200) {
             var foo = hr.responseText;
-            //console.log(foo);
             addCom.innerHTML = foo;
          }
      }
