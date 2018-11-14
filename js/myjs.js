@@ -19,11 +19,6 @@ function likepic(theuid, imgid)
                 }else{
                     document.getElementById('likebtn').innerHTML="LIKE";
                 }
-             
-             
-            //document.getElementById("comment").innerHTML += return_data;
-            //var foo = JSON.parse(hr.responseText);
-            //console.log(foo);
          }
      }
      hr.send(vars); 
@@ -393,7 +388,7 @@ function    fetchPicSet(page, offs){
             var x = 0;
 
             var picdiv = document.getElementById("pagegal");
-           
+            var selprev = document.getElementById("selprev");
             picdiv.innerHTML="";
             
                 for(var w = 0;w< count;w++){
@@ -444,7 +439,8 @@ function imageComment(tid)
   // alert(imgid);
    //loadcomment
    var addCom = document.getElementById("comment");
-
+   var prevsel = document.getElementById("selprev");
+   prevsel.src = el.src;
    var hr = new XMLHttpRequest();
      var url = "functions/ajaxfunction.php";
      var vars = "imgid="+imgid;

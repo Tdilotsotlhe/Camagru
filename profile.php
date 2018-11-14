@@ -46,19 +46,20 @@ if(isset($_GET['welcome']))
 
     include "includes/header.php";
 ?>
- <!-- ////////////////// -->
-<!-- oldcode -->
-<!-- //////////////////////////// -->
+
 
 <!-- newcode -->
-<div class="w3-cell-row">
-<div class="w3-container w3-red w3-cell w3-mobile w3-theme-l1 w3-animate-left">
-<div class="w3-bar-block w3-theme-l1 w3-animate-left">
-<div onclick="window.location = 'profile.php'" class="w3-bar-item w3-mobile w3-hover-gray w3-animate-zoom">PROFILE</div>
-  <div onclick="window.location = 'index.php'" class="w3-bar-item w3-mobile w3-hover-gray">HOME</div>
-  
-  <div class="w3-bar-item w3-mobile w3-hover-gray ">GALLERY</div>
-</div>  
+<div class="w3-theme-d5 (w3-theme-dark) w3-animate-top w3-cell-row w3-center">
+    <div class="w3-third w3-cell">
+    <p onclick="window.location = 'profile.php'" class="w3-bar-item w3-mobile w3-hover-gray">PROFILE</p>
+    
+    </div>
+    <div class="w3-third w3-cell">
+    <p onclick="window.location = 'index.php'" class="w3-bar-item w3-mobile w3-hover-gray w3-animate-zoom">HOME</p>
+    </div>
+    <div class="w3-third w3-cell">
+    <p class="w3-bar-item w3-mobile w3-hover-gray ">GALLERY</p>
+    </div>
 
 </div>
 <div class="w3-container  w3-cell w3-mobile w3-theme-d4 w3-animate-opacity w3-animate-zoom">
