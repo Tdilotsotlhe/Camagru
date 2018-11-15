@@ -46,20 +46,38 @@ if(isset($_GET['welcome']))
 
    // include "includes/header.php";
 ?>
+<div class="w3-container w3-opacity-min w3-padding-10 w3-theme-d5 w3-animate-zoom ">
+  <h1>Camagru</h1>
+  <div class="w3-bar w3-theme-d3 (w3-theme-dark) w3-animate-left w3-cell-row w3-center ">
+  <?php   if(isset($_SESSION['username']))
+  {
+    echo "Welcome ".$_SESSION['username']."<div class='w3-bar-item w3-right'>Logout</div>";
+  }
+  else echo "Welcome Guest <div class='w3-container w3-cell'>Register</div>"; 
+  ?>
+
+
+</div>
+  <p><?php   if(isset($_SESSION['username']))
+  {
+   // echo "Welcome ".$_SESSION['username'];
+  }
+ // else echo "Welcome Guest"; ?></p>
+</div>
  <!-- ////////////////// -->
 <!-- oldcode -->
 <!-- //////////////////////////// -->
 <!-- menu -->
 <!-- newcode test -->
 <!-- new header -->
-<div class="w3-theme-d5 (w3-theme-dark) w3-animate-top w3-cell-row w3-center">
+<div class="w3-theme-l1 w3-mobile (w3-theme-light) w3-animate-top w3-cell-row w3-center w3-opacity-min w3-hover-opacity-off">
     <div class="w3-third w3-cell">
-    <p onclick="window.location = 'index.php'" class="w3-bar-item w3-mobile w3-hover-gray w3-animate-zoom">HOME</p>
+    <p onclick="window.location = 'index.php'" class="w3-bar-item w3-hover-sepia w3-animate-zoom">HOME</p>
     </div>
-    <div class="w3-third w3-cell">
+    <div class="w3-third w3-mobile w3-cell">
     <p onclick="window.location = 'profile.php'" class="w3-bar-item w3-mobile w3-hover-gray">PROFILE</p>
     </div>
-    <div class="w3-third w3-cell">
+    <div class="w3-third w3-mobile w3-cell">
     <p class="w3-bar-item w3-mobile w3-hover-gray ">GALLERY</p>
     </div>
 
@@ -67,20 +85,20 @@ if(isset($_GET['welcome']))
 
 <div class="w3-cell-row">
 
-<div class="w3-container w3-theme-d1 (w3-theme-dark) w3-animate-top w3-cell">
+<div class="w3-container w3-theme-d1 (w3-theme-dark) w3-animate-top w3-cell w3-mobile">
 <p class = "w3-center"> MY GALLERY</p>
-        <p id="pagegal" class = "w3-center w3-cell-middle"></p>
+        <p id="pagegal" class = "w3-center w3-cell-middle w3-mobile"></p>
         <br>
         <p id='pagecounter' class = " w3-center">1/?</p>
         <p class="w3-center w3-animate-top"><button id="prevset" onclick="prevpage();" class="w3-button w3-border w3-hover-dark-grey w3-animate-right">Left</button>
         <button id="nextset" onclick="nextpage();" class="w3-button w3-border w3-hover-dark-grey w3-animate-right">Right</button>
         </p>
-        <p class="w3-center">
+        <p class="w3-center w3-animate-zoom">
           <img class="w3-round" width="250px" height="250px" src="img/newbg1.jpg" id="selprev">
         </p>                                  
 </div>
 
-<div class="w3-container w3-center w3-theme-l1 w3-animate-right w3-cell w3-cell-middle">
+<div class="w3-container w3-center w3-mobile w3-theme-l1 w3-animate-right w3-cell w3-cell-middle">
 <p class="we-center">CARDS</p>
           <p id="comment"></p>
 </div>
@@ -117,7 +135,7 @@ if(isset($_GET['welcome']))
  
 
 <div class="w3-row">
-<footer class="w3-container w3-theme-d5 (w3-theme-dark) w3-animate-bottom ">
+<footer class="w3-container w3-theme-d1 (w3-theme-dark) w3-mobile w3-opacity-min w3-animate-bottom ">
   <p class = "w3-center">TDILOTSO</p>
 </footer>
 </div>

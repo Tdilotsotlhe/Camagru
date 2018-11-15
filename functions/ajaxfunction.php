@@ -126,7 +126,7 @@ function loadGal()
              
               //echo $row["img_name"];
 
-              echo "<img id=".$row['img_id']." onclick='imageFoc(this)' class='thumbs' src='img/gal/".$row['img_name']."' heighty='100px' width='100px'>";
+              echo "<img id=".$row['img_id']." onclick='imageFoc(this)' class='w3-image w3-rounded' src='img/gal/".$row['img_name']."' height='100px' width='100px'>";
           }
         }
      } catch (PDOException $e) {
@@ -170,7 +170,7 @@ function loadthumbs()
              
               //echo $row["img_name"];
 
-              echo "<div><img data-id=".$row['img_id']." id=".$row['img_id']." onclick='privImageFoc(this)' class='thumbs' src='img/gal/".$row['img_name']."' heighty='100px' width='100px'></div>";
+              echo "<div><img data-id=".$row['img_id']." id=".$row['img_id']." onclick='privImageFoc(this)' class='thumbs w3-image' src='img/gal/".$row['img_name']."' heighty='100px' width='100px'></div>";
           }
         }
      } catch (PDOException $e) {
@@ -221,8 +221,8 @@ function comment()
           //exit();
         
 
-              echo "<div id='commdiv' class='w3-animate-opacity w3-card w3-center w3-theme-l3'>
-              <img id=".$row[0]['img_id']." class='thumbs' src='img/gal/".$row[0]['img_name']."' height='100px' width='100px' data-commid=".$_SESSION['uid'].">
+              echo "<div id='commdiv' class='w3-animate-opacity w3-mobile w3-padding-3 w3-card w3-center w3-theme-l3'>
+              <img id=".$row[0]['img_id']." class='thumbs w3-image' src='img/gal/".$row[0]['img_name']."' height='100px' width='100px' data-commid=".$_SESSION['uid'].">
           
              
              "; 
@@ -234,7 +234,7 @@ function comment()
                   }
                   else
                   {
-                    echo "<p class='w3-animate-right  w3-theme-l4 w3-hover-opacity'>".$value["comment"]."</p>";
+                    echo "<p style='font-size:2vw;' class='w3-animate-right w3-mobile w3-padding-2  w3-theme-l4 w3-hover-opacity'>".$value["comment"]."</p>";
                     
                   }
             }

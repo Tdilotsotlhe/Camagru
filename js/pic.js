@@ -71,6 +71,7 @@ window.onload = function()
 			
 		}
 	}
+	
 	function preview()
 	{
 		const context2 = canvas2.getContext('2d');

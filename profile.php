@@ -40,26 +40,54 @@ if(isset($_GET['welcome']))
 
 <!--     <script src="js/myajax.js"></script> -->
 </head>
-<body>
+<body style="background-image:url(img/newbg1.jpg); background-size: 100% 100%;    background-position: center;background-repeat: no-repeat;background-size: stretch;">
 
 <?php
 
-    include "includes/header.php";
+   // include "includes/header.php";
 ?>
 
+<div class="w3-container w3-opacity-min w3-padding-10 w3-theme-d5 w3-animate-zoom ">
+  <h1>Camagru</h1>
+  <div class="w3-bar w3-theme-d3 (w3-theme-dark) w3-animate-left w3-cell-row w3-center ">
+  <?php   if(isset($_SESSION['username']))
+  {
+    echo "Welcome ".$_SESSION['username']."<div class='w3-bar-item w3-right'>Logout</div>";
+  }
+  else echo "Welcome Guest <div class='w3-container w3-cell'>Register</div>"; 
+  ?>
 
-<!-- newcode -->
-<div class="w3-theme-d5 (w3-theme-dark) w3-animate-top w3-cell-row w3-center">
-    <div class="w3-third w3-cell">
+
+</div>
+
+<!-- hide on small -->
+ <div class="w3-theme-l1   w3-mobile (w3-theme-light) w3-animate-top w3-cell-row w3-center w3-opacity-min w3-hover-opacity-off">
+    
+ <div class="w3-third w3-cell w3-hide-small">
     <p onclick="window.location = 'profile.php'" class="w3-bar-item w3-mobile w3-hover-gray">PROFILE</p>
     
     </div>
-    <div class="w3-third w3-cell">
+    <div class="w3-third w3-cell w3-hide-small">
     <p onclick="window.location = 'index.php'" class="w3-bar-item w3-mobile w3-hover-gray w3-animate-zoom">HOME</p>
     </div>
-    <div class="w3-third w3-cell">
+    <div class="w3-third w3-cell w3-hide-small">
     <p class="w3-bar-item w3-mobile w3-hover-gray ">GALLERY</p>
     </div>
+<!-- hide on big -->
+
+ <div class="w3-theme-l1 w3-hide-large w3-hide-medium  w3-mobile (w3-theme-light) w3-animate-top w3-cell-row w3-center w3-opacity-min w3-hover-opacity-off">
+ <button onclick="myFunction('Demo1')" class="w3-btn w3-block w3-black w3-left-align">Menu</button>
+<div id="Demo1" class="w3-container w3-hide">
+  <p>Home</p>
+  <p>Profile</p>
+  <p>Gallery</p>
+  <p>Logout</p>
+</div>
+    </div>
+
+
+
+
 
 </div>
 <div class="w3-container  w3-cell w3-mobile w3-theme-d4 w3-animate-opacity w3-animate-zoom">
@@ -131,6 +159,16 @@ if(isset($_GET['welcome']))
   </div>
 </div>
 </body>
+<script>
+function myFunction(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
 
 
 </html>

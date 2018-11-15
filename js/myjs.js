@@ -401,7 +401,7 @@ function    fetchPicSet(page, offs){
                 newimg.style.width = "100px";
                 newimg.src = "img/gal/"+foo[w][1];
                 newimg.setAttribute("onclick", "imageComment(this)");
-                newimg.className = "w3-animate-opacity";
+                newimg.className = "w3-animate-opacity w3-hover-opacity";
                 picdiv.appendChild(newimg);
                 
             }
