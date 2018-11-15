@@ -329,19 +329,19 @@ if(myOffset > numPics)
 
 function nextpage(){
    // alert(numPics);
-    if (myPage >= Math.ceil(numPics/4)){
+    if (myPage >= Math.ceil(numPics/5)){
         mypage = 1;
     }else{
         myPage++;
     }
    //findway to manage offset
-   myOffset = +myOffset + 4;
+   myOffset = +myOffset + 5;
    if (+myOffset > numPics)
     {
         myOffset = 0;
-     //   document.getElementById("pagecounter").innerHTML = mypage + "/" + Math.ceil(numPics/4);
+        document.getElementById("pagecounter").innerHTML = mypage + "/" + Math.ceil(numPics/5);
     }else{
-       // document.getElementById("pagecounter").innerHTML = myPage + "/" + (Math.ceil(numPics/4) - 1);
+        document.getElementById("pagecounter").innerHTML = myPage + "/" + Math.ceil(numPics/5);
     }
     fetchPicSet(myPage, myOffset);
     
@@ -355,13 +355,13 @@ function prevpage(){
         myPage--;
     }
     //alert(myPage);
-    myOffset = +myOffset - 4;
+    myOffset = +myOffset - 5;
     if (myOffset < 0)
     {
         myOffset = 0;
-        document.getElementById("pagecounter").innerHTML = "1" + "/" + Math.ceil(numPics/4);
+        document.getElementById("pagecounter").innerHTML = "1" + "/" + Math.ceil(numPics/5);
     }else{
-        document.getElementById("pagecounter").innerHTML = myPage + "/" + Math.ceil(numPics/4);
+        document.getElementById("pagecounter").innerHTML = myPage + "/" + Math.ceil(numPics/5);
     }
         fetchPicSet(myPage, myOffset);
     

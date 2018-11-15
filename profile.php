@@ -35,7 +35,7 @@ if(isset($_GET['welcome']))
 <link rel="stylesheet" type="text/css" media="screen" href="css/w3.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="css/w3-theme-indigo.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css" />
-
+<script src="js/prof.js"></script>
 
 
 <!--     <script src="js/myajax.js"></script> -->
@@ -68,16 +68,19 @@ if(isset($_GET['welcome']))
   <div class="w3-panel w3-text-theme w3-round-xlarge">
 <label>username</label>
 <input class="w3-input w3-theme-d4" type="text">
+<p><button onclick="changeuser();" class="w3-btn w3-round">Submit</button></p>
 </div>
   
   <div class="w3-panel  w3-text-theme w3-round-xlarge">
   <label>email</label>
 <input class="w3-input w3-theme-d4" type="text">
+<p><button onclick="changeemail()" class="w3-btn w3-round">Submit</button></p>
+
 </div>
   
 <div class="w3-panel  w3-text-theme w3-round-xlarge">
 <label>Notifications</label>
-<input  class="w3-check" type="checkbox" checked="checked">
+<input id="notcheckbox" class="w3-check" type="checkbox" checked="checked">
 </div>
   
 <div class="w3-panel  w3-text-theme w3-round-xlarge">
@@ -86,9 +89,11 @@ if(isset($_GET['welcome']))
   <br>
   
 </div>
-<div class="w3-container w3-theme-l3 w3-cell w3-mobile w3-animate-right">
-  <p>VIEW</p>
-  <p id="comment"></p>
+<div class="w3-container w3-theme-l3 w3-cell w3-middle w3-mobile w3-animate-right">
+  <p>Details</p>
+  <p w3-theme-l1 id="curuser"></p>
+  <p w3-theme-l1 id="curemail"></p>
+  <p w3-theme-l1 id="curnotif"></p>
 </div>
 </div>
 
@@ -126,5 +131,6 @@ if(isset($_GET['welcome']))
   </div>
 </div>
 </body>
+
 
 </html>
