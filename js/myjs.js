@@ -411,16 +411,12 @@ function    fetchPicSet(page, offs){
                 newimg.src = "img/gal/"+foo[w][1];
                 if(galsel == "private"){
                 newimg.setAttribute("onclick", "imageComment(this)");
-<<<<<<< HEAD
                 }else if(galsel == "public"){
                     newimg.setAttribute("onclick", "imagePublic(this)");
                 }else if(galsel == "fullgal"){
                     newimg.setAttribute("onclick", "imageFull(this)");
                 }
                 newimg.className = "w3-mobile w3-image w3-animate-opacity w3-hover-opacity";
-=======
-                newimg.className = "w3-animate-opacity w3-hover-opacity";
->>>>>>> 3f4165880f59a707a74d40e80a6596994b6658d9
                 picdiv.appendChild(newimg);
                 
             }
