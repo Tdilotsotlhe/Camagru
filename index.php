@@ -173,24 +173,64 @@ if(isset($_GET['welcome']))
     <header class="w3-container w3-theme-d5 (w3-theme-dark) w3-animate-top"> 
       <span onclick="document.getElementById('id01').style.display='none'" 
       class="w3-closebtn w3-right">&times;</span>
-      <h2>Login</h2>
+      <h2>Login / Register</h2>
     </header>
-   
-    <div class="w3-container w3-center w3-theme-d1  w3-animate-zoom">
-    <p>Username</p>
-   <p class="w3-center"> <input type='text' name='uname' id='uname' placeholder='Enter Username' required></p>
+   <!-- lgoin modal -->
+    <div id="modalogin" class="w3-container w3-center w3-theme-d1 w3-animate-zoom w3-mobile">
+    <label>Username</label>
+   <p class="w3-center w3-mobile w3-animate-top"> <input class="w3-input w3-text-theme" type='text' name='uname' id='uname' placeholder='Enter Username' required></p>
     <p>Password</p>
-   <p class="w3-center"> <input type='password' name='pwrd' id='pwrd' placeholder='Enter Password' required></p>
-    <p class="w3-center" id='login_error'></p>
- <p class="w3-center">   <button class="w3-button" onclick='ajax_post()' id='logbut2'>Login2</button></p>
-    
+   <p class="w3-center w3-mobile w3-animate-left"> <input type='password' class="w3-input w3-text-theme" name='pwrd' id='pwrd' placeholder='Enter Password' required></p>
+    <p class="w3-center w3-mobile w3-animate-bottom" id='login_error'></p>
+ <p class="w3-center">   <button class="w3-btn w3-grey w3-mobile w3-animate-opacity" onclick='ajax_post()' id='logbut2'>Login</button></p>
 </div>
+
+
+
+    <!-- reg modal --> 
+    <form id="regform" method="post">
+    <div id="modalreg" class="w3-container w3-center w3-theme-d1 w3-animate-zoom w3-mobile w3-hide">
+    <label>Username</label>
+   <p class="w3-center w3-mobile w3-animate-top"> <input class="w3-input w3-text-theme" type='text' name='uname' id='uname1' placeholder='Enter Username' required></p>
+   <label>Email</label>
+   <p class="w3-center w3-mobile w3-animate-top"> <input class="w3-input w3-text-theme" type='text' name='email' id='email' placeholder='Enter email' required></p>
+   
+   <label>Password</label>
+   <p class="w3-center w3-mobile w3-animate-left"> <input type='password' class="w3-input w3-text-theme" name='pwrd' id='pwrd1' placeholder='Enter Password' required></p>
+   <label>Re-enter Password</label>
+   <p class="w3-center w3-mobile w3-animate-left"> <input type='password' class="w3-input w3-text-theme" name='pwrd' id='pwrd2' placeholder='Re-enter Password' required></p>
+
+   <p class="w3-center w3-mobile w3-animate-bottom" id='reg_error'></p>
+ <p class="w3-center">   <button onclick="ajax_register();" class="w3-btn w3-grey w3-mobile w3-animate-opacity"  id='logbut2' type="submit">Register</button></p>
+</div>
+        </form>
+
+
     <footer class="w3-container w3-theme-d5 (w3-theme-dark) w3-animate-bottom">
-      <p class="w3-center">Register</p>
+      <p class="w3-center w3-mobile w3-hover-grey" onclick="showreg()">Register</p>
+      <p class="w3-center w3-mobile w3-hover-grey" onclick="showlogin()">login</p>
     </footer>
   </div>
 </div>
 <script>
+
+  function showlogin() {
+    document.getElementById("modalreg").className = "w3-container w3-center w3-theme-d1 w3-animate-zoom w3-mobile w3-hide";
+    document.getElementById("modalogin").className = "w3-container w3-center w3-theme-d1 w3-animate-zoom w3-mobile w3-show";
+    
+  }
+
+  function showreg() {
+    document.getElementById("modalogin").className = "w3-container w3-center w3-theme-d1 w3-animate-zoom w3-mobile w3-hide";
+    document.getElementById("modalreg").className = "w3-container w3-center w3-theme-d1 w3-animate-left w3-mobile w3-show";
+    document.getElementById("regform").addEventListener("submit", function(e){
+    e.preventDefault();
+    //ajax_register();
+   // alert("submitting");
+});
+    
+  }
+
   function myFunction(id) {
     var x = document.getElementById(id);
     if (x.className.indexOf("w3-show") == -1) {

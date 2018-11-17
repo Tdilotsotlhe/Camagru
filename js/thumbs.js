@@ -1,7 +1,7 @@
 /////load thumbnails
 //window.addEventListener('load', ajaxthumbs, false);
 
-function ajaxthumbs() {
+/* function ajaxthumbs() {
    // alert("ajax thumbs");
     thumbdiv = document.getElementById("thumbnails");
 
@@ -24,7 +24,7 @@ function ajaxthumbs() {
  // Send the data to PHP now... and wait for response to update the status div
  hr.send(vars); // Actually execute the request
  document.getElementById("thumbnails").innerHTML = "loading thumbs...";
-}
+} */
 
 
 

@@ -241,6 +241,9 @@ function ajax_post(){
     document.getElementById("login_error").innerHTML = "logging in...<br><img class='w3-spin' src='img/loa.png'>";
 }
 
+
+
+
 function checkResponse(response) {
     if (response == "Login failed" || response == "No results")
     {
@@ -408,8 +411,10 @@ function    fetchPicSet(page, offs){
                 newimg.src = "img/gal/"+foo[w][1];
                 if(galsel == "private"){
                 newimg.setAttribute("onclick", "imageComment(this)");
-                }else{
+                }else if(galsel == "public"){
                     newimg.setAttribute("onclick", "imagePublic(this)");
+                }else if(galsel == "fullgal"){
+                    newimg.setAttribute("onclick", "imageFull(this)");
                 }
                 newimg.className = "w3-mobile w3-image w3-animate-opacity w3-hover-opacity";
                 picdiv.appendChild(newimg);
@@ -466,6 +471,33 @@ function imageComment(tid)
 
 }
 
+
+function imageFull(tid)
+{
+    var el = document.getElementById(tid.id);
+    imgid = el.getAttribute('data-id');
+  // alert(imgid);
+   //loadcomment
+   var addCom = document.getElementById("comment");
+   var prevsel = document.getElementById("selprev");
+   prevsel.src = el.src;
+   var hr = new XMLHttpRequest();
+     var url = "functions/ajaxfunction.php";
+     var vars = "imgidfull="+imgid;
+     hr.open("POST", url, true);
+     hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+     hr.onreadystatechange = function() {
+         if(hr.readyState == 4 && hr.status == 200) {
+            var foo = hr.responseText;
+            addCom.innerHTML = foo;
+         }
+     }
+     hr.send(vars); 
+
+}
+
+
+
 function imagePublic(tid)
 {
     var el = document.getElementById(tid.id);
@@ -490,10 +522,64 @@ function delpic(theuser, thepic){
            var foo = hr.responseText;
            //console.log(foo);
            alert(foo);
-           ajaxthumbs();
+           //ajaxthumbs();
            document.getElementById("comment").innerHTML="";
         }
     }
     hr.send(vars);
 }
 
+
+
+
+///////////////ajax reg code
+
+function ajax_register(){
+    // Create our XMLHttpRequest object
+   // alert("wtf");
+    var hr = new XMLHttpRequest();
+    // Create some variables we need to send to our PHP file
+    var url = "functions/register.php";
+    var usern = document.getElementById("uname1").value;
+    var pass1 = document.getElementById("pwrd1").value;
+    var pass2 = document.getElementById("pwrd2").value;
+    var email = document.getElementById("email").value;
+    var vars = "uname1="+usern+"&pwrd="+pass1+"&pwrd1="+pass2+"&email="+email;
+    hr.open("POST", url, true);
+    // Set content type header information for sending url encoded variables in the request
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // Access the onreadystatechange event for the XMLHttpRequest object
+    hr.onreadystatechange = function() {
+	    if(hr.readyState == 4 && hr.status == 200) {
+		    var return_data = hr.responseText;
+            alert(return_data);
+           //checkResponse(hr.responseText);
+            
+          //  document.getElementById("login_error").innerHTML = return_data;
+	    }
+    }
+    // Send the data to PHP now... and wait for response to update the status div
+    hr.send(vars); // Actually execute the request
+    document.getElementById("login_error").innerHTML = "logging in...<br><img class='w3-spin' src='img/loa.png'>";
+}
+
+
+
+
+function checkRegResponse(response) {
+    if (response == "Registration Failed" || response == "No results")
+    {
+        //alert("login error");
+        document.getElementById("reg_error").innerHTML = "login failed";
+    }
+    else{
+        //alert("WTFFFF");
+        location.replace("index.php?regstatus=1");
+/*         document.getElementById("namebrand").innerHTML = response;
+        document.getElementById("logcont").style.visibility = "hidden";
+        document.getElementById("logindiv").style.visibility = "hidden";
+        document.getElementById("regdiv").style.visibility = "hidden"; */
+       // homegal();
+       
+    }
+}

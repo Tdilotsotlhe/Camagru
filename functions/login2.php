@@ -44,12 +44,12 @@ try {
               } 
             else if (strcmp($row['username'], $user) != 0)
             {
-              echo "Login failed NIGGER"; 
+              echo "Login failed"; 
             }else{
-              echo "Login failed NIGGER2"; 
+              echo "Login failed"; 
             }
         }else{
-          echo "No results sdkjghskdjhgkjdshgkjhds";
+          echo "No results";
         }
       }
    } catch (PDOException $e) {

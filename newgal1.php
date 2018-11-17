@@ -84,7 +84,8 @@ if(!isset($_SESSION['uid']))
 <div class="w3-cell-row">
 
 <div class="w3-container w3-theme-d1 (w3-theme-dark) w3-animate-top w3-cell w3-mobile">
-<p class = "w3-center"> MY GALLERY</p>
+<p class = "w3-center"> SOCIAL GALLERY</p>
+        <input type="hidden" id="galtype" value="fullgal">
         <p id="pagegal" class = "w3-center w3-cell-middle w3-mobile"></p>
         <br>
         <p id='pagecounter' class = " w3-center">1/?</p>

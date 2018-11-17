@@ -5,9 +5,12 @@ if (isset($_POST['galtype']) && isset($_POST['page']))
 {
     if($_POST['galtype'] == "public"){
         newPagerPublic();
-    }else{
+    }else if($_POST['galtype'] == "private"){
         newPager();
+    }else if($_POST['galtype'] == "fullgal"){
+        newPagerCom();
     }
+    
 }
 
 if (isset($_POST['notiftog']))
@@ -38,6 +41,12 @@ if (isset($_POST['imgid']))
 {
     comment();
 }
+
+if (isset($_POST['imgidfull']))
+{
+    fullcomment();
+}
+
 if (isset($_POST['delpicid']))
 {
     delpic();
@@ -99,6 +108,7 @@ function likeimage()
         // $stmt->bindParam(':lst', $_SESSION['uid']);
         if($stmt->execute()){
             echo "IN";
+            sendactivitymail($pictureid);
           }
           else{
               echo "OUT";
@@ -196,6 +206,84 @@ function loadthumbs()
     //echo "<div><img src='||||' height='50px' width='50px'></div>";
 
 }
+/////////fullCOmment
+
+function fullcomment()
+{
+    include "../config/database.php";
+
+     try {
+        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       // echo "yes";
+      } catch (PDOException $e) {
+      print "Error!: " . $e->getMessage() . "<br/>";
+      die();
+      }
+      
+     
+       //select DB
+       try {
+        $dbh->query("USE ".$DB_NAME);
+      } catch (Exception $e) {
+         die("db selection failed!");
+      } 
+
+    try { 
+        $imgid = $_POST['imgidfull'];
+        $stmt = $dbh->prepare("SELECT
+        *
+    FROM
+        gallery
+    LEFT OUTER JOIN comments ON img_id = comimg_id
+    WHERE
+        img_id =?");
+        if($stmt->execute([$imgid])){
+          
+          $row = $stmt->fetchAll();
+             
+         // $retstring = $row[0]['comment'];
+          //var_dump($row);
+          //exit();
+        
+
+              echo "<div id='commdiv' class='w3-animate-opacity w3-mobile w3-padding-3 w3-card w3-center w3-theme-l3'>
+              <img id=".$row[0]['img_id']." class='thumbs w3-image' src='img/gal/".$row[0]['img_name']."' height='100px' width='100px' data-commid=".$_SESSION['uid'].">
+          
+             
+             "; 
+                           
+              foreach ($row as $key => $value) {
+                  if ($value["comment"] == NULL)
+                  {
+                      break;
+                  }
+                  else
+                  {
+                    echo "<p style='font-size:2vw;' class='w3-animate-right w3-mobile w3-padding-2  w3-theme-l4 w3-hover-opacity'>".$value["comment"]."</p>";
+                    
+                  }
+            }
+            echo "<p id='latest'></p>";
+           
+            if(isset($_SESSION['uid'])){
+                echo "<p>
+                <input class='w3-input'  type='text' id='comtxt'>
+                </p>
+                <br >";
+
+            echo  "<button class='w3-btn w3-ripple w3-dark-gray' id='delbtn' onclick='newCom(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Comment</button>";
+            echo  "<button class='w3-btn w3-ripple w3-dark-gray' id='likebtn' onclick='likepic(".$_SESSION['uid'].",".$row[0]['img_id'].")'>LIKE</button></div>";
+        }
+        }
+     } catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+     }  
+    //echo "<div><img src='||||' height='50px' width='50px'></div>";
+
+}
+
 
 //modify back to comment
 function comment()
@@ -261,10 +349,11 @@ function comment()
                 <input class='w3-input'  type='text' id='comtxt'>
                 </p>
                 <br >";
-            echo  "<button class='w3-button w3-ripple w3-dark-gray' id='editbtn' onclick='setedit(".$row[0]['img_id'].")'>Edit</button>";
-            echo  "<button class='w3-button w3-ripple w3-light-gray' id='delbtn' onclick='delpic(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Delete</button>";
-            echo  "<button class='w3-button w3-ripple w3-dark-gray' id='delbtn' onclick='newCom(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Comment</button></div>";
-            }
+            echo  "<button class='w3-btn w3-ripple w3-dark-gray' id='editbtn' onclick='setedit(".$row[0]['img_id'].")'>Edit</button>";
+            echo  "<button class='w3-btn w3-ripple w3-light-gray' id='delbtn' onclick='delpic(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Delete</button>";
+            echo  "<button class='w3-btn w3-ripple w3-dark-gray' id='delbtn' onclick='newCom(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Comment</button>";
+            echo  "<button class='w3-btn w3-ripple w3-dark-gray' id='likebtn' onclick='likepic(".$_SESSION['uid'].",".$row[0]['img_id'].")'>LIKE</button></div>";
+        }
         }
      } catch (PDOException $e) {
     print "Error!: " . $e->getMessage() . "<br/>";
@@ -277,6 +366,7 @@ function comment()
 
 function checkLike($picid)
 {
+    ////check onload
     $user = $_SESSION['uid'];
 
     include "../config/database.php";
@@ -430,7 +520,7 @@ function newPagerPublic()
       } 
 
     try { 
-        $stmt = $dbh->prepare("SELECT * FROM gallery ORDER BY uptime LIMIT 5 OFFSET $off");
+        $stmt = $dbh->prepare("SELECT * FROM gallery ORDER BY uptime DESC LIMIT 5 OFFSET $off");
         if($stmt->execute()){
           
           $row = $stmt->fetchAll();
@@ -445,6 +535,48 @@ function newPagerPublic()
     //echo "<div><img src='||||' height='50px' width='50px'></div>";
 
 }
+
+
+function newPagerCom()
+{
+    include "../config/database.php";
+    
+    $pagenumber = $_POST['page'];
+    $off = $_POST['offset'];
+    try {
+        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       // echo "yes";
+      } catch (PDOException $e) {
+      print "Error!: " . $e->getMessage() . "<br/>";
+      die();
+      }
+      
+     
+       //select DB
+       try {
+        $dbh->query("USE ".$DB_NAME);
+      } catch (Exception $e) {
+         die("db selection failed!");
+      } 
+
+    try { 
+        $stmt = $dbh->prepare("SELECT * FROM gallery ORDER BY uptime DESC LIMIT 5 OFFSET $off");
+        if($stmt->execute()){
+          
+          $row = $stmt->fetchAll();
+        
+
+          echo json_encode($row);
+        }
+     } catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+     }  
+    //echo "<div><img src='||||' height='50px' width='50px'></div>";
+
+}
+
 
 
 
@@ -739,5 +871,69 @@ function publicgal()
 
 }
 
+
+function sendactivitymail($authpicid){
+    include "../config/database.php";
+    
+
+    try {
+        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       // echo "yes";
+      } catch (PDOException $e) {
+      print "Error!: " . $e->getMessage() . "<br/>";
+      die();
+      }
+      
+     
+       //select DB
+       try {
+        $dbh->query("USE ".$DB_NAME);
+      } catch (Exception $e) {
+         die("db selection failed!");
+      } 
+
+    try { 
+        $stmt = $dbh->prepare("SELECT * FROM gallery JOIN users ON users.user_id = gallery.users_id WHERE img_id = $authpicid");
+        if($stmt->execute()){
+          
+          if($row = $stmt->fetch()){ 
+              $to = $row['email'];
+              $subject = "New Activity";
+              $message = "
+<html>
+<head>
+<title>Camagru Social</title>
+</head>
+<body>
+<p>New Profile activity!</p>
+<p>Thank you fore registering!</p>
+<p>Someone has commented/liked your post! Login to View message</p>
+http://localhost:8080/camagru/index.php
+</body>
+</html>
+";
+$headers = "MIME-Version: 1.0" . "\r\n";
+$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+if(mail($to,$subject,$message,$headers, "-f phenom92@gmail.here"))
+{
+  //echo "AWE";
+  $errorMessage = error_get_last()['message'];
+  echo $errorMessage;
+}
+else{
+  $errorMessage = error_get_last()['message'];
+  echo $errorMessage;
+}
+
+
+          }
+        }
+     } catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+     }  
+
+}
 
 ?>
