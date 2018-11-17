@@ -216,6 +216,7 @@ function newCom(commenter, picid) {
 
 function ajax_post(){
     // Create our XMLHttpRequest object
+   // alert("wtf");
     var hr = new XMLHttpRequest();
     // Create some variables we need to send to our PHP file
     var url = "functions/login2.php";
@@ -229,8 +230,8 @@ function ajax_post(){
     hr.onreadystatechange = function() {
 	    if(hr.readyState == 4 && hr.status == 200) {
 		    var return_data = hr.responseText;
-           // alert(return_data);
-            checkResponse(hr.responseText);
+            alert(return_data);
+           checkResponse(hr.responseText);
             
           //  document.getElementById("login_error").innerHTML = return_data;
 	    }
@@ -241,17 +242,19 @@ function ajax_post(){
 }
 
 function checkResponse(response) {
-    if (response == "Login failed")
+    if (response == "Login failed" || response == "No results")
     {
+        //alert("login error");
         document.getElementById("login_error").innerHTML = "login failed";
     }
     else{
+        //alert("WTFFFF");
         location.replace("index.php");
 /*         document.getElementById("namebrand").innerHTML = response;
         document.getElementById("logcont").style.visibility = "hidden";
         document.getElementById("logindiv").style.visibility = "hidden";
         document.getElementById("regdiv").style.visibility = "hidden"; */
-        homegal();
+       // homegal();
        
     }
 }
@@ -374,10 +377,13 @@ window.onload = function(){
 
 function    fetchPicSet(page, offs){
 
-
+    var galsel = document.getElementById("galtype").value;
+    //alert(galsel);
+   // var galsel2 = document.getElementById("pagagal").getAttribute('data-pulic');
+   // alert(galsel2);
     var hr = new XMLHttpRequest();
      var url = "functions/ajaxfunction.php";
-     var vars = "page="+page+"&offset="+offs;
+     var vars = "page="+page+"&offset="+offs+"&galtype="+galsel;
      hr.open("POST", url, true);
      hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
      hr.onreadystatechange = function() {
@@ -400,8 +406,12 @@ function    fetchPicSet(page, offs){
                 newimg.style.height = "100px";
                 newimg.style.width = "100px";
                 newimg.src = "img/gal/"+foo[w][1];
+                if(galsel == "private"){
                 newimg.setAttribute("onclick", "imageComment(this)");
-                newimg.className = "w3-animate-opacity";
+                }else{
+                    newimg.setAttribute("onclick", "imagePublic(this)");
+                }
+                newimg.className = "w3-mobile w3-image w3-animate-opacity w3-hover-opacity";
                 picdiv.appendChild(newimg);
                 
             }
@@ -456,7 +466,34 @@ function imageComment(tid)
 
 }
 
+function imagePublic(tid)
+{
+    var el = document.getElementById(tid.id);
+   var prevsel = document.getElementById("selprev");
+   prevsel.src = el.src;
+}
+
 function loginmodal(){
     document.getElementById('id01').style.display='block'
+}
+
+function delpic(theuser, thepic){
+    alert("OK");
+  //loadcomment
+  var hr = new XMLHttpRequest();
+    var url = "functions/ajaxfunction.php";
+    var vars = "delpicid="+thepic;
+    hr.open("POST", url, true);
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    hr.onreadystatechange = function() {
+        if(hr.readyState == 4 && hr.status == 200) {
+           var foo = hr.responseText;
+           //console.log(foo);
+           alert(foo);
+           ajaxthumbs();
+           document.getElementById("comment").innerHTML="";
+        }
+    }
+    hr.send(vars);
 }
 

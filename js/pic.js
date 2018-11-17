@@ -33,6 +33,9 @@ window.onload = function()
 			canvas.setAttribute('height',height);
 			canvas2.setAttribute('width',width);
 			canvas2.setAttribute('height',height);
+			/* video.setAttribute('style', "max-width: 500px; width: 100%;");
+			video.setAttribute('style', "max-height: 375px; height: auto;"); */
+			
 
 			streaming = true;
 		}
@@ -71,6 +74,7 @@ window.onload = function()
 			
 		}
 	}
+	
 	function preview()
 	{
 		const context2 = canvas2.getContext('2d');

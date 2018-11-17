@@ -1,10 +1,10 @@
 <?php
  
 include "functions/load.php";
-
-if(isset($_GET['welcome']))
+session_start();
+if(!isset($_SESSION['uid']))
 {
-    echo "<script>alert('login successful')</script>";
+    header("Location: index.php#");
 }
 ?>
 <!DOCTYPE html>
@@ -40,66 +40,110 @@ if(isset($_GET['welcome']))
 
 <!--     <script src="js/myajax.js"></script> -->
 </head>
-<body>
+<body style="background-image:url(img/newbg1.jpg); background-size: 100% 100%;    background-position: center;background-repeat: no-repeat;background-size: stretch;">
 
 <?php
 
-    include "includes/header.php";
+   // include "includes/header.php";
 ?>
 
-
-<!-- newcode -->
-<div class="w3-theme-d5 (w3-theme-dark) w3-animate-top w3-cell-row w3-center">
-    <div class="w3-third w3-cell">
-    <p onclick="window.location = 'profile.php'" class="w3-bar-item w3-mobile w3-hover-gray">PROFILE</p>
+<div class="w3-container w3-opacity-min w3-padding-5 w3-theme-d5 w3-animate-zoom ">
+  <h1>Camagru</h1>
+  
+</div>
+<div class="w3-container w3-mobile w3-theme-d3 (w3-theme-dark) w3-animate-left w3-cell-row w3-center w3-opacity ">
+<?php   if(isset($_SESSION['username']))
+  {
+    echo "<button class='w3-btn w3-left w3-mobile'>Welcome ".$_SESSION['username']."<button class='w3-mobile w3-btn w3-right'>Logout</button>";
+  }
+  else echo "<div class=' w3-padding-2 w3-container w3-cell w3-mobile'><button  class='w3-btn w3-left w3-mobile'>Welcome Guest </button>   <button onclick='loginmodal()' class='w3-btn w3-hover-grey w3-center w3-right'>Login/Register</button></div>"; 
+  ?>
+</div>
+<!-- hide on small -->
+ <div class="w3-theme-l1   w3-mobile (w3-theme-light) w3-animate-top w3-cell-row w3-center w3-opacity-min w3-hover-opacity-off">
     
+ <div class="w3-quarter w3-cell w3-hide-small">
+   
+   <p onclick="window.location = 'index.php'" class="w3-bar-item w3-mobile w3-hover-gray"> HOME</p>
     </div>
-    <div class="w3-third w3-cell">
-    <p onclick="window.location = 'index.php'" class="w3-bar-item w3-mobile w3-hover-gray w3-animate-zoom">HOME</p>
+    <div class="w3-quarter w3-cell w3-hide-small">
+    <p onclick="window.location = 'profile.php'" class="w3-bar-item w3-mobile w3-hover-gray w3-animate-zoom">PROFILE</p>
     </div>
-    <div class="w3-third w3-cell">
-    <p class="w3-bar-item w3-mobile w3-hover-gray ">GALLERY</p>
+    <div class="w3-quarter w3-cell w3-hide-small">
+    <p onclick="window.location = 'snap.php'" class="w3-bar-item w3-mobile w3-hover-gray ">PHOTOBOOTH</p>
+		</div>
+		<div class="w3-quarter w3-cell w3-hide-small">
+    <p onclick="window.location = 'gal3.php'" class="w3-bar-item w3-mobile w3-hover-gray ">GALLERY</p>
+    </div>
+<!-- hide on big -->
+
+ <div class="w3-theme-l1 w3-hide-large w3-hide-medium  w3-mobile (w3-theme-light) w3-animate-top w3-cell-row w3-center w3-opacity-min w3-hover-opacity-off">
+ <button onclick="myFunction('Demo1')" class="w3-btn w3-block w3-black w3-left-align">Menu</button>
+<div id="Demo1" class="w3-container w3-hide">
+  <p>Home</p>
+  <p>Profile</p>
+  <p>Gallery</p>
+  <p>Logout</p>
+</div>
     </div>
 
-</div>
-<div class="w3-container  w3-cell w3-mobile w3-theme-d4 w3-animate-opacity w3-animate-zoom">
-  <p>MY PROFILE</p>
 
-  <div class="w3-panel w3-text-theme w3-round-xlarge">
-<label>username</label>
-<input class="w3-input w3-theme-d4" type="text">
-<p><button onclick="changeuser();" class="w3-btn w3-round">Submit</button></p>
-</div>
-  
-  <div class="w3-panel  w3-text-theme w3-round-xlarge">
-  <label>email</label>
-<input class="w3-input w3-theme-d4" type="text">
-<p><button onclick="changeemail()" class="w3-btn w3-round">Submit</button></p>
+
+
 
 </div>
+
+
+<!-- //start new row -->
+<div class="w3-cell-row">
+
+
+        <div class="w3-container w3-half w3-cell w3-mobile w3-theme-d4 w3-animate-opacity w3-animate-zoom">
+        <p>MY PROFILE</p>
+
+        <div class="w3-panel w3-text-theme w3-mobile w3-round-xlarge">
+        <label class="w3-mobile">username</label>
+        <input class="w3-mobile w3-input w3-theme-d4" type="text" id="newname">
+        <p><button onclick="changeuser();" class="w3-btn w3-round">Submit</button></p>
+        </div>
   
-<div class="w3-panel  w3-text-theme w3-round-xlarge">
-<label>Notifications</label>
-<input id="notcheckbox" class="w3-check" type="checkbox" checked="checked">
-</div>
+        <div class="w3-panel w3-mobile w3-text-theme w3-round-xlarge">
+        <label class="w3-mobile">email</label>
+        <input class="w3-mobile w3-input w3-theme-d4" type="text" id="newemail">
+        <p class="w3-mobile"><button onclick="changeemail()" class="w3-mobile w3-btn w3-round">Submit</button></p>
+
+        </div>
   
-<div class="w3-panel  w3-text-theme w3-round-xlarge">
-<button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-center w3-theme-d4">Change Password</button>
-</div>
-  <br>
+        <div class="w3-panel w3-mobile w3-text-theme w3-round-xlarge">
+        <label class="w3-mobile">Notifications</label>
+        <input id="notcheckbox" class="w3-check w3-mobile" type="checkbox" checked="checked">
+        </div>
   
-</div>
-<div class="w3-container w3-theme-l3 w3-cell w3-middle w3-mobile w3-animate-right">
-  <p>Details</p>
-  <p w3-theme-l1 id="curuser"></p>
-  <p w3-theme-l1 id="curemail"></p>
-  <p w3-theme-l1 id="curnotif"></p>
-</div>
+          <div class="w3-panel w3-mobile  w3-text-theme w3-round-xlarge">
+          <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-center w3-theme-d4 w3-mobile">Change Password</button>
+          </div>
+  
+        </div>
+
+        <div class="w3-container w3-mobile w3-half w3-theme-l3 w3-cell w3-opacity w3-animate-right">
+        <p class="w3-mobile">Details</p>
+        <p class="w3-theme-l1 w3-mobile" id="curuser"></p>
+        <p class="w3-theme-l1 w3-mobile" id="curemail"></p>
+        <p class="w3-theme-l1 w3-mobile" id="curnotif"></p>
+        </div>
+
 </div>
 
-<footer class="w3-container w3-theme-d5 (w3-theme-dark) w3-animate-bottom ">
+
+
+
+
+
+<div class="w3-row">
+<footer class="w3-container w3-mobile w3-theme-d5 (w3-theme-dark) w3-animate-bottom ">
   <p class="w3-center">TDILOTSO</p>
 </footer>
+</div>
 <!-- DMODAL -->
 <div id="id01" class="w3-modal">
   <div class="w3-modal-content">
@@ -131,6 +175,41 @@ if(isset($_GET['welcome']))
   </div>
 </div>
 </body>
+<!-- MODAL -->
+
+<div id="id02" class="w3-modal" >
+  <div class="w3-modal-content" >
+    <header class="w3-container w3-theme-d5 (w3-theme-dark) w3-animate-top"> 
+      <span onclick="document.getElementById('id02').style.display='none'" 
+      class="w3-closebtn w3-right">&times;</span>
+      <h2>Login</h2>
+    </header>
+    <div class="w3-container w3-center w3-theme-d1  w3-animate-zoom">
+    <p>Username</p>
+   <p class="w3-center"> <input type='text' name='uname' id='uname' placeholder='Enter Username' required></p>
+    <p>Password</p>
+   <p class="w3-center"> <input type='password' name='pwrd' id='pwrd' placeholder='Enter Password' required></p>
+    <p class="w3-center" id='login_error'></p>
+ <p class="w3-center">   <button class="w3-button" onclick='ajax_post()' id='logbut2'>Login2</button></p>
+</div>
+    <footer class="w3-container w3-theme-d5 (w3-theme-dark) w3-animate-bottom">
+      <p class="w3-center">Register</p>
+    </footer>
+  </div>
+</div>
+
+
+<!-- MODALEND -->
+<script>
+function myFunction(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
 
 
 </html>

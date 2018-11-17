@@ -5,6 +5,10 @@ window.onload = function(){
 var curemail = document.getElementById("curemail");
 //var curnotif = document.getElementById("curemail");
     loadcurdetails();
+   var cb =  document.getElementById("notcheckbox");
+   cb.addEventListener("click", function(event){
+       notifupd();
+   });
   }
 
   function loadcurdetails()
@@ -20,35 +24,79 @@ var curemail = document.getElementById("curemail");
              var foo = JSON.parse(hr.responseText);
             curuser.innerHTML = "username: "+foo['username'];
             curemail.innerHTML = "email: "+foo['email'];
-           // curnotif.innerHTML = foo['notifications'];
+            curnotif.innerHTML = foo['notification'];
+            if (foo['notification'] == 1)
+            {
+                document.getElementById("notcheckbox").checked= true;
+            }else{
+                document.getElementById("notcheckbox").checked= false;
+            }
+            
           }
       }
       hr.send(vars);
   }
 
+  function  notifupd(){
 
-  function changeuser(){
-      alert("user");
+    
       var hr = new XMLHttpRequest();
       var url = "functions/ajaxfunction.php";
-      var vars = "newname=me";
+   var vars = "notiftog=toggle";
+      hr.open("POST", url, true);
+      hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        hr.onreadystatechange = function() {
+          if(hr.readyState == 4 && hr.status == 200) {
+             
+           loadcurdetails();
+
+          }
+      }
+      hr.send(vars); 
+  }
+
+  function changeuser(){
+      var nn = document.getElementById("newname").value;
+    //  alert(nn);
+      var hr = new XMLHttpRequest();
+      var url = "functions/ajaxfunction.php";
+      var vars = "newname="+nn;
       hr.open("POST", url, true);
       hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       hr.onreadystatechange = function() {
           if(hr.readyState == 4 && hr.status == 200) {
-          //   var foo = JSON.parse(hr.responseText);
+             //var foo = JSON.parse(hr.responseText);
            loadcurdetails();
-        
+           //alert(foo);
           }
       }
       hr.send(vars);
 
   }
   function changeemail(){
-      alert("email");
+    var nn = document.getElementById("newemail").value;
+    //  alert(nn);
+      var hr = new XMLHttpRequest();
+      var url = "functions/ajaxfunction.php";
+      var vars = "newemail="+nn;
+      hr.open("POST", url, true);
+      hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      hr.onreadystatechange = function() {
+          if(hr.readyState == 4 && hr.status == 200) {
+             //var foo = JSON.parse(hr.responseText);
+           loadcurdetails();
+           //alert(foo);
+          }
+      }
+      hr.send(vars);
 
   }
   function changepass(){
       alert("pass");
 
   }
+
+  function loginmodal(){
+   // document.getElementById('id01').style.display='block'
+    document.getElementById('id02').style.display='block'
+}

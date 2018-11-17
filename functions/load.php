@@ -106,6 +106,7 @@ function loadLogin()
         <br>
         <div id='login_error'></div>
         <button onclick='ajax_post()' id='logbut2'>Login2</button>
+        
        
     
     <hr>

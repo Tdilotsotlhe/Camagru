@@ -55,7 +55,7 @@ function ajaxsavepic(){
         var hr = new XMLHttpRequest();
          var url = "functions/upload.php";
          var thefile = document.getElementById("userpic").files[0];
-        console.log(thefile);
+        //console.log(thefile);
          //var vars = "userpic="+thefile.file;
          //alert(vars);
         var formData = new FormData();
@@ -69,8 +69,8 @@ function ajaxsavepic(){
          hr.onreadystatechange = function() {
              if(hr.readyState == 4 && hr.status == 200) {
                  var return_data = hr.responseText;
-                 ajaxthumbs();
-               // alert(return_data);
+                // ajaxthumbs();
+                alert(return_data);
              }
          }
          hr.send(formData); 

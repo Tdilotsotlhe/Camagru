@@ -32,19 +32,24 @@ try {
       $stmt = $dbh->prepare("SELECT * FROM users WHERE username=?");
       if($stmt->execute([$user])){
         
-        while($row = $stmt->fetch()){ 
+        if($row = $stmt->fetch()){ 
         //  var_dump(simplexml_load_string($unser));
-         
+        
+       
              if (strcmp($row['username'], $user) == 0 && $row && password_verify($pwrd, $row['passw']))
             {
             
                 setlogin($row);
                 echo "Welcome ".$row['username']; 
               } 
-            else 
+            else if (strcmp($row['username'], $user) != 0)
             {
-              echo "Login failed"; 
+              echo "Login failed NIGGER"; 
+            }else{
+              echo "Login failed NIGGER2"; 
             }
+        }else{
+          echo "No results sdkjghskdjhgkjdshgkjhds";
         }
       }
    } catch (PDOException $e) {

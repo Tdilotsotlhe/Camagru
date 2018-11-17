@@ -1,5 +1,5 @@
 /////load thumbnails
-window.addEventListener('load', ajaxthumbs, false);
+//window.addEventListener('load', ajaxthumbs, false);
 
 function ajaxthumbs() {
    // alert("ajax thumbs");

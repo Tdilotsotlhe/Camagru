@@ -15,8 +15,9 @@ function showuser()
 echo "
 
 <div class='w3-container'>
-  <a href='#default' class='logo'>Camagru</a>
+  
   <div class='header-right'>
+  <a href='#default' class='logo'>Camagru</a>
       <a id='namebrand' href='#'>";
 echo "Welcome ";
 echo showuser();

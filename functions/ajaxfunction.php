@@ -1,7 +1,23 @@
 <?php
    include "../config/database.php";
    
+if (isset($_POST['galtype']) && isset($_POST['page']))
+{
+    if($_POST['galtype'] == "public"){
+        newPagerPublic();
+    }else{
+        newPager();
+    }
+}
 
+if (isset($_POST['notiftog']))
+{
+    togglenotif();
+}
+if (isset($_POST['newemail']))
+{
+    changeEmail();
+}
 if (isset($_POST['newname']))
 {
     changename();
@@ -30,10 +46,10 @@ if (isset($_POST['allpics']))
 {
     allPics();
 }
-if (isset($_POST['page']))
+/* if (isset($_POST['page']))
 {
     newPager();
-}
+} */
 if (isset($_POST['countpics']))
 {
     picCount();
@@ -126,7 +142,7 @@ function loadGal()
              
               //echo $row["img_name"];
 
-              echo "<img id=".$row['img_id']." onclick='imageFoc(this)' class='thumbs' src='img/gal/".$row['img_name']."' heighty='100px' width='100px'>";
+              echo "<img id=".$row['img_id']." onclick='imageFoc(this)' class='w3-image w3-rounded' src='img/gal/".$row['img_name']."' height='100px' width='100px'>";
           }
         }
      } catch (PDOException $e) {
@@ -170,7 +186,7 @@ function loadthumbs()
              
               //echo $row["img_name"];
 
-              echo "<div><img data-id=".$row['img_id']." id=".$row['img_id']." onclick='privImageFoc(this)' class='thumbs' src='img/gal/".$row['img_name']."' heighty='100px' width='100px'></div>";
+              echo "<div><img data-id=".$row['img_id']." id=".$row['img_id']." onclick='privImageFoc(this)' class='thumbs w3-image' src='img/gal/".$row['img_name']."' heighty='100px' width='100px'></div>";
           }
         }
      } catch (PDOException $e) {
@@ -221,8 +237,8 @@ function comment()
           //exit();
         
 
-              echo "<div id='commdiv' class='w3-animate-opacity w3-card w3-center w3-theme-l3'>
-              <img id=".$row[0]['img_id']." class='thumbs' src='img/gal/".$row[0]['img_name']."' height='100px' width='100px' data-commid=".$_SESSION['uid'].">
+              echo "<div id='commdiv' class='w3-animate-opacity w3-mobile w3-padding-3 w3-card w3-center w3-theme-l3'>
+              <img id=".$row[0]['img_id']." class='thumbs w3-image' src='img/gal/".$row[0]['img_name']."' height='100px' width='100px' data-commid=".$_SESSION['uid'].">
           
              
              "; 
@@ -234,7 +250,7 @@ function comment()
                   }
                   else
                   {
-                    echo "<p class='w3-animate-right  w3-theme-l4 w3-hover-opacity'>".$value["comment"]."</p>";
+                    echo "<p style='font-size:2vw;' class='w3-animate-right w3-mobile w3-padding-2  w3-theme-l4 w3-hover-opacity'>".$value["comment"]."</p>";
                     
                   }
             }
@@ -334,7 +350,7 @@ function allPics()
 
     try { 
         $stmt = $dbh->prepare("SELECT * FROM gallery ORDER BY uptime DESC");
-        if($stmt->execute([$_SESSION['uid']])){
+        if($stmt->execute()){
           
           $row = $stmt->fetchAll();
           //echo json encode
@@ -374,7 +390,47 @@ function newPager()
       } 
 
     try { 
-        $stmt = $dbh->prepare("SELECT * FROM gallery WHERE users_id = ".$_SESSION['uid']." ORDER BY uptime LIMIT 5 OFFSET $off");
+        $stmt = $dbh->prepare("SELECT * FROM gallery WHERE users_id = ".$_SESSION['uid']." ORDER BY uptime DESC LIMIT 5 OFFSET $off");
+        if($stmt->execute()){
+          
+          $row = $stmt->fetchAll();
+        
+
+          echo json_encode($row);
+        }
+     } catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+     }  
+    //echo "<div><img src='||||' height='50px' width='50px'></div>";
+
+}
+
+function newPagerPublic()
+{
+    include "../config/database.php";
+    
+    $pagenumber = $_POST['page'];
+    $off = $_POST['offset'];
+    try {
+        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       // echo "yes";
+      } catch (PDOException $e) {
+      print "Error!: " . $e->getMessage() . "<br/>";
+      die();
+      }
+      
+     
+       //select DB
+       try {
+        $dbh->query("USE ".$DB_NAME);
+      } catch (Exception $e) {
+         die("db selection failed!");
+      } 
+
+    try { 
+        $stmt = $dbh->prepare("SELECT * FROM gallery ORDER BY uptime LIMIT 5 OFFSET $off");
         if($stmt->execute()){
           
           $row = $stmt->fetchAll();
@@ -464,6 +520,7 @@ function addComment(){
         if($stmt->execute()){
 
           echo "Comment added Successfully!";
+          sendactivitymail($picid);
         }
      } catch (PDOException $e) {
     print "Error!: " . $e->getMessage() . "<br/>";
@@ -559,17 +616,128 @@ function changename(){
       } 
 
     try { 
-        $stmt = $dbh->prepare("UPDATE * FROM users WHERE `user_id` = :imgid");
-        $stmt->bindParam(':imgid',$_SESSION['uid']);
+        $stmt = $dbh->prepare("UPDATE users SET username = :chngname WHERE `user_id` = :userid");
+        $stmt->bindParam(':userid',$_SESSION['uid']);
+        $stmt->bindParam(':chngname',$_POST['newname']);
         if($stmt->execute()){
-            $row = $stmt->fetch();
-          echo json_encode($row);
+            echo "Name updated";
         }else{
-            echo "unable to retrieve user details.";
+            echo "unable to update user details.";
         }
      } catch (PDOException $e) {
     print "Error!: " . $e->getMessage() . "<br/>";
     die();
      }
 }
+
+
+
+function changeEmail(){
+    include "../config/database.php";
+    
+    try {
+        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       // echo "yes";
+      } catch (PDOException $e) {
+      print "Error!: " . $e->getMessage() . "<br/>";
+      die();
+      }
+       //select DB
+       try {
+        $dbh->query("USE ".$DB_NAME);
+      } catch (Exception $e) {
+         die("db selection failed!");
+      } 
+
+    try { 
+        $stmt = $dbh->prepare("UPDATE users SET email = :chngname WHERE `user_id` = :userid");
+        $stmt->bindParam(':userid',$_SESSION['uid']);
+        $stmt->bindParam(':chngname',$_POST['newemail']);
+        if($stmt->execute()){
+            echo "Name updated";
+        }else{
+            echo "unable to update user details.";
+        }
+     } catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+     }
+}
+
+function togglenotif(){
+
+    //$sql =UPDATE some_table SET an_int_value = IF(an_int_value=1, 0, 1);
+    include "../config/database.php";
+    
+    try {
+        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       // echo "yes";
+      } catch (PDOException $e) {
+      print "Error!: " . $e->getMessage() . "<br/>";
+      die();
+      }
+       //select DB
+       try {
+        $dbh->query("USE ".$DB_NAME);
+      } catch (Exception $e) {
+         die("db selection failed!");
+      } 
+
+    try { 
+        $stmt = $dbh->prepare("UPDATE users SET notification = IF(notification=1, 0, 1)");
+        if($stmt->execute()){
+            echo "notification status updated";
+        }else{
+            echo "unable to update user details.";
+        }
+     } catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+     }
+}
+
+function publicgal()
+{
+    include "../config/database.php";
+    
+
+    try {
+        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       // echo "yes";
+      } catch (PDOException $e) {
+      print "Error!: " . $e->getMessage() . "<br/>";
+      die();
+      }
+      
+     
+       //select DB
+       try {
+        $dbh->query("USE ".$DB_NAME);
+      } catch (Exception $e) {
+         die("db selection failed!");
+      } 
+
+    try { 
+        $stmt = $dbh->prepare("SELECT * FROM gallery ORDER BY uptime DESC");
+        if($stmt->execute()){
+          
+          while($row = $stmt->fetch()){ 
+             
+              //echo $row["img_name"];
+
+              echo "<img id=".$row['img_id']." onclick='imageFoc(this)' class='w3-image w3-rounded' src='img/gal/".$row['img_name']."' height='100px' width='100px'>";
+          }
+        }
+     } catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+     }  
+    //echo "<div><img src='||||' height='50px' width='50px'></div>";
+
+}
+
+
 ?>
