@@ -46,6 +46,7 @@ if(isset($_GET['welcome']))
 
    // include "includes/header.php";
 ?>
+<<<<<<< HEAD
 <div class="w3-container w3-opacity-min w3-padding-10 w3-theme-d5 w3-animate-zoom w3-mobile">
   <h1>Camagru</h1>
 
@@ -58,6 +59,25 @@ if(isset($_GET['welcome']))
   else echo "<button class='w3-mobile w3-padding-2 w3-cell'><button  class='w3-btn w3-left w3-mobile'>Welcome Guest </button>   <button onclick='loginmodal()' class='w3-mobile w3-btn w3-hover-grey w3-center w3-right'>Login/Register</button></button>"; 
   ?>
 
+=======
+<div class="w3-container w3-opacity-min w3-padding-10 w3-theme-d5 w3-animate-zoom ">
+  <h1>Camagru</h1>
+  <div class="w3-bar w3-theme-d3 (w3-theme-dark) w3-animate-left w3-cell-row w3-center ">
+  <?php   if(isset($_SESSION['username']))
+  {
+    echo "Welcome ".$_SESSION['username']."<div class='w3-bar-item w3-right'>Logout</div>";
+  }
+  else echo "Welcome Guest <div class='w3-container w3-cell'>Register</div>"; 
+  ?>
+
+
+</div>
+  <p><?php   if(isset($_SESSION['username']))
+  {
+   // echo "Welcome ".$_SESSION['username'];
+  }
+ // else echo "Welcome Guest"; ?></p>
+>>>>>>> 3f4165880f59a707a74d40e80a6596994b6658d9
 </div>
  <!-- ////////////////// -->
 <!-- oldcode -->
@@ -65,6 +85,7 @@ if(isset($_GET['welcome']))
 <!-- menu -->
 <!-- newcode test -->
 <!-- new header -->
+<<<<<<< HEAD
 
 <div class="w3-theme-l1 w3-hide-small w3-mobile (w3-theme-light) w3-animate-top w3-cell-row w3-center w3-opacity-min w3-hover-opacity-off">
     <div class="w3-quarter w3-mobile w3-cell">
@@ -78,6 +99,17 @@ if(isset($_GET['welcome']))
 		</div>
 		<div class="w3-quarter w3-mobile w3-cell w3-hide-small">
     <p onclick="window.location = 'newgal1.php'" class="w3-bar-item w3-mobile w3-hover-gray ">GALLERY</p>
+=======
+<div class="w3-theme-l1 w3-mobile (w3-theme-light) w3-animate-top w3-cell-row w3-center w3-opacity-min w3-hover-opacity-off">
+    <div class="w3-third w3-cell">
+    <p onclick="window.location = 'index.php'" class="w3-bar-item w3-hover-sepia w3-animate-zoom">HOME</p>
+    </div>
+    <div class="w3-third w3-mobile w3-cell">
+    <p onclick="window.location = 'profile.php'" class="w3-bar-item w3-mobile w3-hover-gray">PROFILE</p>
+    </div>
+    <div class="w3-third w3-mobile w3-cell">
+    <p class="w3-bar-item w3-mobile w3-hover-gray ">GALLERY</p>
+>>>>>>> 3f4165880f59a707a74d40e80a6596994b6658d9
     </div>
 
 </div>
@@ -93,6 +125,7 @@ if(isset($_GET['welcome']))
 </div>
     </div>
 
+<<<<<<< HEAD
 <div class="w3-cell-row w3-mobile">
 
 <div class="w3-container w3-theme-d1 (w3-theme-dark) w3-animate-top w3-cell w3-mobile">
@@ -107,23 +140,40 @@ if(isset($_GET['welcome']))
           }
         ?>
        
+=======
+<div class="w3-cell-row">
+
+<div class="w3-container w3-theme-d1 (w3-theme-dark) w3-animate-top w3-cell w3-mobile">
+<p class = "w3-center"> MY GALLERY</p>
+        <p id="pagegal" class = "w3-center w3-cell-middle w3-mobile"></p>
+>>>>>>> 3f4165880f59a707a74d40e80a6596994b6658d9
         <br>
         
         <p id="pagecounter" class = " w3-center">1/?</p>
         <p class="w3-center w3-animate-top"><button id="prevset" onclick="prevpage();" class="w3-button w3-border w3-hover-dark-grey w3-animate-right">Left</button>
         <button id="nextset" onclick="nextpage();" class="w3-button w3-border w3-hover-dark-grey w3-animate-right">Right</button>
         </p>
+<<<<<<< HEAD
        
 
 
         <p class="w3-center w3-animate-zoom w3-mobile">
           <img class="w3-round w3-mobile w3-image" width="250px" height="250px" src="img/newbg1.jpg" id="selprev">
+=======
+        <p class="w3-center w3-animate-zoom">
+          <img class="w3-round" width="250px" height="250px" src="img/newbg1.jpg" id="selprev">
+>>>>>>> 3f4165880f59a707a74d40e80a6596994b6658d9
         </p>                                  
 </div>
 
 <div class="w3-container w3-center w3-mobile w3-theme-l1 w3-animate-right w3-cell w3-cell-middle">
+<<<<<<< HEAD
 <p class="w3-center w3-mobile">CARDS</p>
           <p id="comment" class = "w3-center w3-mobile">Login to view comments</p>
+=======
+<p class="we-center">CARDS</p>
+          <p id="comment"></p>
+>>>>>>> 3f4165880f59a707a74d40e80a6596994b6658d9
 </div>
 
 </div>

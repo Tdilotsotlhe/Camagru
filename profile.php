@@ -47,6 +47,7 @@ if(!isset($_SESSION['uid']))
    // include "includes/header.php";
 ?>
 
+<<<<<<< HEAD
 <div class="w3-container w3-opacity-min w3-padding-5 w3-theme-d5 w3-animate-zoom ">
   <h1>Camagru</h1>
   
@@ -61,11 +62,32 @@ if(!isset($_SESSION['uid']))
 </div>
 <!-- hide on small -->
  <div class="w3-theme-l1   w3-mobile (w3-theme-light) w3-animate-top w3-cell-row w3-center w3-opacity-min w3-hover-opacity-off">
+=======
+<div class="w3-container w3-opacity-min w3-padding-10 w3-theme-d5 w3-animate-zoom ">
+  <h1>Camagru</h1>
+  <div class="w3-bar w3-theme-d3 (w3-theme-dark) w3-animate-left w3-cell-row w3-center ">
+  <?php   if(isset($_SESSION['username']))
+  {
+    echo "Welcome ".$_SESSION['username']."<div class='w3-bar-item w3-right'>Logout</div>";
+  }
+  else echo "Welcome Guest <div class='w3-container w3-cell'>Register</div>"; 
+  ?>
+
+
+</div>
+
+<!-- hide on small -->
+ <div class="w3-theme-l1   w3-mobile (w3-theme-light) w3-animate-top w3-cell-row w3-center w3-opacity-min w3-hover-opacity-off">
+    
+ <div class="w3-third w3-cell w3-hide-small">
+    <p onclick="window.location = 'profile.php'" class="w3-bar-item w3-mobile w3-hover-gray">PROFILE</p>
+>>>>>>> 3f4165880f59a707a74d40e80a6596994b6658d9
     
  <div class="w3-quarter w3-cell w3-hide-small">
    
    <p onclick="window.location = 'index.php'" class="w3-bar-item w3-mobile w3-hover-gray"> HOME</p>
     </div>
+<<<<<<< HEAD
     <div class="w3-quarter w3-cell w3-hide-small">
     <p onclick="window.location = 'profile.php'" class="w3-bar-item w3-mobile w3-hover-gray w3-animate-zoom">PROFILE</p>
     </div>
@@ -74,6 +96,13 @@ if(!isset($_SESSION['uid']))
 		</div>
 		<div class="w3-quarter w3-cell w3-hide-small">
     <p onclick="window.location = 'gal3.php'" class="w3-bar-item w3-mobile w3-hover-gray ">GALLERY</p>
+=======
+    <div class="w3-third w3-cell w3-hide-small">
+    <p onclick="window.location = 'index.php'" class="w3-bar-item w3-mobile w3-hover-gray w3-animate-zoom">HOME</p>
+    </div>
+    <div class="w3-third w3-cell w3-hide-small">
+    <p class="w3-bar-item w3-mobile w3-hover-gray ">GALLERY</p>
+>>>>>>> 3f4165880f59a707a74d40e80a6596994b6658d9
     </div>
 <!-- hide on big -->
 
@@ -84,6 +113,16 @@ if(!isset($_SESSION['uid']))
   <p>Profile</p>
   <p>Gallery</p>
   <p>Logout</p>
+<<<<<<< HEAD
+=======
+</div>
+    </div>
+
+
+
+
+
+>>>>>>> 3f4165880f59a707a74d40e80a6596994b6658d9
 </div>
     </div>
 
@@ -175,6 +214,7 @@ if(!isset($_SESSION['uid']))
   </div>
 </div>
 </body>
+<<<<<<< HEAD
 <!-- MODAL -->
 
 <div id="id02" class="w3-modal" >
@@ -200,6 +240,8 @@ if(!isset($_SESSION['uid']))
 
 
 <!-- MODALEND -->
+=======
+>>>>>>> 3f4165880f59a707a74d40e80a6596994b6658d9
 <script>
 function myFunction(id) {
     var x = document.getElementById(id);
