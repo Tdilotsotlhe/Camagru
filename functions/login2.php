@@ -12,6 +12,7 @@ function setlogin($row)
 {
   $_SESSION['uid'] = $row['user_id'];
   $_SESSION['username'] = $row['username'];
+  $_SESSION['emailnotif'] = $row["notification"];
 }
 
 try {

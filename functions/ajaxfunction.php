@@ -13,6 +13,10 @@ if (isset($_POST['galtype']) && isset($_POST['page']))
     
 }
 
+if (isset($_POST['newp1']))
+{
+    changepass2();
+}
 if (isset($_POST['notiftog']))
 {
     togglenotif();
@@ -108,6 +112,7 @@ function likeimage()
         // $stmt->bindParam(':lst', $_SESSION['uid']);
         if($stmt->execute()){
             echo "IN";
+            
             sendactivitymail($pictureid);
           }
           else{
@@ -874,7 +879,7 @@ function publicgal()
 
 function sendactivitymail($authpicid){
     include "../config/database.php";
-    
+ 
 
     try {
         $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
@@ -898,6 +903,7 @@ function sendactivitymail($authpicid){
         if($stmt->execute()){
           
           if($row = $stmt->fetch()){ 
+              if($row['notification'] == "1"){
               $to = $row['email'];
               $subject = "New Activity";
               $message = "
@@ -929,11 +935,72 @@ else{
 
           }
         }
+        }
      } catch (PDOException $e) {
     print "Error!: " . $e->getMessage() . "<br/>";
     die();
      }  
 
+}
+
+function changepass2(){
+    $cur = $_POST['cur'];
+    $new = $_POST['newp1'];
+    $new2 = $_POST['newp2'];
+    //echo $cur;
+   // exit();
+    if(strcmp($new, $new2) == 0)
+    {
+        
+        //SELECT * from users where ID
+        include "../config/database.php";
+    
+        try {
+            $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
+            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+           // echo "yes";
+          } catch (PDOException $e) {
+          print "Error!: " . $e->getMessage() . "<br/>";
+          die();
+          }
+           //select DB
+           try {
+            $dbh->query("USE ".$DB_NAME);
+          } catch (Exception $e) {
+             die("db selection failed!");
+          } 
+    
+        try { 
+            $stmt = $dbh->prepare("SELECT * FROM users WHERE `user_id` = ".$_SESSION['uid']);
+            if($stmt->execute()){
+                $row = $stmt->fetch();
+                if(password_verify($cur, $row['passw'])){
+                    $stmt = $dbh->prepare("UPDATE users SET passw = :newpassw WHERE `user_id` = :userid");
+                    $hashp = password_hash($new, PASSWORD_BCRYPT);
+                    $stmt->bindParam(':newpassw', $hashp);
+                    $stmt->bindParam(':userid', $_SESSION['uid']);
+                    if($stmt->execute()){
+                        echo "Password changed! please log back in with your new password";
+                    }else{
+                        echo "unable to update password";
+                    }
+                }
+            }
+         } catch (PDOException $e) {
+        print "Error!: " . $e->getMessage() . "<br/>";
+        die();
+         }
+
+
+
+
+        //passwordverify 
+        // if all good, update password and log them out
+
+        // echo "Password changed! please log back in with your new password";
+    }else{
+        echo "Passwords do not match";
+    }
 }
 
 ?>

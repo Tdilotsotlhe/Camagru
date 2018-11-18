@@ -91,10 +91,46 @@ var curemail = document.getElementById("curemail");
       hr.send(vars);
 
   }
-  function changepass(){
-      alert("pass");
+  function changepassword(){
+      //alert("pass");
+      var cur = document.getElementById("current").value;
+      var newp = document.getElementById("newpass").value;
+      var newp2 = document.getElementById("newpass2").value;
+        
+      alert(newp.localeCompare(newp2, 'en', {sensitivity: 'variant'}));
 
-  }
+        if (cur == "" || newp == "" || newp2 == "" || newp.localeCompare(newp2, 'en', {sensitivity: 'variant'}) == 1)
+        {
+            
+            alert("all fields required! and new password must match");
+            document.getElementById("changepass").reset();
+        }else{
+        var hr = new XMLHttpRequest();
+        var url = "functions/ajaxfunction.php";
+        var vars = "cur="+cur+"&newp1="+newp+"&newp2="+newp2;
+        hr.open("POST", url, true);
+        hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        hr.onreadystatechange = function() {
+            if(hr.readyState == 4 && hr.status == 200) {
+               var foo = hr.responseText;
+               alert(foo);
+             if (foo == "Password changed! please log back in with your new password")
+             {
+                 //alert(foo);
+                 location.replace("functions/logout.php");
+             }
+             else{
+                 alert(foo);
+                 document.getElementById("changepass").reset();
+             }
+            }
+        }
+        hr.send(vars);
+    }
+
+
+
+}
 
   function loginmodal(){
    // document.getElementById('id01').style.display='block'

@@ -120,7 +120,7 @@ if(!isset($_SESSION['uid']))
         </div>
   
           <div class="w3-panel w3-mobile  w3-text-theme w3-round-xlarge">
-          <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-center w3-theme-d4 w3-mobile">Change Password</button>
+          <button onclick="document.getElementById('modalpass').style.display='block'" class="w3-button w3-center w3-theme-d4 w3-mobile">Change Password</button>
           </div>
   
         </div>
@@ -145,27 +145,27 @@ if(!isset($_SESSION['uid']))
 </footer>
 </div>
 <!-- DMODAL -->
-<div id="id01" class="w3-modal">
+<div id="modalpass" class="w3-modal">
   <div class="w3-modal-content">
   <header class="w3-container w3-theme-d5">
-      <span onclick="document.getElementById('id01').style.display='none'" 
+      <span onclick="document.getElementById('modalpass').style.display='none'" 
       class="w3-button w3-display-topright">&times;</span>
       <h2>Change Password</h2>
     </header>
     <div class="w3-container">
      <!--  <span onclick="document.getElementById('id01').style.display='none'" 
       class="w3-button w3-display-topright">&times;</span> -->
-      <form class="w3-container">
+      <form id="changepass" class="w3-container">
 
 <label>Current Password</label>
-<input class="w3-input" type="text">
+<input class="w3-input" type="password" id="current" required>
 
 <label>New Password</label>
-<input class="w3-input" type="text">
+<input class="w3-input" type="password" id="newpass" required>
 
 <label>Re-type Password</label>
-<input class="w3-input" type="text">
-<p><button type="button" class="w3-btn w3-padding w3-theme" style="width:120px">Send &nbsp; ❯</button></p>
+<input class="w3-input" type="password" id="newpass2" required>
+<p><button type="button" onclick="changepassword()" class="w3-btn w3-padding w3-theme" style="width:120px">Send &nbsp; ❯</button></p>
 <br>
 <form>
 <footer class="w3-container w3-theme-l5 (w3-theme-light)">
@@ -177,7 +177,7 @@ if(!isset($_SESSION['uid']))
 </body>
 <!-- MODAL -->
 
-<div id="id02" class="w3-modal" >
+<!-- <div id="id02" class="w3-modal" >
   <div class="w3-modal-content" >
     <header class="w3-container w3-theme-d5 (w3-theme-dark) w3-animate-top"> 
       <span onclick="document.getElementById('id02').style.display='none'" 
@@ -196,20 +196,25 @@ if(!isset($_SESSION['uid']))
       <p class="w3-center">Register</p>
     </footer>
   </div>
-</div>
+</div> -->
 
 
 <!-- MODALEND -->
 <script>
-function myFunction(id) {
-    var x = document.getElementById(id);
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-    } else { 
-        x.className = x.className.replace(" w3-show", "");
-    }
+
+function showpass() {
+   // document.getElementById("modalogin").className = "w3-container w3-center w3-theme-d1 w3-animate-zoom w3-mobile w3-hide";
+    document.getElementById("modalpass").className = "w3-container w3-center w3-theme-d1 w3-animate-left w3-mobile w3-show";
+    document.getElementById("regform").addEventListener("submit", function(e){
+    e.preventDefault();
+    //changepassword();
+   
+});
 }
 </script>
+
+ 
+
 
 
 </html>

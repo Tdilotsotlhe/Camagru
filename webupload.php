@@ -16,8 +16,8 @@
     
     file_put_contents("img/gal/".$user_id."$".$newimgname.".png", $test);
     $dest= imagecreatefrompng("img/gal/".$user_id."$".$newimgname.".png");
-echo "OK<img src=";
-echo "img/gal/".$user_id."$".$newimgname.".png>";
+/* echo "OK<img src=";
+echo "img/gal/".$user_id."$".$newimgname.".png>"; */
     if(!empty($_POST["emoji64"]))
     {
         $emo = explode ('camagru/',$_POST["emoji64"]);   
@@ -69,7 +69,10 @@ echo "img/gal/".$user_id."$".$newimgname.".png>";
           $picname = $user_id."$".$newimgname.".png";
           $stmt->bindParam(':pic', $picname);
       
-          $stmt->execute();
+          if($stmt->execute()){
+              header("Location: snap.php");
+          }
+
          
        } catch (PDOException $e) {
       print "Error!: " . $e->getMessage() . "<br/>";
