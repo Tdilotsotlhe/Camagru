@@ -182,7 +182,10 @@ if(isset($_GET['welcome']))
     <p>Password</p>
    <p class="w3-center w3-mobile w3-animate-left"> <input type='password' class="w3-input w3-text-theme" name='pwrd' id='pwrd' placeholder='Enter Password' required></p>
     <p class="w3-center w3-mobile w3-animate-bottom" id='login_error'></p>
+   
  <p class="w3-center">   <button class="w3-btn w3-grey w3-mobile w3-animate-opacity" onclick='ajax_post()' id='logbut2'>Login</button></p>
+ <button id="forgotpass" class="w3-btn w3-center w3-grey w3-animate-zoom" onclick="document.getElementById('forgot').style.display = 'block';">Forgot Password</button>
+  <p class="w3-animate-rigth" id="forgot" style="display: none;"><label class="w3-tag">Email:</label><br><input class="w3-input w3-animate-zoom" type="text" id="forgotemail"><button class="w3-btn w3-animate-left w3-grey" id="forgotsub">Send Email</button></p>
 </div>
 
 
