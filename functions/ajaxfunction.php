@@ -77,6 +77,11 @@ if (isset($_POST['theid']))
     likeimage();
 }
 
+if (isset($_POST['forgotemail']))
+{
+    resetpass();
+}
+
 function likeimage()
 {
     $userid1 = $_POST['theid'];
@@ -1003,4 +1008,143 @@ function changepass2(){
     }
 }
 
+function resetpass(){
+
+    $theemail = $_POST['forgotemail'];
+    
+    if(checkemailexists($theemail) == 1)
+    {
+       // echo "one result";
+       //deactivate account&&insert new acthash
+       $newhash = md5(rand(0,555));
+        deactivate($newhash);
+        
+
+        //send email
+     //   sendpassreset($hash, $theemail); */
+    }else
+    {
+        echo "failed";
+    }
+    
+}
+
+function deactivate($thehash){
+   
+    include "../config/database.php";
+    
+    try {
+        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       // echo "yes";
+      } catch (PDOException $e) {
+      print "Error!: " . $e->getMessage() . "<br/>";
+      die();
+      }
+       //select DB
+       try {
+        $dbh->query("USE ".$DB_NAME);
+      } catch (Exception $e) {
+         die("db selection failed!");
+      } 
+
+    try { 
+        $stmt = $dbh->prepare("UPDATE users SET active = 0, acthash=:ahash WHERE email = :userid");
+        $stmt->bindParam(':userid',$_POST['forgotemail']);
+         $stmt->bindParam(':ahash',$thehash);
+        if($stmt->execute()){
+            sendresetmail($thehash);
+            echo "Password reset, please check your email!";
+        }else{
+            echo "unable to update user details.";
+        }
+     } catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+     }
+   
+
+
+
+
+}
+
+function sendresetmail($hash){
+    $to = $_POST['forgotemail'];
+    $subject = "Password Reset";
+
+    $message = "
+    <html>
+    <head>
+    <title>Camagru Password reset</title>
+    </head>
+    <body>
+    <p>Password Reset</p>
+    
+    <p>Please use the following link to reset your password.</p>
+   
+    http://localhost:8080/camagru/fp.php?passact=".$hash."
+    </body>
+    </html>
+    ";
+
+    // Always set content-type when sending HTML email
+
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    //$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+
+    if(mail($to,$subject,$message,$headers, "-f phenom92@gmail.here"))
+    {
+    $errorMessage = error_get_last()['message'];
+    echo $errorMessage;
+    }
+    else{
+    $errorMessage = error_get_last()['message'];
+    echo $errorMessage;
+    }
+
+}
+
+
+
+
+
+
+
+function checkemailexists($email)
+{
+    include "../config/database.php";
+    
+
+    try {
+        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       // echo "yes";
+      } catch (PDOException $e) {
+      print "Error!: " . $e->getMessage() . "<br/>";
+      die();
+      }
+      
+     
+       //select DB
+       try {
+        $dbh->query("USE ".$DB_NAME);
+      } catch (Exception $e) {
+         die("db selection failed!");
+      } 
+
+    try { 
+        $stmt = $dbh->prepare("SELECT COUNT(*) as mycount FROM users WHERE email = :email");
+        $stmt->bindparam(':email', $email);
+        if($stmt->execute()){
+            $row = $stmt->fetch();
+            return($row['mycount']);
+          }
+     } catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+     }  
+}
 ?>

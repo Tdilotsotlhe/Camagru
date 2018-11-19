@@ -67,9 +67,9 @@ $message = "
 <body>
 <p>Welcome to camagru!</p>
 <p>Thank you fore registering!</p>
-<p>Pleasue use this One-Time-Pin to activate your account</p>
+<p>Pleasue use the link below to activate your account</p>
 <p>".$ah."</p>
-http://localhost:8080/camagru/activation.php?".$ah."
+http://localhost:8080/camagru/act.php?act=".$ah."
 </body>
 </html>
 ";

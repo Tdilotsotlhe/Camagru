@@ -2,11 +2,11 @@
 
 window.onload = function(){
     var curuser = document.getElementById("curuser");
-var curemail = document.getElementById("curemail");
+    var curemail = document.getElementById("curemail");
 //var curnotif = document.getElementById("curemail");
     loadcurdetails();
-   var cb =  document.getElementById("notcheckbox");
-   cb.addEventListener("click", function(event){
+    var cb =  document.getElementById("notcheckbox");
+    cb.addEventListener("click", function(event){
        notifupd();
    });
   }
@@ -97,7 +97,7 @@ var curemail = document.getElementById("curemail");
       var newp = document.getElementById("newpass").value;
       var newp2 = document.getElementById("newpass2").value;
         
-      alert(newp.localeCompare(newp2, 'en', {sensitivity: 'variant'}));
+     // alert(newp.localeCompare(newp2, 'en', {sensitivity: 'variant'}));
 
         if (cur == "" || newp == "" || newp2 == "" || newp.localeCompare(newp2, 'en', {sensitivity: 'variant'}) == 1)
         {
@@ -136,3 +136,5 @@ var curemail = document.getElementById("curemail");
    // document.getElementById('id01').style.display='block'
     document.getElementById('id02').style.display='block'
 }
+
+

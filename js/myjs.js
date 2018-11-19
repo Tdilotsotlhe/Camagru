@@ -553,6 +553,7 @@ function ajax_register(){
 	    if(hr.readyState == 4 && hr.status == 200) {
 		    var return_data = hr.responseText;
             alert(return_data);
+            location.replace("index.php");
            //checkResponse(hr.responseText);
             
           //  document.getElementById("login_error").innerHTML = return_data;

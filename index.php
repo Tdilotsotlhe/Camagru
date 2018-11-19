@@ -2,9 +2,14 @@
  
 include "functions/load.php";
 session_start();
-if(isset($_GET['welcome']))
+if(isset($_GET['as']))
 {
-    echo "<script>alert('login successful')</script>";
+   if($_GET['as'] == 1)
+   {
+     echo "<script>alert('Welcome, your account is activated');location.replace('index.php');</script>";
+   }else{
+    echo "<script>alert('Account activation failed, please try again');location.replace('index.php');</script>";
+   }
 }
 ?>
 <!DOCTYPE html>
@@ -55,7 +60,7 @@ if(isset($_GET['welcome']))
   {
     echo "<button class='w3-btn w3-left w3-mobile'>Welcome ".$_SESSION['username']."</button> <a href='functions/logout.php' class='w3-mobile w3-btn w3-right'>Logout</a>";
   }
-  else echo "<button class='w3-mobile w3-padding-2 w3-cell'><button  class='w3-btn w3-left w3-mobile'>Welcome Guest </button>   <button onclick='loginmodal()' class='w3-mobile w3-btn w3-hover-grey w3-center w3-right'>Login/Register</button></button>"; 
+  else echo "<div class='w3-mobile w3-padding-2 w3-cell'><button  class='w3-btn w3-left w3-mobile'>Welcome Guest </button>   <button onclick='loginmodal()' class='w3-mobile w3-btn w3-hover-grey w3-center w3-right'>Login/Register</button></div>"; 
   ?>
 
 </div>
@@ -185,7 +190,7 @@ if(isset($_GET['welcome']))
    
  <p class="w3-center">   <button class="w3-btn w3-grey w3-mobile w3-animate-opacity" onclick='ajax_post()' id='logbut2'>Login</button></p>
  <button id="forgotpass" class="w3-btn w3-center w3-grey w3-animate-zoom" onclick="document.getElementById('forgot').style.display = 'block';">Forgot Password</button>
-  <p class="w3-animate-rigth" id="forgot" style="display: none;"><label class="w3-tag">Email:</label><br><input class="w3-input w3-animate-zoom" type="text" id="forgotemail"><button class="w3-btn w3-animate-left w3-grey" id="forgotsub">Send Email</button></p>
+  <p class="w3-animate-rigth" id="forgot" style="display: none;"><label class="w3-tag">Email:</label><br><input class="w3-input w3-animate-zoom" type="email" id="forgotemail"><button onclick="forgpassmail()" class="w3-btn w3-animate-left w3-grey" id="forgotsub">Send Email</button></p>
 </div>
 
 
