@@ -4,7 +4,7 @@ include "functions/load.php";
 session_start();
 if(!isset($_SESSION['uid']))
 {
-    header("Location: index.php#");
+    //header("Location: index.php#");
 }
 ?>
 <!DOCTYPE html>

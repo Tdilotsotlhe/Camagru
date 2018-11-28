@@ -126,7 +126,7 @@ if(isset($_GET['as']))
         </p>                                  
 </div>
 
-<div class="w3-container w3-center w3-mobile w3-theme-l1 w3-animate-right w3-cell w3-cell-middle">
+<div  class="w3-container w3-center w3-mobile w3-theme-l1 w3-animate-right w3-rest w3-cell w3-cell-middle">
 <p class="w3-center w3-mobile">CARDS</p>
           <p id="comment" class = "w3-center w3-mobile">Login to view comments</p>
 </div>

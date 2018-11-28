@@ -1,14 +1,20 @@
 /////load thumbnails
-/* window.addEventListener('load', ajaxthumbs, false);
+/* if(window.location.href == "http://127.0.0.1:8080/camagru/snap.php")
+{
+    alert("photobooth");
+} */
+window.addEventListener('load', function(){
+    ajaxthumbs();
+});
 
 function ajaxthumbs() {
    // alert("ajax thumbs");
-    thumbdiv = document.getElementById("thumbnails");
+    thumbdiv = document.getElementById("mygal");
 
  var hr = new XMLHttpRequest();
  var url = "functions/ajaxfunction.php";
 
- var vars = "thumby=SHO";
+ var vars = "homegal=SHO";
  hr.open("POST", url, true);
  // Set content type header information for sending url encoded variables in the request
  hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -18,13 +24,13 @@ function ajaxthumbs() {
          var return_data = hr.responseText;
         // alert(return_data);
          //checkResponse(hr.responseText);
-         document.getElementById("thumbnails").innerHTML = return_data;
+         document.getElementById("mygal").innerHTML = return_data;
      }
  }
  // Send the data to PHP now... and wait for response to update the status div
  hr.send(vars); // Actually execute the request
- document.getElementById("thumbnails").innerHTML = "loading thumbs...";
-} */
+ document.getElementById("mygal").innerHTML = "loading thumbs...";
+} 
 
 
 
@@ -73,7 +79,11 @@ function imgFetch()
 
    
 //     }
-
+function imageFoc(tid)
+{
+   //alert(tid.id);
+   //imgFetch(tid.id);
+}
 
 function privImageFoc(tid)
 {

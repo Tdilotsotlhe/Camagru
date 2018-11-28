@@ -127,12 +127,9 @@ window.onload = function()
 		form.submit();
 	}
 
-	document.getElementById("testme").addEventListener('click', function()
-	{
-		alert("Qwerty");
-	})
 
-/* 	function setedit(imgid) {
+
+ 	function setedit(imgid) {
 		alert(imgid);
 		//var hv = document.getElementById("video");
 		//hv.style.display = "none";
@@ -143,7 +140,7 @@ window.onload = function()
 		alert(imgid);
 	   // video = document.getElementById("editpic");
 	
-	} */
+	} 
 }
 
 	

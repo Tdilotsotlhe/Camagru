@@ -50,26 +50,20 @@ function ajaxsavepic(){
     
     }
 
+
+
+    
     function ajaxupload() {
         alert("ajuploaddh running");
         var hr = new XMLHttpRequest();
          var url = "functions/upload.php";
          var thefile = document.getElementById("userpic").files[0];
-        //console.log(thefile);
-         //var vars = "userpic="+thefile.file;
-         //alert(vars);
         var formData = new FormData();
         formData.append("userpic", thefile);
-      //  console.log(document.getElementById("userpic").value);  
-        // "application/x-www-form-urlencoded"
-        //"multipart/form-data"
-    //
          hr.open("POST", url, true);
-        // hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
          hr.onreadystatechange = function() {
              if(hr.readyState == 4 && hr.status == 200) {
                  var return_data = hr.responseText;
-                // ajaxthumbs();
                 alert(return_data);
              }
          }
@@ -77,6 +71,13 @@ function ajaxsavepic(){
     
        
         }
+
+
+
+
+
+
+
 
         function forgpassmail() {
 

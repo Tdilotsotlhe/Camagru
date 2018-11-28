@@ -21,10 +21,7 @@ function likepic(theuid, imgid)
                 }
          }
      }
-     hr.send(vars); 
-
- 
-    
+     hr.send(vars);  
 }
 
 function privategal()
@@ -72,11 +69,11 @@ var logbut = document.getElementById("logbut2");
 //////
 function loginAjax(){
 
-    alert('sdfsdf');
+   // alert('sdfsdf');
     var xmlString;
     userid = document.getElementById("uname").value;
     pass = document.getElementById("pwrd").value;
-    alert(userid, pass);
+   // alert(userid, pass);
     var xhr = new XMLHttpRequest();
    
     
@@ -152,7 +149,7 @@ var images;
 
 function imageFoc(tid)
 {
-   alert(tid.id);
+   //alert(tid.id);
    imgFetch(tid.id);
 }
 
@@ -176,7 +173,7 @@ function regtoggle()
 
 function wtf()
 {
-    alert("wtf");
+    //("wtf");
 }
 
 function logout()
@@ -187,10 +184,10 @@ function logout()
 
 /////newcomment
 function newCom(commenter, picid) {
-    alert(commenter + "  " + picid);
+   // alert(commenter + "  " + picid);
     //insert comment, NB****modify comment table
     var comtext = document.getElementById("comtxt");
-    alert(comtext.value);
+  //  alert(comtext.value);
 
      var hr = new XMLHttpRequest();
      var url = "functions/ajaxfunction.php";
@@ -230,7 +227,7 @@ function ajax_post(){
     hr.onreadystatechange = function() {
 	    if(hr.readyState == 4 && hr.status == 200) {
 		    var return_data = hr.responseText;
-            alert(return_data);
+            //alert(return_data);
            checkResponse(hr.responseText);
             
           //  document.getElementById("login_error").innerHTML = return_data;
@@ -322,11 +319,8 @@ function imgFetch()
 } */
 var myPage = 1;
 var myOffset = 0;
-//var numPics = 0;
 var numPics = countPics();
-//var numPage = Math.ceil(numPics/4);
 
-///if offset > numpics disable next;
 if(myOffset > numPics)
 {
     document.getElementById("nextstep").style.visibility = "hidden";
@@ -376,15 +370,14 @@ function prevpage(){
 /////////////
 window.onload = function(){
     fetchPicSet(0,0);
+
+    //ajaxthumbs();
 }
 
 function    fetchPicSet(page, offs){
 
     var galsel = document.getElementById("galtype").value;
-    //alert(galsel);
-   // var galsel2 = document.getElementById("pagagal").getAttribute('data-pulic');
-   // alert(galsel2);
-    var hr = new XMLHttpRequest();
+     var hr = new XMLHttpRequest();
      var url = "functions/ajaxfunction.php";
      var vars = "page="+page+"&offset="+offs+"&galtype="+galsel;
      hr.open("POST", url, true);
@@ -420,7 +413,6 @@ function    fetchPicSet(page, offs){
                 picdiv.appendChild(newimg);
                 
             }
-            
          }
      }
      hr.send(vars); 
@@ -510,7 +502,7 @@ function loginmodal(){
 }
 
 function delpic(theuser, thepic){
-    alert("OK");
+    //alert("OK");
   //loadcomment
   var hr = new XMLHttpRequest();
     var url = "functions/ajaxfunction.php";
@@ -584,3 +576,28 @@ function checkRegResponse(response) {
        
     }
 }
+
+/* function ajaxthumbs() {
+     alert("ajax thumbs");
+     thumbdiv = document.getElementById("thumbnails");
+ 
+  var hr = new XMLHttpRequest();
+  var url = "functions/ajaxfunction.php";
+ 
+  var vars = "newthumby=SHO";
+  hr.open("POST", url, true);
+  // Set content type header information for sending url encoded variables in the request
+  hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  // Access the onreadystatechange event for the XMLHttpRequest object
+  hr.onreadystatechange = function() {
+      if(hr.readyState == 4 && hr.status == 200) {
+          var return_data = hr.responseText;
+         // alert(return_data);
+          //checkResponse(hr.responseText);
+          document.getElementById("thumbnails").innerHTML = return_data;
+      }
+  }
+  // Send the data to PHP now... and wait for response to update the status div
+  hr.send(vars); // Actually execute the request
+  document.getElementById("thumbnails").innerHTML = "loading thumbs...";
+ } */

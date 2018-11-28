@@ -1,11 +1,15 @@
 <?php
 
-echo "AWE";
+//echo "AWE";
 //var_dump($_POST['userpic']);
 /* var_dump($_POST);
 var_dump($_FILES); */
 //exit();
 $target_dir = "../img/gal/";
+if(!isset($_FILES['userpic'])){
+    echo "No file selected!";
+    exit();
+}
 
 
 $target_file = $target_dir . basename($_FILES['userpic']['name']);

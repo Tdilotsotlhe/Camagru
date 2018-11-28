@@ -1,5 +1,6 @@
 <?php
    include "../config/database.php";
+   include "../config/dbclass.php";
    
 if (isset($_POST['galtype']) && isset($_POST['page']))
 {
@@ -13,6 +14,10 @@ if (isset($_POST['galtype']) && isset($_POST['page']))
     
 }
 
+if (isset($_POST['newthumby']))
+{
+    newthumbs();
+}
 if (isset($_POST['newp1']))
 {
     changepass2();
@@ -638,7 +643,7 @@ function addComment(){
    // exit();
     
     try {
-        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
+        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4"));
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
        // echo "yes";
       } catch (PDOException $e) {
@@ -756,7 +761,8 @@ function changename(){
       } catch (Exception $e) {
          die("db selection failed!");
       } 
-
+    //   $dbh = DB::getInstance();
+      
     try { 
         $stmt = $dbh->prepare("UPDATE users SET username = :chngname WHERE `user_id` = :userid");
         $stmt->bindParam(':userid',$_SESSION['uid']);
@@ -1147,4 +1153,82 @@ function checkemailexists($email)
     die();
      }  
 }
+
+function newthumbs()
+{
+    include "../config/database.php";
+
+     try {
+        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       // echo "yes";
+      } catch (PDOException $e) {
+      print "Error!: " . $e->getMessage() . "<br/>";
+      die();
+      }
+      
+     
+       //select DB
+       try {
+        $dbh->query("USE ".$DB_NAME);
+      } catch (Exception $e) {
+         die("db selection failed!");
+      } 
+
+    try { 
+        $imgid = $_POST['imgid'];
+        $stmt = $dbh->prepare("SELECT
+        *
+    FROM
+        gallery
+    LEFT OUTER JOIN comments ON img_id = comimg_id
+    WHERE
+        img_id =?");
+        if($stmt->execute([$imgid])){
+          
+          $row = $stmt->fetchAll();
+             
+         // $retstring = $row[0]['comment'];
+          //var_dump($row);
+          //exit();
+        
+
+              echo "<div id='commdiv' class='w3-animate-opacity w3-mobile w3-padding-3 w3-card w3-center w3-theme-l3'>
+              <img id=".$row[0]['img_id']." class='thumbs w3-image' src='img/gal/".$row[0]['img_name']."' height='100px' width='100px' data-commid=".$_SESSION['uid'].">
+          
+             
+             "; 
+/*                            
+              foreach ($row as $key => $value) {
+                  if ($value["comment"] == NULL)
+                  {
+                      break;
+                  }
+                  else
+                  {
+                    echo "<p style='font-size:2vw;' class='w3-animate-right w3-mobile w3-padding-2  w3-theme-l4 w3-hover-opacity'>".$value["comment"]."</p>";
+                    
+                  }
+            } */
+           /*  echo "<p id='latest'></p>"; */
+           
+            if(isset($_SESSION['uid'])){
+                echo "<p>
+                <input class='w3-input'  type='text' id='comtxt'>
+                </p>
+                <br >";
+            echo  "<button class='w3-btn w3-ripple w3-dark-gray' id='editbtn' onclick='setedit(".$row[0]['img_id'].")'>Edit</button>";
+            echo  "<button class='w3-btn w3-ripple w3-light-gray' id='delbtn' onclick='delpic(".$_SESSION['uid'].",".$row[0]['img_id'].")'>Delete</button>";
+
+        }
+        }
+     } catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+     }  
+    //echo "<div><img src='||||' height='50px' width='50px'></div>";
+
+}
+
+
 ?>

@@ -131,17 +131,17 @@ if(!isset($_SESSION['uid']))
     <p onclick="window.location = 'snap.php'" class="w3-bar-item w3-mobile w3-hover-gray ">PHOTOBOOTH</p>
 		</div>
 		<div class="w3-quarter w3-cell w3-hide-small">
-    <p onclick="window.location = 'gal3.php'" class="w3-bar-item w3-mobile w3-hover-gray ">GALLERY</p>
+    <p onclick="window.location = 'newgal1.php'" class="w3-bar-item w3-mobile w3-hover-gray ">GALLERY</p>
     </div>
 <!-- hide on big -->
 
  <div class="w3-theme-l1 w3-hide-large w3-hide-medium  w3-mobile (w3-theme-light) w3-animate-top w3-cell-row w3-center w3-opacity-min w3-hover-opacity-off">
  <button onclick="myFunction('Demo1')" class="w3-btn w3-block w3-black w3-left-align">Menu</button>
 <div id="Demo1" class="w3-container w3-hide">
-  <p>Home</p>
-  <p>Profile</p>
-  <p>Gallery</p>
-  <p>Logout</p>
+  <p onclick="window.location = 'index.php'">Home</p>
+  <p onclick="window.location = 'profile.php'">Profile</p>
+  <p onclick="window.location = 'newgal1.php'">Gallery</p>
+  <p onclick="window.location = 'functions/logout.php'">Logout</p>
 </div>
     </div>
 
@@ -172,14 +172,14 @@ if(!isset($_SESSION['uid']))
 			<img id="e4" src="img/emojis/4.png" height='50px' width='50px' style="margin: 19px">
 			<br>
 		</div>
-			<button id="photo_button" class="button">Take Photo</button>
-			<button id="Uploadbtn" class="button">Upload</button>
-			<label id="testme" for="file" class="lbbutton">Css only file upload button</label>
-			<input id="file" class="file-upload__input" type="file" name="file-upload">
+			<button id="photo_button" class="w3-button" >Take Photo</button>
+			<!-- <button id="Uploadbtn" class="button">Upload</button> -->
+			<!-- <label id="testme" for="file" class="lbbutton">Css only file upload button</label> -->
+		<!-- 	<input id="file" class="file-upload__input" type="file" name="file-upload"> -->
 			<!-- <div class="file-upload">
 			</div> -->
 			<!-- <canvas id="canvas2"></canvas> -->
-			<button id="save_photo" class="button">save</button>
+			<button id="save_photo" class="w3-button w3-grey" style="display:none;">save</button>
 		<!-- 	<canvas id="canvas"></canvas> -->
 		</div>
 		
@@ -339,6 +339,10 @@ action="functions/upload.php"
   <p>Preview</p>
   <canvas id="canvas2"></canvas>
   <canvas id="canvas"></canvas>
+</div>
+<div class="w3-container w3-theme-l3 w3-cell w3-middle w3-padding-large w3-mobile w3-animate-right">
+  <p>Gallery</p>
+  <div id="mygal"></div>
 </div>
 </div>
 
