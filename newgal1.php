@@ -76,7 +76,7 @@ if(!isset($_SESSION['uid']))
     <p onclick="window.location = 'snap.php'" class="w3-bar-item w3-mobile w3-hover-gray ">PHOTOBOOTH</p>
 		</div>
 		<div class="w3-quarter w3-cell w3-hide-small">
-    <p onclick="window.location = 'gal3.php'" class="w3-bar-item w3-mobile w3-hover-gray ">GALLERY</p>
+    <p onclick="window.location = 'newgal1.php'" class="w3-bar-item w3-mobile w3-hover-gray ">GALLERY</p>
     </div>
 
 </div>

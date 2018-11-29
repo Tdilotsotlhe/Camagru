@@ -54,7 +54,7 @@ function ajaxsavepic(){
 
     
     function ajaxupload() {
-        alert("ajuploaddh running");
+        //alert("ajuploaddh running");
         var hr = new XMLHttpRequest();
          var url = "functions/upload.php";
          var thefile = document.getElementById("userpic").files[0];

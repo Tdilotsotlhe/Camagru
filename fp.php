@@ -75,14 +75,44 @@ window.onload = function(){
 function forgotpassword(pass1, pass2){
 
 
-   if (pass1.localeCompare(pass2,'en', {sensitivity: 'variant'}) == 1){
-        alert("1");
+   if (pass1 == pass2){
+        forgotpass(pass1,pass2, window.location.href);
    }else{
        alert("0!");
    }
   // pass1.localeCompare(pass2, 'en', {sensitivity: 'variant'})
 
 }
+
+  function forgotpass(password1, password2, newhash){
+     
+    alert(password1);
+    alert(password2);
+    alert(newhash);
+        var hr = new XMLHttpRequest();
+        var url = "functions/ajaxfunction.php";
+        var vars = "forgot1="+password1+"&forgot2="+password2+"&newhash="+newhash;
+        hr.open("POST", url, true);
+        hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        hr.onreadystatechange = function() {
+            if(hr.readyState == 4 && hr.status == 200) {
+               var foo = hr.responseText;
+               alert(foo);
+             if (foo == "Password changed! please log back in with your new password")
+             {
+                 //alert(foo);
+                 location.replace("functions/logout.php");
+             }
+             else{
+                 alert(foo);
+                 document.getElementById("changepass").reset();
+             }
+            }
+        }
+        hr.send(vars);
+    }
+
+
 </script>
 
 </html>

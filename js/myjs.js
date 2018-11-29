@@ -69,18 +69,15 @@ var logbut = document.getElementById("logbut2");
 //////
 function loginAjax(){
 
-   // alert('sdfsdf');
+
     var xmlString;
     userid = document.getElementById("uname").value;
     pass = document.getElementById("pwrd").value;
-   // alert(userid, pass);
+
     var xhr = new XMLHttpRequest();
    
     
-/*     xmlString = "<userinfo>" +
-    "  <uname>" + escape(userid) + "</userid>" +
-    "  <password>" + escape(pwrd) + "</password>" +
-    "</userinfo>"; */
+
     xmlString = "uname=" + escape(userid) + "&" +
     "password=" + escape(pwrd);
     var url = "functions/login2.php";
@@ -90,7 +87,7 @@ function loginAjax(){
     xhr.onreadystatechange = function(){
     if (xhr.readyState == 4 && xhr.status == 200)
     {
-       // alert("READY!");
+ 
         alert(xhr.responseText);
         document.getElementById("foot").innerHTML = "home";
     }
@@ -150,7 +147,7 @@ var images;
 function imageFoc(tid)
 {
    //alert(tid.id);
-   imgFetch(tid.id);
+   //imgFetch(tid.id);
 }
 
 
@@ -227,7 +224,7 @@ function ajax_post(){
     hr.onreadystatechange = function() {
 	    if(hr.readyState == 4 && hr.status == 200) {
 		    var return_data = hr.responseText;
-            //alert(return_data);
+            alert(return_data);
            checkResponse(hr.responseText);
             
           //  document.getElementById("login_error").innerHTML = return_data;

@@ -1,7 +1,7 @@
 
 
 function takepic() {
-    alert('camjs kjhkjworking');
+  alert('camjs kjhkjworking');
 }
 
 //check if features available

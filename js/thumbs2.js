@@ -111,7 +111,7 @@ function privImageFoc(tid)
 
 
 function delpic(theuser, thepic){
-     alert("OK");
+    // alert("OK");
    //loadcomment
    var hr = new XMLHttpRequest();
      var url = "functions/ajaxfunction.php";
@@ -122,7 +122,7 @@ function delpic(theuser, thepic){
          if(hr.readyState == 4 && hr.status == 200) {
             var foo = hr.responseText;
             //console.log(foo);
-            alert(foo);
+           // alert(foo);
             ajaxthumbs();
             document.getElementById("comment").innerHTML="";
          }

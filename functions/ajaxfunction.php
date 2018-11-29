@@ -14,6 +14,10 @@ if (isset($_POST['galtype']) && isset($_POST['page']))
     
 }
 
+if (isset($_POST['forgot1']))
+{
+    forgotpass();
+}
 if (isset($_POST['newthumby']))
 {
     newthumbs();
@@ -1228,6 +1232,11 @@ function newthumbs()
      }  
     //echo "<div><img src='||||' height='50px' width='50px'></div>";
 
+}
+
+
+function forgotpass(){
+    
 }
 
 

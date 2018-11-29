@@ -73,7 +73,7 @@ if(!isset($_SESSION['uid']))
     <p onclick="window.location = 'snap.php'" class="w3-bar-item w3-mobile w3-hover-gray ">PHOTOBOOTH</p>
 		</div>
 		<div class="w3-quarter w3-cell w3-hide-small">
-    <p onclick="window.location = 'gal3.php'" class="w3-bar-item w3-mobile w3-hover-gray ">GALLERY</p>
+    <p onclick="window.location = 'newgal1.php'" class="w3-bar-item w3-mobile w3-hover-gray ">GALLERY</p>
     </div>
 <!-- hide on big -->
 
@@ -109,7 +109,7 @@ if(!isset($_SESSION['uid']))
   
         <div class="w3-panel w3-mobile w3-text-theme w3-round-xlarge">
         <label class="w3-mobile">email</label>
-        <input class="w3-mobile w3-input w3-theme-d4" type="text" id="newemail">
+        <input class="w3-mobile w3-input w3-theme-d4" type="email" id="newemail">
         <p class="w3-mobile"><button onclick="changeemail()" class="w3-mobile w3-btn w3-round">Submit</button></p>
 
         </div>
@@ -158,13 +158,13 @@ if(!isset($_SESSION['uid']))
       <form id="changepass" class="w3-container">
 
 <label>Current Password</label>
-<input class="w3-input" type="password" id="current" required>
+<input  class="w3-input" type="password" id="current" required>
 
 <label>New Password</label>
-<input class="w3-input" type="password" id="newpass" required>
+<input pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" class="w3-input" type="password" id="newpass" required>
 
 <label>Re-type Password</label>
-<input class="w3-input" type="password" id="newpass2" required>
+<input pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" class="w3-input" type="password" id="newpass2" required>
 <p><button type="button" onclick="changepassword()" class="w3-btn w3-padding w3-theme" style="width:120px">Send &nbsp; ❯</button></p>
 <br>
 <form>
