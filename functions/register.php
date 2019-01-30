@@ -42,6 +42,9 @@ die();
   if($stmt->execute()){
     sendVerify($email, $acthash);
     echo "Please check email to complete registration!";
+  }else {
+    echo "0";
+    exit();
   }
    
  } catch (PDOException $e) {

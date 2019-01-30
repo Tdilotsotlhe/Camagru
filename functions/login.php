@@ -38,7 +38,7 @@ die();
       while($row = $stmt->fetch()){ 
          
        
-           if (strcmp($row['username'], $login) == 0 && $row && password_verify($pass, $row['passw']))
+           if (strcmp($row['username'], $login) == 0 && $row && password_verify($pass, $row['passw']) && $row['active'] == "1" )
           {
           
               setlogin($row);

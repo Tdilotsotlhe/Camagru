@@ -54,7 +54,7 @@ if(!isset($_SESSION['uid']))
 <div class="w3-container w3-mobile w3-theme-d3 (w3-theme-dark) w3-animate-left w3-cell-row w3-center w3-opacity ">
 <?php   if(isset($_SESSION['username']))
   {
-    echo "<button class='w3-btn w3-left w3-mobile'>Welcome ".$_SESSION['username']."<button class='w3-mobile w3-btn w3-right'>Logout</button>";
+    echo "<button class='w3-btn w3-left w3-mobile'>Welcome ".$_SESSION['username']."</button><a href='functions/logout.php'  class='w3-mobile w3-btn w3-right'>Logout</a>";
   }
   else echo "<div class=' w3-padding-2 w3-container w3-cell w3-mobile'><button  class='w3-btn w3-left w3-mobile'>Welcome Guest </button>   <button onclick='loginmodal()' class='w3-btn w3-hover-grey w3-center w3-right'>Login/Register</button></div>"; 
   ?>
@@ -109,7 +109,7 @@ if(!isset($_SESSION['uid']))
   
         <div class="w3-panel w3-mobile w3-text-theme w3-round-xlarge">
         <label class="w3-mobile">email</label>
-        <input class="w3-mobile w3-input w3-theme-d4" type="email" id="newemail">
+        <input class="w3-mobile w3-input w3-theme-d4" pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" type="email" id="newemail">
         <p class="w3-mobile"><button onclick="changeemail()" class="w3-mobile w3-btn w3-round">Submit</button></p>
 
         </div>

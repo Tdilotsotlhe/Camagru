@@ -37,7 +37,7 @@ try {
         //  var_dump(simplexml_load_string($unser));
         
        
-             if (strcmp($row['username'], $user) == 0 && $row && password_verify($pwrd, $row['passw']))
+             if (strcmp($row['username'], $user) == 0 && $row && password_verify($pwrd, $row['passw']) && $row['active'] == "1")
             {
             
                 setlogin($row);
@@ -45,9 +45,9 @@ try {
               } 
             else if (strcmp($row['username'], $user) != 0)
             {
-              echo "Login failed"; 
+              echo "Login failed username krap"; 
             }else{
-              echo "Login failed"; 
+              echo "Login failed dont know"; 
             }
         }else{
           echo "No results";

@@ -112,7 +112,7 @@ if(!isset($_SESSION['uid']))
 <div class="w3-container w3-theme-d3 (w3-theme-dark) w3-animate-left w3-cell-row w3-center w3-opacity ">
 <?php   if(isset($_SESSION['username']))
   {
-    echo "<button class='w3-btn w3-left'>Welcome ".$_SESSION['username']."<button class='w3-btn w3-right'>Logout</button>";
+    echo "<button class='w3-btn w3-left'>Welcome ".$_SESSION['username']."</button> <a href='functions/logout.php' class='w3-mobile w3-btn w3-right'>Logout</a>";
   }
   else echo "<div class=' w3-padding-2 w3-container w3-cell'><button  class='w3-btn w3-left'>Welcome Guest </button>   <button onclick='loginmodal()' class='w3-btn w3-hover-grey w3-center w3-right'>Login/Register</button></div>"; 
   ?>

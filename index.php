@@ -196,20 +196,20 @@ if(isset($_GET['as']))
 
 
     <!-- reg modal --> 
-    <form id="regform" method="post">
+    <form id="regform" method="post" onsubmit="event.preventDefault();">
     <div id="modalreg" class="w3-container w3-center w3-theme-d1 w3-animate-zoom w3-mobile w3-hide">
     <label>Username</label>
    <p class="w3-center w3-mobile w3-animate-top"> <input class="w3-input w3-text-theme" type='text' name='uname' id='uname1' placeholder='Enter Username' required></p>
    <label>Email</label>
-   <p class="w3-center w3-mobile w3-animate-top"> <input class="w3-input w3-text-theme" type='text' name='email' id='email' placeholder='Enter email' required></p>
+   <p class="w3-center w3-mobile w3-animate-top"> <input  class="w3-input w3-text-theme" type='text' name='email' id='email' placeholder='Enter email' required></p>
    
    <label>Password</label>
    <p class="w3-center w3-mobile w3-animate-left"> <input pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" type='password' class="w3-input w3-text-theme" name='pwrd' id='pwrd1' placeholder='Enter Password' required></p>
    <label>Re-enter Password</label>
-   <p pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" class="w3-center w3-mobile w3-animate-left"> <input type='password' class="w3-input w3-text-theme" name='pwrd' id='pwrd2' placeholder='Re-enter Password' required></p>
+   <p  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" class="w3-center w3-mobile w3-animate-left"> <input pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" type='password' class="w3-input w3-text-theme" name='pwrd' id='pwrd2' placeholder='Re-enter Password' required></p>
 
    <p class="w3-center w3-mobile w3-animate-bottom" id='reg_error'></p>
- <p class="w3-center">   <button onclick="ajax_register();" class="w3-btn w3-grey w3-mobile w3-animate-opacity"  id='logbut2' type="submit">Register</button></p>
+ <p class="w3-center"><!-- <input type="submit" id="newBtn" value="sendtest">  -->  <input onclick="ajax_register();" class="w3-btn w3-grey w3-mobile w3-animate-opacity"  id='logbut2' type="submit" value = "Register"><!-- Register</button> --></p>
 </div>
         </form>
 

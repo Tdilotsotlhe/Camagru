@@ -988,8 +988,12 @@ function changepass2(){
         try { 
             $stmt = $dbh->prepare("SELECT * FROM users WHERE `user_id` = ".$_SESSION['uid']);
             if($stmt->execute()){
+               
                 $row = $stmt->fetch();
+                //var_dump($row);
+                echo password_verify($cur, $row['passw']);
                 if(password_verify($cur, $row['passw'])){
+                    echo "shiiiii";
                     $stmt = $dbh->prepare("UPDATE users SET passw = :newpassw WHERE `user_id` = :userid");
                     $hashp = password_hash($new, PASSWORD_BCRYPT);
                     $stmt->bindParam(':newpassw', $hashp);
@@ -1026,20 +1030,21 @@ function resetpass(){
     {
        // echo "one result";
        //deactivate account&&insert new acthash
-       $newhash = md5(rand(0,555));
-        deactivate($newhash);
-        
-
-        //send email
-     //   sendpassreset($hash, $theemail); */
+       $actualnewpass = rand(0, 555);
+       $token = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890!$()*";
+        $token = str_shuffle($token);
+        $token = substr($token, 0, 8) . "#";
+       $newhash = password_hash($token, PASSWORD_BCRYPT);
+        deactivate($newhash, $actualnewpass);
+    
     }else
     {
-        echo "failed";
+        echo "Password reset failed";
     }
     
 }
 
-function deactivate($thehash){
+function deactivate($thehash, $theunhashed){
    
     include "../config/database.php";
     
@@ -1059,11 +1064,11 @@ function deactivate($thehash){
       } 
 
     try { 
-        $stmt = $dbh->prepare("UPDATE users SET active = 0, acthash=:ahash WHERE email = :userid");
+        $stmt = $dbh->prepare("UPDATE users SET passw=:ahash WHERE email = :userid");
         $stmt->bindParam(':userid',$_POST['forgotemail']);
          $stmt->bindParam(':ahash',$thehash);
         if($stmt->execute()){
-            sendresetmail($thehash);
+            sendresetmail($theunhashed);
             echo "Password reset, please check your email!";
         }else{
             echo "unable to update user details.";
@@ -1091,9 +1096,10 @@ function sendresetmail($hash){
     <body>
     <p>Password Reset</p>
     
-    <p>Please use the following link to reset your password.</p>
+    <p>Please use the following password to login and reset your password:</p>
+    <p>New Password:".$hash."</p>
    
-    http://localhost:8080/camagru/fp.php?passact=".$hash."
+    http://localhost:8080/camagru/index.php?pr
     </body>
     </html>
     ";
@@ -1236,7 +1242,61 @@ function newthumbs()
 
 
 function forgotpass(){
+
+    if(strcmp($new, $new2) == 0)
+    {
+        
+        //SELECT * from users where ID
+        include "../config/database.php";
     
+        try {
+            $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASS);
+            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+           // echo "yes";
+          } catch (PDOException $e) {
+          print "Error!: " . $e->getMessage() . "<br/>";
+          die();
+          }
+           //select DB
+           try {
+            $dbh->query("USE ".$DB_NAME);
+          } catch (Exception $e) {
+             die("db selection failed!");
+          } 
+    
+        try { 
+            $stmt = $dbh->prepare("SELECT * FROM users WHERE `user_id` = ".$_SESSION['uid']);
+            if($stmt->execute()){
+                $row = $stmt->fetch();
+                //echo password_verify($cur, $row['passw']);
+                if(password_verify($cur, $row['passw'])){
+                    $stmt = $dbh->prepare("UPDATE users SET passw = :newpassw WHERE `user_id` = :userid");
+                    $hashp = password_hash($new, PASSWORD_BCRYPT);
+                    $stmt->bindParam(':newpassw', $hashp);
+                    $stmt->bindParam(':userid', $_SESSION['uid']);
+                    if($stmt->execute()){
+                        echo "Password changed! please log back in with your new password";
+                    }else{
+                        echo "unable to update password";
+                    }
+                }
+            }
+         } catch (PDOException $e) {
+        print "Error!: " . $e->getMessage() . "<br/>";
+        die();
+         }
+
+
+
+
+        //passwordverify 
+        // if all good, update password and log them out
+
+        // echo "Password changed! please log back in with your new password";
+    }else{
+        echo "Passwords do not match";
+    }
+
 }
 
 

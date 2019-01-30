@@ -523,6 +523,22 @@ function delpic(theuser, thepic){
 
 ///////////////ajax reg code
 
+/* document.getElementById("regform").submit(function(e){
+e.preventDefault();
+alert("stopping");
+}); */
+
+function ValidateEmail(mail) 
+{
+ if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
+  {
+    return (true)
+  }
+    alert("You have entered an invalid email address!")
+    return (false)
+}
+
+
 function ajax_register(){
     // Create our XMLHttpRequest object
    // alert("wtf");
@@ -533,6 +549,25 @@ function ajax_register(){
     var pass1 = document.getElementById("pwrd1").value;
     var pass2 = document.getElementById("pwrd2").value;
     var email = document.getElementById("email").value;
+    
+    if(ValidateEmail(email) == false)
+    {
+        alert("tseks");
+        return false;
+    }
+
+    var regStr = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    if (pass1 != pass2){
+        alert("Passwords do not match");
+        return false;
+    }else if (pass1 == pass2 && regStr.test(pass1) != 1){
+       
+        alert("regex fail");
+        return false;
+    }else{
+    
+
+
     var vars = "uname1="+usern+"&pwrd="+pass1+"&pwrd1="+pass2+"&email="+email;
     hr.open("POST", url, true);
     // Set content type header information for sending url encoded variables in the request
@@ -542,7 +577,13 @@ function ajax_register(){
 	    if(hr.readyState == 4 && hr.status == 200) {
 		    var return_data = hr.responseText;
             alert(return_data);
-            location.replace("index.php");
+            if(return_data[1] == "E"){
+                alert("Registration failed, please check all fields");
+
+            }else{
+
+                location.replace("index.php");
+            }
            //checkResponse(hr.responseText);
             
           //  document.getElementById("login_error").innerHTML = return_data;
@@ -551,6 +592,7 @@ function ajax_register(){
     // Send the data to PHP now... and wait for response to update the status div
     hr.send(vars); // Actually execute the request
     document.getElementById("login_error").innerHTML = "logging in...<br><img class='w3-spin' src='img/loa.png'>";
+}
 }
 
 

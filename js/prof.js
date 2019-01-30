@@ -73,9 +73,29 @@ window.onload = function(){
       hr.send(vars);
 
   }
+
+
+  function ValidateEmail(mail) 
+{
+ if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
+  {
+    return (true)
+  }
+    alert("You have entered an invalid email address!")
+    return (false)
+}
+
+
   function changeemail(){
     var nn = document.getElementById("newemail").value;
     //  alert(nn);
+
+    if(ValidateEmail(nn) == false)
+    {
+        alert("tseks");
+        return false;
+    }
+
       var hr = new XMLHttpRequest();
       var url = "functions/ajaxfunction.php";
       var vars = "newemail="+nn;
@@ -97,14 +117,24 @@ window.onload = function(){
       var newp = document.getElementById("newpass").value;
       var newp2 = document.getElementById("newpass2").value;
         
+
+      var regStr = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+
+
+
      // alert(newp.localeCompare(newp2, 'en', {sensitivity: 'variant'}));
 
         if (cur == "" || newp == "" || newp2 == "" || newp.localeCompare(newp2, 'en', {sensitivity: 'variant'}) == 1)
         {
             
             alert("all fields required! and new password must match");
-            document.getElementById("changepass").reset();
-        }else{
+          //  document.getElementById("changepass").reset();
+            return false;
+        }else if (newp == newp2 && regStr.test(newp) != 1){
+       
+        alert("regex fail");
+        return false;
+    }else{
         var hr = new XMLHttpRequest();
         var url = "functions/ajaxfunction.php";
         var vars = "cur="+cur+"&newp1="+newp+"&newp2="+newp2;
