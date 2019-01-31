@@ -576,12 +576,12 @@ function ajax_register(){
     hr.onreadystatechange = function() {
 	    if(hr.readyState == 4 && hr.status == 200) {
 		    var return_data = hr.responseText;
-            alert(return_data);
-            if(return_data[1] == "E"){
+            //alert(return_data);
+            if(return_data[0] == "E"){
                 alert("Registration failed, please check all fields");
 
             }else{
-
+                alert("Registration successful");
                 location.replace("index.php");
             }
            //checkResponse(hr.responseText);

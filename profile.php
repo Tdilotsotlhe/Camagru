@@ -177,6 +177,8 @@ if(!isset($_SESSION['uid']))
 </body>
 <!-- MODAL -->
 
+<!-- MODAL -->
+
 <div id="id01" class="w3-modal" >
   <div class="w3-modal-content" >
     <header class="w3-container w3-theme-d5 (w3-theme-dark) w3-animate-top"> 
@@ -213,7 +215,7 @@ if(!isset($_SESSION['uid']))
    <p  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" class="w3-center w3-mobile w3-animate-left"> <input pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" type='password' class="w3-input w3-text-theme" name='pwrd' id='pwrd2' placeholder='Re-enter Password' required></p>
 
    <p class="w3-center w3-mobile w3-animate-bottom" id='reg_error'></p>
- <p class="w3-center"><!-- <input type="submit" id="newBtn" value="sendtest">  -->  <input onclick="ajax_register();" class="w3-btn w3-grey w3-mobile w3-animate-opacity"  id='logbut2' type="submit" value = "Register"><!-- Register</button> --></p>
+ <p class="w3-center"><!-- <input type="submit" id="newBtn" value="sendtest">  -->  <input onclick="ajax_register();" class="w3-btn w3-grey w3-mobile w3-animate-opacity"  id='logbut3' type="submit" value = "Register"><!-- Register</button> --></p>
 </div>
         </form>
 
@@ -252,6 +254,8 @@ if(!isset($_SESSION['uid']))
     }
 }
 </script>
+
+<!-- MODALEND -->
 
 <!-- MODALEND -->
 <script>

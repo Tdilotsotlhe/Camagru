@@ -45,9 +45,9 @@ try {
               } 
             else if (strcmp($row['username'], $user) != 0)
             {
-              echo "Login failed username krap"; 
+              echo "Login failed"; 
             }else{
-              echo "Login failed dont know"; 
+              echo "Login failed"; 
             }
         }else{
           echo "No results";
