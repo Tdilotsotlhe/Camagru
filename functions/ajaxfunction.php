@@ -8,8 +8,10 @@ if (isset($_POST['galtype']) && isset($_POST['page']))
         newPagerPublic();
     }else if($_POST['galtype'] == "private"){
         newPager();
-    }else if($_POST['galtype'] == "fullgal"){
+    }else if($_POST['galtype'] == "fullgal" && isset($_SESSION['uid'])){
         newPagerCom();
+    }else{
+        newPagerPublic();
     }
     
 }
@@ -55,7 +57,7 @@ if (isset($_POST['imgid']))
     comment();
 }
 
-if (isset($_POST['imgidfull']))
+if (isset($_POST['imgidfull']) && isset($_SESSION['uid']))
 {
     fullcomment();
 }
@@ -988,12 +990,12 @@ function changepass2(){
         try { 
             $stmt = $dbh->prepare("SELECT * FROM users WHERE `user_id` = ".$_SESSION['uid']);
             if($stmt->execute()){
-               
+               //echo "excuted query";
                 $row = $stmt->fetch();
                 //var_dump($row);
-                echo password_verify($cur, $row['passw']);
-                if(password_verify($cur, $row['passw'])){
-                    echo "shiiiii";
+               $passbool = password_verify($cur, $row['passw']);
+                if($passbool == true){
+                    //echo "pass verified";
                     $stmt = $dbh->prepare("UPDATE users SET passw = :newpassw WHERE `user_id` = :userid");
                     $hashp = password_hash($new, PASSWORD_BCRYPT);
                     $stmt->bindParam(':newpassw', $hashp);
@@ -1003,6 +1005,9 @@ function changepass2(){
                     }else{
                         echo "unable to update password";
                     }
+                }
+                else{
+                    echo $passbool.": this is passbool, this is cur:".$cur;
                 }
             }
          } catch (PDOException $e) {

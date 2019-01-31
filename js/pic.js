@@ -65,8 +65,9 @@ window.onload = function()
 
 	function takepicture()
 	{
-		const context1 = canvas.getContext('2d');
 
+		const context1 = canvas.getContext('2d');
+		document.getElementById("save_photo").style.visibility = "visible";
 		if (width && height) {
 			canvas.width = width;
 			canvas.height = height;

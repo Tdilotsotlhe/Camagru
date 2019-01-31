@@ -92,7 +92,7 @@ window.onload = function(){
 
     if(ValidateEmail(nn) == false)
     {
-        alert("tseks");
+     //   alert("tseks");
         return false;
     }
 
@@ -132,7 +132,7 @@ window.onload = function(){
             return false;
         }else if (newp == newp2 && regStr.test(newp) != 1){
        
-        alert("regex fail");
+        alert("password strength fail");
         return false;
     }else{
         var hr = new XMLHttpRequest();
@@ -143,14 +143,15 @@ window.onload = function(){
         hr.onreadystatechange = function() {
             if(hr.readyState == 4 && hr.status == 200) {
                var foo = hr.responseText;
-               alert(foo);
+               //alert(foo);
              if (foo == "Password changed! please log back in with your new password")
              {
-                 //alert(foo);
+                 alert(foo);
                  location.replace("functions/logout.php");
              }
-             else{
-                 alert(foo);
+             else{ 
+                 alert(foo +": this is foo");
+                 alert("Password change failed! check all fields.");
                  document.getElementById("changepass").reset();
              }
             }

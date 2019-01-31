@@ -163,7 +163,7 @@ if(isset($_GET['as']))
  
 
 <div class="w3-row">
-<footer class="w3-container w3-theme-d1 (w3-theme-dark) w3-mobile w3-opacity-min w3-animate-bottom ">
+<footer class="w3-container w3-theme-d1 (w3-theme-dark) w3-mobile w3-opacity-min w3-animate-bottom w3-bottom ">
   <p class = "w3-center">TDILOTSO</p>
 </footer>
 </div>
@@ -180,7 +180,7 @@ if(isset($_GET['as']))
       class="w3-closebtn w3-right">&times;</span>
       <h2>Login / Register</h2>
     </header>
-   <!-- lgoin modal -->
+   <!-- login modal -->
     <div id="modalogin" class="w3-container w3-center w3-theme-d1 w3-animate-zoom w3-mobile">
     <label>Username</label>
    <p class="w3-center w3-mobile w3-animate-top"> <input class="w3-input w3-text-theme" type='text' name='uname' id='uname' placeholder='Enter Username' required></p>
@@ -214,7 +214,7 @@ if(isset($_GET['as']))
         </form>
 
 
-    <footer class="w3-container w3-theme-d5 (w3-theme-dark) w3-animate-bottom">
+    <footer class="w3-container w3-theme-d5 (w3-theme-dark) w3-animate-bottom w3-bottom">
       <p class="w3-center w3-mobile w3-hover-grey" onclick="showreg()">Register</p>
       <p class="w3-center w3-mobile w3-hover-grey" onclick="showlogin()">login</p>
     </footer>

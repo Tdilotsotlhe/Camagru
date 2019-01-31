@@ -29,9 +29,12 @@ if(!isset($_SESSION['uid']))
 
 <body>
 <div class="wrapper">
-<?php
-    include "includes/header.php";
-?>
+<?php   if(isset($_SESSION['username']))
+  {
+    echo "<button class='w3-btn w3-left w3-mobile'>Welcome ".$_SESSION['username']."</button> <a href='functions/logout.php' class='w3-mobile w3-btn w3-right'>Logout</a>";
+  }
+  else echo "<div class='w3-mobile w3-padding-2 w3-cell'><button  class='w3-btn w3-left w3-mobile'>Welcome Guest </button>   <button onclick='loginmodal()' class='w3-mobile w3-btn w3-hover-grey w3-center w3-right'>Login/Register</button></div>"; 
+  ?>
   <article class="main">
   <div class="top_container">
 			<div id="overlay" class="overlay">

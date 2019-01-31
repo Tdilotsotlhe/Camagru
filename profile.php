@@ -54,9 +54,9 @@ if(!isset($_SESSION['uid']))
 <div class="w3-container w3-mobile w3-theme-d3 (w3-theme-dark) w3-animate-left w3-cell-row w3-center w3-opacity ">
 <?php   if(isset($_SESSION['username']))
   {
-    echo "<button class='w3-btn w3-left w3-mobile'>Welcome ".$_SESSION['username']."</button><a href='functions/logout.php'  class='w3-mobile w3-btn w3-right'>Logout</a>";
+    echo "<button class='w3-btn w3-left w3-mobile'>Welcome ".$_SESSION['username']."</button> <a href='functions/logout.php' class='w3-mobile w3-btn w3-right'>Logout</a>";
   }
-  else echo "<div class=' w3-padding-2 w3-container w3-cell w3-mobile'><button  class='w3-btn w3-left w3-mobile'>Welcome Guest </button>   <button onclick='loginmodal()' class='w3-btn w3-hover-grey w3-center w3-right'>Login/Register</button></div>"; 
+  else echo "<div class='w3-mobile w3-padding-2 w3-cell'><button  class='w3-btn w3-left w3-mobile'>Welcome Guest </button>   <button onclick='loginmodal()' class='w3-mobile w3-btn w3-hover-grey w3-center w3-right'>Login/Register</button></div>"; 
   ?>
 </div>
 <!-- hide on small -->
@@ -109,7 +109,7 @@ if(!isset($_SESSION['uid']))
   
         <div class="w3-panel w3-mobile w3-text-theme w3-round-xlarge">
         <label class="w3-mobile">email</label>
-        <input class="w3-mobile w3-input w3-theme-d4" pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" type="email" id="newemail">
+        <input class="w3-mobile w3-input w3-theme-d4"  type="email" id="newemail">
         <p class="w3-mobile"><button onclick="changeemail()" class="w3-mobile w3-btn w3-round">Submit</button></p>
 
         </div>
@@ -177,27 +177,81 @@ if(!isset($_SESSION['uid']))
 </body>
 <!-- MODAL -->
 
-<!-- <div id="id02" class="w3-modal" >
+<div id="id01" class="w3-modal" >
   <div class="w3-modal-content" >
     <header class="w3-container w3-theme-d5 (w3-theme-dark) w3-animate-top"> 
-      <span onclick="document.getElementById('id02').style.display='none'" 
+      <span onclick="document.getElementById('id01').style.display='none'" 
       class="w3-closebtn w3-right">&times;</span>
-      <h2>Login</h2>
+      <h2>Login / Register</h2>
     </header>
-    <div class="w3-container w3-center w3-theme-d1  w3-animate-zoom">
-    <p>Username</p>
-   <p class="w3-center"> <input type='text' name='uname' id='uname' placeholder='Enter Username' required></p>
+   <!-- login modal -->
+    <div id="modalogin" class="w3-container w3-center w3-theme-d1 w3-animate-zoom w3-mobile">
+    <label>Username</label>
+   <p class="w3-center w3-mobile w3-animate-top"> <input class="w3-input w3-text-theme" type='text' name='uname' id='uname' placeholder='Enter Username' required></p>
     <p>Password</p>
-   <p class="w3-center"> <input type='password' name='pwrd' id='pwrd' placeholder='Enter Password' required></p>
-    <p class="w3-center" id='login_error'></p>
- <p class="w3-center">   <button class="w3-button" onclick='ajax_post()' id='logbut2'>Login2</button></p>
+   <p class="w3-center w3-mobile w3-animate-left"> <input  type='password' class="w3-input w3-text-theme" name='pwrd' id='pwrd' placeholder='Enter Password' required></p>
+    <p class="w3-center w3-mobile w3-animate-bottom" id='login_error'></p>
+   
+ <p class="w3-center">   <button class="w3-btn w3-grey w3-mobile w3-animate-opacity" onclick='ajax_post()' id='logbut2'>Login</button></p>
+ <button id="forgotpass" class="w3-btn w3-center w3-grey w3-animate-zoom" onclick="document.getElementById('forgot').style.display = 'block';">Forgot Password</button>
+  <p class="w3-animate-rigth" id="forgot" style="display: none;"><label class="w3-tag">Email:</label><br><input class="w3-input w3-animate-zoom" type="email" id="forgotemail"><button onclick="forgpassmail()" class="w3-btn w3-animate-left w3-grey" id="forgotsub">Send Email</button></p>
 </div>
-    <footer class="w3-container w3-theme-d5 (w3-theme-dark) w3-animate-bottom">
-      <p class="w3-center">Register</p>
+
+
+
+    <!-- reg modal --> 
+    <form id="regform" method="post" onsubmit="event.preventDefault();">
+    <div id="modalreg" class="w3-container w3-center w3-theme-d1 w3-animate-zoom w3-mobile w3-hide">
+    <label>Username</label>
+   <p class="w3-center w3-mobile w3-animate-top"> <input class="w3-input w3-text-theme" type='text' name='uname' id='uname1' placeholder='Enter Username' required></p>
+   <label>Email</label>
+   <p class="w3-center w3-mobile w3-animate-top"> <input  class="w3-input w3-text-theme" type='text' name='email' id='email' placeholder='Enter email' required></p>
+   
+   <label>Password</label>
+   <p class="w3-center w3-mobile w3-animate-left"> <input pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" type='password' class="w3-input w3-text-theme" name='pwrd' id='pwrd1' placeholder='Enter Password' required></p>
+   <label>Re-enter Password</label>
+   <p  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" class="w3-center w3-mobile w3-animate-left"> <input pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" type='password' class="w3-input w3-text-theme" name='pwrd' id='pwrd2' placeholder='Re-enter Password' required></p>
+
+   <p class="w3-center w3-mobile w3-animate-bottom" id='reg_error'></p>
+ <p class="w3-center"><!-- <input type="submit" id="newBtn" value="sendtest">  -->  <input onclick="ajax_register();" class="w3-btn w3-grey w3-mobile w3-animate-opacity"  id='logbut2' type="submit" value = "Register"><!-- Register</button> --></p>
+</div>
+        </form>
+
+
+    <footer class="w3-container w3-theme-d5 (w3-theme-dark) w3-animate-bottom w3-bottom">
+      <p class="w3-center w3-mobile w3-hover-grey" onclick="showreg()">Register</p>
+      <p class="w3-center w3-mobile w3-hover-grey" onclick="showlogin()">login</p>
     </footer>
   </div>
-</div> -->
+</div>
+<script>
 
+  function showlogin() {
+    document.getElementById("modalreg").className = "w3-container w3-center w3-theme-d1 w3-animate-zoom w3-mobile w3-hide";
+    document.getElementById("modalogin").className = "w3-container w3-center w3-theme-d1 w3-animate-zoom w3-mobile w3-show";
+    
+  }
+
+  function showreg() {
+    document.getElementById("modalogin").className = "w3-container w3-center w3-theme-d1 w3-animate-zoom w3-mobile w3-hide";
+    document.getElementById("modalreg").className = "w3-container w3-center w3-theme-d1 w3-animate-left w3-mobile w3-show";
+    document.getElementById("regform").addEventListener("submit", function(e){
+    e.preventDefault();
+    //ajax_register();
+   // alert("submitting");
+});
+    
+  }
+
+  function myFunction(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
 
 <!-- MODALEND -->
 <script>
